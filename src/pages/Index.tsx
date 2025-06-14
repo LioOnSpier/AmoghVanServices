@@ -37,7 +37,7 @@ const Index = () => {
                 <Bus className="h-6 w-6 text-white" />
               </div>
               <span className="text-xl font-bold text-gray-900 font-manrope">
-                SafeRide
+                Amogh Van/Bus Services
               </span>
             </div>
             <div className="hidden md:flex items-center space-x-8">
@@ -90,9 +90,9 @@ const Index = () => {
                   </span>
                 </h1>
                 <p className="text-xl text-gray-600 leading-relaxed">
-                  Providing secure, comfortable, and punctual transportation
-                  services for students across the city. Your child's safety is
-                  our top priority.
+                  Amogh Van/Bus Services provides secure, comfortable, and
+                  punctual transportation services for students across Mumbai.
+                  Your child's safety is our top priority.
                 </p>
               </div>
 
@@ -474,8 +474,8 @@ const Index = () => {
               Ready to Secure Safe Transportation for Your Child?
             </h2>
             <p className="text-xl text-white/90 max-w-2xl mx-auto">
-              Join hundreds of families who trust SafeRide for their children's
-              daily transportation needs.
+              Join hundreds of families who trust Amogh Van/Bus Services for
+              their children's daily transportation needs.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link
@@ -508,11 +508,14 @@ const Index = () => {
                 <div className="bg-school-yellow-500 p-2 rounded-lg">
                   <Bus className="h-6 w-6 text-white" />
                 </div>
-                <span className="text-xl font-bold font-manrope">SafeRide</span>
+                <span className="text-xl font-bold font-manrope">
+                  Amogh Van/Bus Services
+                </span>
               </div>
               <p className="text-gray-400">
-                Providing safe, reliable school transportation services in
-                Mumbai and surrounding areas since 2010.
+                Founded by Rajesh Kumar J Kharwar. Providing safe, reliable
+                school transportation services in Mumbai and surrounding areas
+                since 2010.
               </p>
               <div className="flex space-x-4">
                 <a
@@ -522,7 +525,7 @@ const Index = () => {
                   <Phone className="h-5 w-5" />
                 </a>
                 <a
-                  href="mailto:info@saferide.com"
+                  href="mailto:info@amoghservices.com"
                   className="bg-gray-800 p-2 rounded-lg hover:bg-school-yellow-500 transition-colors cursor-pointer"
                 >
                   <Mail className="h-5 w-5" />
@@ -559,7 +562,7 @@ const Index = () => {
                 </div>
                 <div className="flex items-center">
                   <Mail className="h-4 w-4 mr-3" />
-                  info@saferide.com
+                  info@amoghservices.com
                 </div>
                 <div className="flex items-start">
                   <MapPin className="h-4 w-4 mr-3 mt-1" />
@@ -572,7 +575,7 @@ const Index = () => {
           </div>
 
           <div className="border-t border-gray-800 mt-12 pt-8 text-center text-gray-400">
-            <p>&copy; 2024 SafeRide Transportation. All rights reserved.</p>
+            <p>&copy; 2024 Amogh Van/Bus Services. All rights reserved.</p>
           </div>
         </div>
       </footer>
