@@ -63,10 +63,17 @@ const NotFound = () => {
           <p className="text-sm text-gray-500">
             Need help? Contact us at{" "}
             <a
-              href="tel:5551234567"
+              href="tel:9870525637"
               className="text-school-blue-600 hover:underline"
             >
-              (555) 123-4567
+              9870525637
+            </a>{" "}
+            /{" "}
+            <a
+              href="tel:9321025627"
+              className="text-school-blue-600 hover:underline"
+            >
+              9321025627
             </a>{" "}
             or{" "}
             <a
