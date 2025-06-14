@@ -149,7 +149,7 @@ const StudentRegistration = () => {
 
     console.log("Form submitted:", data);
     toast.success(
-      "Registration submitted successfully! We'll contact you within 24 hours.",
+      "Registration submitted successfully! Amogh Van/Bus Services will contact you within 24 hours.",
     );
     setIsSubmitting(false);
   };
@@ -187,7 +187,7 @@ const StudentRegistration = () => {
                 <Bus className="h-6 w-6 text-white" />
               </div>
               <span className="text-xl font-bold text-gray-900 font-manrope">
-                SafeRide
+                Amogh Van/Bus Services
               </span>
             </Link>
             <Link
@@ -213,7 +213,7 @@ const StudentRegistration = () => {
             </h1>
             <p className="text-lg text-gray-600">
               Please fill out all required information to register your child
-              for our transportation services.
+              for Amogh Van/Bus Services transportation.
             </p>
           </div>
 
@@ -668,8 +668,8 @@ const StudentRegistration = () => {
                           className="text-sm leading-relaxed"
                         >
                           I give permission for my child to be photographed for
-                          SafeRide promotional materials and safety
-                          documentation.
+                          Amogh Van/Bus Services promotional materials and
+                          safety documentation.
                         </Label>
                       </div>
 

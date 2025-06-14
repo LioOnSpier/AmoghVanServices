@@ -12,7 +12,7 @@ const NotFound = () => {
             <Bus className="h-8 w-8 text-white" />
           </div>
           <span className="text-2xl font-bold text-gray-900 font-manrope">
-            SafeRide
+            Amogh Van/Bus Services
           </span>
         </div>
 
@@ -77,10 +77,10 @@ const NotFound = () => {
             </a>{" "}
             or{" "}
             <a
-              href="mailto:info@saferide.com"
+              href="mailto:info@amoghservices.com"
               className="text-school-blue-600 hover:underline"
             >
-              info@saferide.com
+              info@amoghservices.com
             </a>
           </p>
         </div>
