@@ -413,10 +413,11 @@ const Index = () => {
                   ))}
                 </div>
                 <p className="text-gray-600 mb-4">
-                  "SafeRide has been incredible. My daughter feels safe and I
-                  have peace of mind knowing she's in good hands."
+                  "Mr. Rajesh and his team at Amogh Van/Bus Services have been
+                  incredible. My daughter feels safe and I have peace of mind
+                  knowing she's in good hands."
                 </p>
-                <div className="font-semibold text-gray-900">Sarah Johnson</div>
+                <div className="font-semibold text-gray-900">Priya Sharma</div>
                 <div className="text-sm text-gray-500">
                   Parent, Elementary School
                 </div>
@@ -435,9 +436,9 @@ const Index = () => {
                 </div>
                 <p className="text-gray-600 mb-4">
                   "Always on time, professional drivers, and excellent
-                  communication. Highly recommend!"
+                  communication. Amogh Van/Bus Services is highly recommended!"
                 </p>
-                <div className="font-semibold text-gray-900">Michael Davis</div>
+                <div className="font-semibold text-gray-900">Suresh Patel</div>
                 <div className="text-sm text-gray-500">Parent, High School</div>
               </CardContent>
             </Card>
@@ -456,7 +457,7 @@ const Index = () => {
                   "The GPS tracking feature is amazing. I can see exactly where
                   the bus is and when it will arrive."
                 </p>
-                <div className="font-semibold text-gray-900">Emily Chen</div>
+                <div className="font-semibold text-gray-900">Kavita Desai</div>
                 <div className="text-sm text-gray-500">
                   Parent, Middle School
                 </div>
