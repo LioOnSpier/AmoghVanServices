@@ -1,24 +1,82 @@
-import { useLocation } from "react-router-dom";
-import { useEffect } from "react";
+import { Button } from "@/components/ui/button";
+import { Bus, Home, ArrowLeft } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const NotFound = () => {
-  const location = useLocation();
-
-  useEffect(() => {
-    console.error(
-      "404 Error: User attempted to access non-existent route:",
-      location.pathname,
-    );
-  }, [location.pathname]);
-
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
-      <div className="text-center">
-        <h1 className="text-4xl font-bold mb-4">404</h1>
-        <p className="text-xl text-gray-600 mb-4">Oops! Page not found</p>
-        <a href="/" className="text-blue-500 hover:text-blue-700 underline">
-          Return to Home
-        </a>
+    <div className="min-h-screen bg-gradient-to-b from-blue-50 to-white flex items-center justify-center">
+      <div className="text-center space-y-8 px-4">
+        {/* Logo */}
+        <div className="flex items-center justify-center space-x-3 mb-8">
+          <div className="bg-school-yellow-500 p-3 rounded-lg">
+            <Bus className="h-8 w-8 text-white" />
+          </div>
+          <span className="text-2xl font-bold text-gray-900 font-manrope">
+            SafeRide
+          </span>
+        </div>
+
+        {/* 404 Animation */}
+        <div className="relative">
+          <div className="text-9xl font-bold text-school-yellow-500 opacity-20">
+            404
+          </div>
+          <div className="absolute inset-0 flex items-center justify-center">
+            <div className="animate-bounce">
+              <Bus className="h-16 w-16 text-school-blue-500" />
+            </div>
+          </div>
+        </div>
+
+        {/* Content */}
+        <div className="space-y-4 max-w-md mx-auto">
+          <h1 className="text-4xl font-bold text-gray-900 font-manrope">
+            Route Not Found
+          </h1>
+          <p className="text-lg text-gray-600">
+            Looks like this page took a wrong turn! Our buses know the way
+            better than our website sometimes.
+          </p>
+        </div>
+
+        {/* Actions */}
+        <div className="flex flex-col sm:flex-row gap-4 justify-center">
+          <Link to="/">
+            <Button className="btn-primary flex items-center">
+              <Home className="mr-2 h-5 w-5" />
+              Back to Home
+            </Button>
+          </Link>
+          <Link to="/register">
+            <Button
+              variant="outline"
+              className="border-school-blue-500 text-school-blue-600 hover:bg-school-blue-50 flex items-center"
+            >
+              <Bus className="mr-2 h-5 w-5" />
+              Register Student
+            </Button>
+          </Link>
+        </div>
+
+        {/* Help Text */}
+        <div className="pt-8 border-t border-gray-200 max-w-md mx-auto">
+          <p className="text-sm text-gray-500">
+            Need help? Contact us at{" "}
+            <a
+              href="tel:5551234567"
+              className="text-school-blue-600 hover:underline"
+            >
+              (555) 123-4567
+            </a>{" "}
+            or{" "}
+            <a
+              href="mailto:info@saferide.com"
+              className="text-school-blue-600 hover:underline"
+            >
+              info@saferide.com
+            </a>
+          </p>
+        </div>
       </div>
     </div>
   );
