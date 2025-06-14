@@ -104,14 +104,16 @@ const Index = () => {
                   Register Your Child
                   <ArrowRight className="ml-2 h-5 w-5" />
                 </Link>
-                <Button
-                  variant="outline"
-                  size="lg"
-                  className="border-school-blue-500 text-school-blue-600 hover:bg-school-blue-50"
-                >
-                  <Phone className="mr-2 h-5 w-5" />
-                  Call Us Now
-                </Button>
+                <a href="tel:9870525637">
+                  <Button
+                    variant="outline"
+                    size="lg"
+                    className="border-school-blue-500 text-school-blue-600 hover:bg-school-blue-50"
+                  >
+                    <Phone className="mr-2 h-5 w-5" />
+                    Call Us Now
+                  </Button>
+                </a>
               </div>
 
               <div className="grid grid-cols-3 gap-6 pt-8">
@@ -482,14 +484,16 @@ const Index = () => {
               >
                 Register Your Student
               </Link>
-              <Button
-                variant="outline"
-                size="lg"
-                className="border-white text-white hover:bg-white hover:text-school-blue-600"
-              >
-                <Phone className="mr-2 h-5 w-5" />
-                Get Quote
-              </Button>
+              <a href="tel:9870525637">
+                <Button
+                  variant="outline"
+                  size="lg"
+                  className="border-white text-white hover:bg-white hover:text-school-blue-600"
+                >
+                  <Phone className="mr-2 h-5 w-5" />
+                  Get Quote
+                </Button>
+              </a>
             </div>
           </div>
         </div>
@@ -507,16 +511,22 @@ const Index = () => {
                 <span className="text-xl font-bold font-manrope">SafeRide</span>
               </div>
               <p className="text-gray-400">
-                Providing safe, reliable school transportation services since
-                2010.
+                Providing safe, reliable school transportation services in
+                Mumbai and surrounding areas since 2010.
               </p>
               <div className="flex space-x-4">
-                <div className="bg-gray-800 p-2 rounded-lg hover:bg-school-yellow-500 transition-colors cursor-pointer">
+                <a
+                  href="tel:9870525637"
+                  className="bg-gray-800 p-2 rounded-lg hover:bg-school-yellow-500 transition-colors cursor-pointer"
+                >
                   <Phone className="h-5 w-5" />
-                </div>
-                <div className="bg-gray-800 p-2 rounded-lg hover:bg-school-yellow-500 transition-colors cursor-pointer">
+                </a>
+                <a
+                  href="mailto:info@saferide.com"
+                  className="bg-gray-800 p-2 rounded-lg hover:bg-school-yellow-500 transition-colors cursor-pointer"
+                >
                   <Mail className="h-5 w-5" />
-                </div>
+                </a>
               </div>
             </div>
 
@@ -545,7 +555,7 @@ const Index = () => {
               <div className="space-y-3 text-gray-400">
                 <div className="flex items-center">
                   <Phone className="h-4 w-4 mr-3" />
-                  (555) 123-4567
+                  9870525637 / 9321025627
                 </div>
                 <div className="flex items-center">
                   <Mail className="h-4 w-4 mr-3" />
@@ -553,9 +563,9 @@ const Index = () => {
                 </div>
                 <div className="flex items-start">
                   <MapPin className="h-4 w-4 mr-3 mt-1" />
-                  123 Transport Lane
+                  Prabhadevi, Dadar West
                   <br />
-                  City, State 12345
+                  Mumbai, Maharashtra
                 </div>
               </div>
             </div>
