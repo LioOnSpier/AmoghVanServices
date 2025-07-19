@@ -145,9 +145,27 @@ const StudentRegistration = () => {
   const onSubmit = async (data: StudentFormData) => {
     setIsSubmitting(true);
 
+    // Check if EmailJS is configured
+    const emailjsPublicKey = "YOUR_PUBLIC_KEY"; // Replace with your actual EmailJS public key
+    const emailjsServiceId = "YOUR_SERVICE_ID"; // Replace with your actual service ID
+    const emailjsTemplateId = "YOUR_TEMPLATE_ID"; // Replace with your actual template ID
+
+    if (
+      emailjsPublicKey === "YOUR_PUBLIC_KEY" ||
+      emailjsServiceId === "YOUR_SERVICE_ID" ||
+      emailjsTemplateId === "YOUR_TEMPLATE_ID"
+    ) {
+      toast.error(
+        "EmailJS is not configured yet. Please contact kharwaramog02@gmail.com directly with your registration details.",
+        { duration: 8000 },
+      );
+      setIsSubmitting(false);
+      return;
+    }
+
     try {
       // Initialize EmailJS with your public key
-      emailjs.init("YOUR_PUBLIC_KEY"); // Replace with your actual EmailJS public key
+      emailjs.init(emailjsPublicKey);
 
       // Format the email template parameters
       const templateParams = {
@@ -226,8 +244,8 @@ Submitted on: ${new Date().toLocaleString()}
 
       // Send email using EmailJS
       const result = await emailjs.send(
-        "YOUR_SERVICE_ID", // Replace with your EmailJS service ID
-        "YOUR_TEMPLATE_ID", // Replace with your EmailJS template ID
+        emailjsServiceId,
+        emailjsTemplateId,
         templateParams,
       );
 
