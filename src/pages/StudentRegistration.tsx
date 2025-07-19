@@ -80,6 +80,7 @@ type StudentFormData = z.infer<typeof studentSchema>;
 const StudentRegistration = () => {
   const [step, setStep] = useState(1);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSubmitted, setIsSubmitted] = useState(false);
 
   const {
     register,
@@ -290,12 +291,9 @@ Submitted on: ${new Date().toLocaleString()}
       );
 
       console.log("Email sent successfully:", result);
-      toast.success(
-        "Registration submitted successfully! We've sent your details to Amogh Van/Bus Services and they will contact you within 24 hours.",
-      );
 
-      // Reset form after successful submission
-      setStep(1);
+      // Show success screen
+      setIsSubmitted(true);
     } catch (error) {
       console.error("Failed to send email:", error);
       toast.error(
@@ -355,569 +353,657 @@ Submitted on: ${new Date().toLocaleString()}
 
       <div className="py-12">
         <div className="section-container max-w-4xl">
-          {/* Header */}
-          <div className="text-center mb-12">
-            <Badge className="bg-school-yellow-100 text-school-yellow-700 mb-4">
-              Student Registration
-            </Badge>
-            <h1 className="text-4xl font-bold text-gray-900 font-manrope mb-4">
-              Register Your Student
-            </h1>
-            <p className="text-lg text-gray-600">
-              Please fill out all required information to register your child
-              for Amogh Van/Bus Services transportation.
-            </p>
-          </div>
-
-          {renderStepIndicator()}
-
-          <form
-            onSubmit={handleSubmit(onSubmit)}
-            onKeyDown={(e) => {
-              // Prevent form submission on Enter key unless on submit button
-              if (e.key === "Enter" && e.target !== e.currentTarget) {
-                e.preventDefault();
-              }
-            }}
-          >
-            <Card className="shadow-lg border-0">
-              <CardHeader className="bg-gradient-to-r from-school-yellow-50 to-school-blue-50">
-                <CardTitle className="flex items-center text-2xl">
-                  {step === 1 && (
-                    <>
-                      <User className="mr-3 h-6 w-6" />
-                      Student Information
-                    </>
-                  )}
-                  {step === 2 && (
-                    <>
-                      <Phone className="mr-3 h-6 w-6" />
-                      Parent/Guardian Information
-                    </>
-                  )}
-                  {step === 3 && (
-                    <>
-                      <MapPin className="mr-3 h-6 w-6" />
-                      Transportation Details
-                    </>
-                  )}
-                  {step === 4 && (
-                    <>
-                      <FileText className="mr-3 h-6 w-6" />
-                      Medical Information & Agreement
-                    </>
-                  )}
-                </CardTitle>
-                <CardDescription className="text-base">
-                  {step === 1 &&
-                    "Enter your child's basic information and school details."}
-                  {step === 2 &&
-                    "Provide parent/guardian and emergency contact information."}
-                  {step === 3 &&
-                    "Specify pickup, drop-off locations and service preferences."}
-                  {step === 4 &&
-                    "Add any medical information and accept our terms of service."}
-                </CardDescription>
-              </CardHeader>
-
-              <CardContent className="p-8">
-                {/* Step 1: Student Information */}
-                {step === 1 && (
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div>
-                      <Label htmlFor="studentFirstName">
-                        Student First Name *
-                      </Label>
-                      <Input
-                        id="studentFirstName"
-                        {...register("studentFirstName")}
-                        className="mt-1"
-                        placeholder="Enter first name"
-                      />
-                      {errors.studentFirstName && (
-                        <p className="text-red-500 text-sm mt-1 flex items-center">
-                          <AlertCircle className="h-4 w-4 mr-1" />
-                          {errors.studentFirstName.message}
-                        </p>
-                      )}
-                    </div>
-
-                    <div>
-                      <Label htmlFor="studentLastName">
-                        Student Last Name *
-                      </Label>
-                      <Input
-                        id="studentLastName"
-                        {...register("studentLastName")}
-                        className="mt-1"
-                        placeholder="Enter last name"
-                      />
-                      {errors.studentLastName && (
-                        <p className="text-red-500 text-sm mt-1 flex items-center">
-                          <AlertCircle className="h-4 w-4 mr-1" />
-                          {errors.studentLastName.message}
-                        </p>
-                      )}
-                    </div>
-
-                    <div>
-                      <Label htmlFor="dateOfBirth">Date of Birth *</Label>
-                      <Input
-                        id="dateOfBirth"
-                        type="date"
-                        {...register("dateOfBirth")}
-                        className="mt-1"
-                      />
-                      {errors.dateOfBirth && (
-                        <p className="text-red-500 text-sm mt-1 flex items-center">
-                          <AlertCircle className="h-4 w-4 mr-1" />
-                          {errors.dateOfBirth.message}
-                        </p>
-                      )}
-                    </div>
-
-                    <div>
-                      <Label htmlFor="grade">Grade *</Label>
-                      <Select
-                        onValueChange={(value) => setValue("grade", value)}
-                      >
-                        <SelectTrigger className="mt-1">
-                          <SelectValue placeholder="Select grade" />
-                        </SelectTrigger>
-                        <SelectContent>
-                          <SelectItem value="pre-k">Pre-K</SelectItem>
-                          <SelectItem value="k">Kindergarten</SelectItem>
-                          <SelectItem value="1">1st Grade</SelectItem>
-                          <SelectItem value="2">2nd Grade</SelectItem>
-                          <SelectItem value="3">3rd Grade</SelectItem>
-                          <SelectItem value="4">4th Grade</SelectItem>
-                          <SelectItem value="5">5th Grade</SelectItem>
-                          <SelectItem value="6">6th Grade</SelectItem>
-                          <SelectItem value="7">7th Grade</SelectItem>
-                          <SelectItem value="8">8th Grade</SelectItem>
-                          <SelectItem value="9">9th Grade</SelectItem>
-                          <SelectItem value="10">10th Grade</SelectItem>
-                          <SelectItem value="11">11th Grade</SelectItem>
-                          <SelectItem value="12">12th Grade</SelectItem>
-                        </SelectContent>
-                      </Select>
-                      {errors.grade && (
-                        <p className="text-red-500 text-sm mt-1 flex items-center">
-                          <AlertCircle className="h-4 w-4 mr-1" />
-                          {errors.grade.message}
-                        </p>
-                      )}
-                    </div>
-
-                    <div className="md:col-span-2">
-                      <Label htmlFor="school">School Name *</Label>
-                      <Input
-                        id="school"
-                        {...register("school")}
-                        className="mt-1"
-                        placeholder="Enter school name"
-                      />
-                      {errors.school && (
-                        <p className="text-red-500 text-sm mt-1 flex items-center">
-                          <AlertCircle className="h-4 w-4 mr-1" />
-                          {errors.school.message}
-                        </p>
-                      )}
-                    </div>
-
-                    <div className="md:col-span-2">
-                      <Label htmlFor="studentAddress">
-                        Student Home Address *
-                      </Label>
-                      <Textarea
-                        id="studentAddress"
-                        {...register("studentAddress")}
-                        className="mt-1"
-                        placeholder="Enter complete home address"
-                        rows={3}
-                      />
-                      {errors.studentAddress && (
-                        <p className="text-red-500 text-sm mt-1 flex items-center">
-                          <AlertCircle className="h-4 w-4 mr-1" />
-                          {errors.studentAddress.message}
-                        </p>
-                      )}
-                    </div>
-                  </div>
-                )}
-
-                {/* Step 2: Parent Information */}
-                {step === 2 && (
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div>
-                      <Label htmlFor="parentFirstName">
-                        Parent/Guardian First Name *
-                      </Label>
-                      <Input
-                        id="parentFirstName"
-                        {...register("parentFirstName")}
-                        className="mt-1"
-                        placeholder="Enter first name"
-                      />
-                      {errors.parentFirstName && (
-                        <p className="text-red-500 text-sm mt-1 flex items-center">
-                          <AlertCircle className="h-4 w-4 mr-1" />
-                          {errors.parentFirstName.message}
-                        </p>
-                      )}
-                    </div>
-
-                    <div>
-                      <Label htmlFor="parentLastName">
-                        Parent/Guardian Last Name *
-                      </Label>
-                      <Input
-                        id="parentLastName"
-                        {...register("parentLastName")}
-                        className="mt-1"
-                        placeholder="Enter last name"
-                      />
-                      {errors.parentLastName && (
-                        <p className="text-red-500 text-sm mt-1 flex items-center">
-                          <AlertCircle className="h-4 w-4 mr-1" />
-                          {errors.parentLastName.message}
-                        </p>
-                      )}
-                    </div>
-
-                    <div>
-                      <Label htmlFor="parentPhone">
-                        Primary Phone Number *
-                      </Label>
-                      <Input
-                        id="parentPhone"
-                        {...register("parentPhone")}
-                        className="mt-1"
-                        placeholder="(555) 123-4567"
-                      />
-                      {errors.parentPhone && (
-                        <p className="text-red-500 text-sm mt-1 flex items-center">
-                          <AlertCircle className="h-4 w-4 mr-1" />
-                          {errors.parentPhone.message}
-                        </p>
-                      )}
-                    </div>
-
-                    <div>
-                      <Label htmlFor="parentEmail">Email Address *</Label>
-                      <Input
-                        id="parentEmail"
-                        type="email"
-                        {...register("parentEmail")}
-                        className="mt-1"
-                        placeholder="parent@email.com"
-                      />
-                      {errors.parentEmail && (
-                        <p className="text-red-500 text-sm mt-1 flex items-center">
-                          <AlertCircle className="h-4 w-4 mr-1" />
-                          {errors.parentEmail.message}
-                        </p>
-                      )}
-                    </div>
-
-                    <div>
-                      <Label htmlFor="emergencyContact">
-                        Emergency Contact Name *
-                      </Label>
-                      <Input
-                        id="emergencyContact"
-                        {...register("emergencyContact")}
-                        className="mt-1"
-                        placeholder="Emergency contact name"
-                      />
-                      {errors.emergencyContact && (
-                        <p className="text-red-500 text-sm mt-1 flex items-center">
-                          <AlertCircle className="h-4 w-4 mr-1" />
-                          {errors.emergencyContact.message}
-                        </p>
-                      )}
-                    </div>
-
-                    <div>
-                      <Label htmlFor="emergencyPhone">
-                        Emergency Contact Phone *
-                      </Label>
-                      <Input
-                        id="emergencyPhone"
-                        {...register("emergencyPhone")}
-                        className="mt-1"
-                        placeholder="(555) 987-6543"
-                      />
-                      {errors.emergencyPhone && (
-                        <p className="text-red-500 text-sm mt-1 flex items-center">
-                          <AlertCircle className="h-4 w-4 mr-1" />
-                          {errors.emergencyPhone.message}
-                        </p>
-                      )}
-                    </div>
-                  </div>
-                )}
-
-                {/* Step 3: Transportation Details */}
-                {step === 3 && (
-                  <div className="space-y-6">
-                    <div>
-                      <Label htmlFor="serviceType">Service Type *</Label>
-                      <Select
-                        onValueChange={(value) =>
-                          setValue("serviceType", value)
-                        }
-                      >
-                        <SelectTrigger className="mt-1">
-                          <SelectValue placeholder="Select service type" />
-                        </SelectTrigger>
-                        <SelectContent>
-                          <SelectItem value="daily-route">
-                            Daily School Route
-                          </SelectItem>
-                          <SelectItem value="field-trip">
-                            Field Trip Only
-                          </SelectItem>
-                          <SelectItem value="private">
-                            Private Transportation
-                          </SelectItem>
-                          <SelectItem value="special-needs">
-                            Special Needs Support
-                          </SelectItem>
-                        </SelectContent>
-                      </Select>
-                      {errors.serviceType && (
-                        <p className="text-red-500 text-sm mt-1 flex items-center">
-                          <AlertCircle className="h-4 w-4 mr-1" />
-                          {errors.serviceType.message}
-                        </p>
-                      )}
-                    </div>
-
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                      <div>
-                        <Label htmlFor="pickupAddress">Pickup Address *</Label>
-                        <Textarea
-                          id="pickupAddress"
-                          {...register("pickupAddress")}
-                          className="mt-1"
-                          placeholder="Enter pickup address"
-                          rows={3}
-                        />
-                        {errors.pickupAddress && (
-                          <p className="text-red-500 text-sm mt-1 flex items-center">
-                            <AlertCircle className="h-4 w-4 mr-1" />
-                            {errors.pickupAddress.message}
-                          </p>
-                        )}
-                      </div>
-
-                      <div>
-                        <Label htmlFor="dropoffAddress">
-                          Drop-off Address *
-                        </Label>
-                        <Textarea
-                          id="dropoffAddress"
-                          {...register("dropoffAddress")}
-                          className="mt-1"
-                          placeholder="Enter drop-off address"
-                          rows={3}
-                        />
-                        {errors.dropoffAddress && (
-                          <p className="text-red-500 text-sm mt-1 flex items-center">
-                            <AlertCircle className="h-4 w-4 mr-1" />
-                            {errors.dropoffAddress.message}
-                          </p>
-                        )}
-                      </div>
-                    </div>
-
-                    <div>
-                      <Label htmlFor="preferredPickupTime">
-                        Preferred Pickup Time *
-                      </Label>
-                      <Select
-                        onValueChange={(value) =>
-                          setValue("preferredPickupTime", value)
-                        }
-                      >
-                        <SelectTrigger className="mt-1">
-                          <SelectValue placeholder="Select preferred pickup time" />
-                        </SelectTrigger>
-                        <SelectContent>
-                          <SelectItem value="6:30">6:30 AM</SelectItem>
-                          <SelectItem value="7:00">7:00 AM</SelectItem>
-                          <SelectItem value="7:30">7:30 AM</SelectItem>
-                          <SelectItem value="8:00">8:00 AM</SelectItem>
-                          <SelectItem value="8:30">8:30 AM</SelectItem>
-                          <SelectItem value="flexible">Flexible</SelectItem>
-                        </SelectContent>
-                      </Select>
-                      {errors.preferredPickupTime && (
-                        <p className="text-red-500 text-sm mt-1 flex items-center">
-                          <AlertCircle className="h-4 w-4 mr-1" />
-                          {errors.preferredPickupTime.message}
-                        </p>
-                      )}
-                    </div>
-                  </div>
-                )}
-
-                {/* Step 4: Medical & Agreement */}
-                {step === 4 && (
-                  <div className="space-y-6">
-                    <div className="bg-school-yellow-50 p-6 rounded-lg">
-                      <h3 className="font-semibold text-gray-900 mb-4 flex items-center">
-                        <Heart className="h-5 w-5 mr-2 text-school-red-500" />
-                        Medical Information (Optional)
-                      </h3>
-
-                      <div className="space-y-4">
-                        <div>
-                          <Label htmlFor="medicalConditions">
-                            Medical Conditions
-                          </Label>
-                          <Textarea
-                            id="medicalConditions"
-                            {...register("medicalConditions")}
-                            className="mt-1"
-                            placeholder="Any medical conditions we should be aware of?"
-                            rows={2}
-                          />
-                        </div>
-
-                        <div>
-                          <Label htmlFor="medications">
-                            Current Medications
-                          </Label>
-                          <Textarea
-                            id="medications"
-                            {...register("medications")}
-                            className="mt-1"
-                            placeholder="List any medications your child takes"
-                            rows={2}
-                          />
-                        </div>
-
-                        <div>
-                          <Label htmlFor="specialNeeds">
-                            Special Needs/Accommodations
-                          </Label>
-                          <Textarea
-                            id="specialNeeds"
-                            {...register("specialNeeds")}
-                            className="mt-1"
-                            placeholder="Any special accommodations needed?"
-                            rows={2}
-                          />
-                        </div>
-                      </div>
-                    </div>
-
-                    <div className="space-y-4">
-                      <div className="flex items-start space-x-3">
-                        <Checkbox
-                          id="photoPermission"
-                          checked={watch("photoPermission")}
-                          onCheckedChange={(checked) =>
-                            setValue("photoPermission", checked as boolean)
-                          }
-                        />
-                        <Label
-                          htmlFor="photoPermission"
-                          className="text-sm leading-relaxed"
-                        >
-                          I give permission for my child to be photographed for
-                          Amogh Van/Bus Services promotional materials and
-                          safety documentation.
-                        </Label>
-                      </div>
-
-                      <div className="flex items-start space-x-3">
-                        <Checkbox
-                          id="termsAccepted"
-                          checked={watch("termsAccepted")}
-                          onCheckedChange={(checked) =>
-                            setValue("termsAccepted", checked as boolean)
-                          }
-                        />
-                        <Label
-                          htmlFor="termsAccepted"
-                          className="text-sm leading-relaxed"
-                        >
-                          I accept the{" "}
-                          <span className="text-school-blue-600 underline cursor-pointer">
-                            Terms of Service
-                          </span>{" "}
-                          and
-                          <span className="text-school-blue-600 underline cursor-pointer">
-                            {" "}
-                            Privacy Policy
-                          </span>
-                          . I understand the transportation policies and safety
-                          procedures. *
-                        </Label>
-                      </div>
-                      {errors.termsAccepted && (
-                        <p className="text-red-500 text-sm flex items-center">
-                          <AlertCircle className="h-4 w-4 mr-1" />
-                          {errors.termsAccepted.message}
-                        </p>
-                      )}
-                    </div>
-                  </div>
-                )}
-              </CardContent>
-
-              {/* Navigation Buttons */}
-              <div className="flex justify-between items-center p-8 bg-gray-50">
-                <Button
-                  type="button"
-                  variant="outline"
-                  onClick={prevStep}
-                  disabled={step === 1}
-                  className="flex items-center"
-                >
-                  <ArrowLeft className="h-4 w-4 mr-2" />
-                  Previous
-                </Button>
-
-                <div className="text-sm text-gray-500">
-                  Step {step} of {totalSteps}
+          {/* Success Screen */}
+          {isSubmitted ? (
+            <div className="text-center space-y-8">
+              <div className="bg-white rounded-2xl shadow-lg p-12 max-w-2xl mx-auto">
+                <div className="bg-school-green-100 w-24 h-24 rounded-full flex items-center justify-center mx-auto mb-8">
+                  <CheckCircle className="h-12 w-12 text-school-green-600" />
                 </div>
 
-                {step < totalSteps ? (
+                <h1 className="text-4xl font-bold text-gray-900 font-manrope mb-6">
+                  Registration Successful!
+                </h1>
+
+                <div className="bg-school-yellow-50 border-l-4 border-school-yellow-500 p-6 mb-8">
+                  <p className="text-xl text-gray-800 font-medium">
+                    Welcome to Amogh Van Service! We're happy to have you as
+                    part of our family.
+                  </p>
+                </div>
+
+                <div className="space-y-4 text-gray-600">
+                  <p className="text-lg">
+                    We've received your registration and sent the details to our
+                    team.
+                  </p>
+                  <p className="text-base">
+                    <strong>What happens next?</strong>
+                  </p>
+                  <ul className="text-left space-y-2 max-w-md mx-auto">
+                    <li className="flex items-center">
+                      <CheckCircle className="h-4 w-4 text-school-green-500 mr-2" />
+                      We'll review your application within 24 hours
+                    </li>
+                    <li className="flex items-center">
+                      <CheckCircle className="h-4 w-4 text-school-green-500 mr-2" />
+                      Our team will contact you to confirm details
+                    </li>
+                    <li className="flex items-center">
+                      <CheckCircle className="h-4 w-4 text-school-green-500 mr-2" />
+                      We'll schedule a route assessment if needed
+                    </li>
+                  </ul>
+                </div>
+
+                <div className="flex flex-col sm:flex-row gap-4 justify-center mt-8">
+                  <Link to="/">
+                    <Button className="btn-primary flex items-center">
+                      <ArrowLeft className="mr-2 h-5 w-5" />
+                      Back to Home
+                    </Button>
+                  </Link>
                   <Button
-                    type="button"
-                    onClick={nextStep}
-                    disabled={isSubmitting}
-                    className="btn-primary flex items-center"
+                    onClick={() => {
+                      setIsSubmitted(false);
+                      setStep(1);
+                    }}
+                    variant="outline"
+                    className="border-school-blue-500 text-school-blue-600 hover:bg-school-blue-50 flex items-center"
                   >
-                    Next
-                    <ArrowRight className="h-4 w-4 ml-2" />
+                    Register Another Student
                   </Button>
-                ) : (
-                  <Button
-                    type="submit"
-                    disabled={isSubmitting || !watch("termsAccepted")}
-                    className="btn-primary flex items-center disabled:opacity-50 disabled:cursor-not-allowed"
-                  >
-                    {isSubmitting ? (
-                      <>
-                        <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white mr-2"></div>
-                        Submitting...
-                      </>
-                    ) : (
-                      <>
-                        Submit Registration
-                        <CheckCircle className="h-4 w-4 ml-2" />
-                      </>
-                    )}
-                  </Button>
-                )}
+                </div>
+
+                <div className="mt-8 pt-6 border-t border-gray-200">
+                  <p className="text-sm text-gray-500">
+                    Questions? Contact us at{" "}
+                    <a
+                      href="tel:9870525637"
+                      className="text-school-blue-600 hover:underline"
+                    >
+                      9870525637
+                    </a>{" "}
+                    or{" "}
+                    <a
+                      href="mailto:kharwaramog02@gmail.com"
+                      className="text-school-blue-600 hover:underline"
+                    >
+                      kharwaramog02@gmail.com
+                    </a>
+                  </p>
+                </div>
               </div>
-            </Card>
-          </form>
+            </div>
+          ) : (
+            <>
+              {/* Header */}
+              <div className="text-center mb-12">
+                <Badge className="bg-school-yellow-100 text-school-yellow-700 mb-4">
+                  Student Registration
+                </Badge>
+                <h1 className="text-4xl font-bold text-gray-900 font-manrope mb-4">
+                  Register Your Student
+                </h1>
+                <p className="text-lg text-gray-600">
+                  Please fill out all required information to register your
+                  child for Amogh Van/Bus Services transportation.
+                </p>
+              </div>
+
+              {renderStepIndicator()}
+
+              <form
+                onSubmit={handleSubmit(onSubmit)}
+                onKeyDown={(e) => {
+                  // Prevent form submission on Enter key unless on submit button
+                  if (e.key === "Enter" && e.target !== e.currentTarget) {
+                    e.preventDefault();
+                  }
+                }}
+              >
+                <Card className="shadow-lg border-0">
+                  <CardHeader className="bg-gradient-to-r from-school-yellow-50 to-school-blue-50">
+                    <CardTitle className="flex items-center text-2xl">
+                      {step === 1 && (
+                        <>
+                          <User className="mr-3 h-6 w-6" />
+                          Student Information
+                        </>
+                      )}
+                      {step === 2 && (
+                        <>
+                          <Phone className="mr-3 h-6 w-6" />
+                          Parent/Guardian Information
+                        </>
+                      )}
+                      {step === 3 && (
+                        <>
+                          <MapPin className="mr-3 h-6 w-6" />
+                          Transportation Details
+                        </>
+                      )}
+                      {step === 4 && (
+                        <>
+                          <FileText className="mr-3 h-6 w-6" />
+                          Medical Information & Agreement
+                        </>
+                      )}
+                    </CardTitle>
+                    <CardDescription className="text-base">
+                      {step === 1 &&
+                        "Enter your child's basic information and school details."}
+                      {step === 2 &&
+                        "Provide parent/guardian and emergency contact information."}
+                      {step === 3 &&
+                        "Specify pickup, drop-off locations and service preferences."}
+                      {step === 4 &&
+                        "Add any medical information and accept our terms of service."}
+                    </CardDescription>
+                  </CardHeader>
+
+                  <CardContent className="p-8">
+                    {/* Step 1: Student Information */}
+                    {step === 1 && (
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                          <Label htmlFor="studentFirstName">
+                            Student First Name *
+                          </Label>
+                          <Input
+                            id="studentFirstName"
+                            {...register("studentFirstName")}
+                            className="mt-1"
+                            placeholder="Enter first name"
+                          />
+                          {errors.studentFirstName && (
+                            <p className="text-red-500 text-sm mt-1 flex items-center">
+                              <AlertCircle className="h-4 w-4 mr-1" />
+                              {errors.studentFirstName.message}
+                            </p>
+                          )}
+                        </div>
+
+                        <div>
+                          <Label htmlFor="studentLastName">
+                            Student Last Name *
+                          </Label>
+                          <Input
+                            id="studentLastName"
+                            {...register("studentLastName")}
+                            className="mt-1"
+                            placeholder="Enter last name"
+                          />
+                          {errors.studentLastName && (
+                            <p className="text-red-500 text-sm mt-1 flex items-center">
+                              <AlertCircle className="h-4 w-4 mr-1" />
+                              {errors.studentLastName.message}
+                            </p>
+                          )}
+                        </div>
+
+                        <div>
+                          <Label htmlFor="dateOfBirth">Date of Birth *</Label>
+                          <Input
+                            id="dateOfBirth"
+                            type="date"
+                            {...register("dateOfBirth")}
+                            className="mt-1"
+                          />
+                          {errors.dateOfBirth && (
+                            <p className="text-red-500 text-sm mt-1 flex items-center">
+                              <AlertCircle className="h-4 w-4 mr-1" />
+                              {errors.dateOfBirth.message}
+                            </p>
+                          )}
+                        </div>
+
+                        <div>
+                          <Label htmlFor="grade">Grade *</Label>
+                          <Select
+                            onValueChange={(value) => setValue("grade", value)}
+                          >
+                            <SelectTrigger className="mt-1">
+                              <SelectValue placeholder="Select grade" />
+                            </SelectTrigger>
+                            <SelectContent>
+                              <SelectItem value="pre-k">Pre-K</SelectItem>
+                              <SelectItem value="k">Kindergarten</SelectItem>
+                              <SelectItem value="1">1st Grade</SelectItem>
+                              <SelectItem value="2">2nd Grade</SelectItem>
+                              <SelectItem value="3">3rd Grade</SelectItem>
+                              <SelectItem value="4">4th Grade</SelectItem>
+                              <SelectItem value="5">5th Grade</SelectItem>
+                              <SelectItem value="6">6th Grade</SelectItem>
+                              <SelectItem value="7">7th Grade</SelectItem>
+                              <SelectItem value="8">8th Grade</SelectItem>
+                              <SelectItem value="9">9th Grade</SelectItem>
+                              <SelectItem value="10">10th Grade</SelectItem>
+                              <SelectItem value="11">11th Grade</SelectItem>
+                              <SelectItem value="12">12th Grade</SelectItem>
+                            </SelectContent>
+                          </Select>
+                          {errors.grade && (
+                            <p className="text-red-500 text-sm mt-1 flex items-center">
+                              <AlertCircle className="h-4 w-4 mr-1" />
+                              {errors.grade.message}
+                            </p>
+                          )}
+                        </div>
+
+                        <div className="md:col-span-2">
+                          <Label htmlFor="school">School Name *</Label>
+                          <Input
+                            id="school"
+                            {...register("school")}
+                            className="mt-1"
+                            placeholder="Enter school name"
+                          />
+                          {errors.school && (
+                            <p className="text-red-500 text-sm mt-1 flex items-center">
+                              <AlertCircle className="h-4 w-4 mr-1" />
+                              {errors.school.message}
+                            </p>
+                          )}
+                        </div>
+
+                        <div className="md:col-span-2">
+                          <Label htmlFor="studentAddress">
+                            Student Home Address *
+                          </Label>
+                          <Textarea
+                            id="studentAddress"
+                            {...register("studentAddress")}
+                            className="mt-1"
+                            placeholder="Enter complete home address"
+                            rows={3}
+                          />
+                          {errors.studentAddress && (
+                            <p className="text-red-500 text-sm mt-1 flex items-center">
+                              <AlertCircle className="h-4 w-4 mr-1" />
+                              {errors.studentAddress.message}
+                            </p>
+                          )}
+                        </div>
+                      </div>
+                    )}
+
+                    {/* Step 2: Parent Information */}
+                    {step === 2 && (
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                          <Label htmlFor="parentFirstName">
+                            Parent/Guardian First Name *
+                          </Label>
+                          <Input
+                            id="parentFirstName"
+                            {...register("parentFirstName")}
+                            className="mt-1"
+                            placeholder="Enter first name"
+                          />
+                          {errors.parentFirstName && (
+                            <p className="text-red-500 text-sm mt-1 flex items-center">
+                              <AlertCircle className="h-4 w-4 mr-1" />
+                              {errors.parentFirstName.message}
+                            </p>
+                          )}
+                        </div>
+
+                        <div>
+                          <Label htmlFor="parentLastName">
+                            Parent/Guardian Last Name *
+                          </Label>
+                          <Input
+                            id="parentLastName"
+                            {...register("parentLastName")}
+                            className="mt-1"
+                            placeholder="Enter last name"
+                          />
+                          {errors.parentLastName && (
+                            <p className="text-red-500 text-sm mt-1 flex items-center">
+                              <AlertCircle className="h-4 w-4 mr-1" />
+                              {errors.parentLastName.message}
+                            </p>
+                          )}
+                        </div>
+
+                        <div>
+                          <Label htmlFor="parentPhone">
+                            Primary Phone Number *
+                          </Label>
+                          <Input
+                            id="parentPhone"
+                            {...register("parentPhone")}
+                            className="mt-1"
+                            placeholder="(555) 123-4567"
+                          />
+                          {errors.parentPhone && (
+                            <p className="text-red-500 text-sm mt-1 flex items-center">
+                              <AlertCircle className="h-4 w-4 mr-1" />
+                              {errors.parentPhone.message}
+                            </p>
+                          )}
+                        </div>
+
+                        <div>
+                          <Label htmlFor="parentEmail">Email Address *</Label>
+                          <Input
+                            id="parentEmail"
+                            type="email"
+                            {...register("parentEmail")}
+                            className="mt-1"
+                            placeholder="parent@email.com"
+                          />
+                          {errors.parentEmail && (
+                            <p className="text-red-500 text-sm mt-1 flex items-center">
+                              <AlertCircle className="h-4 w-4 mr-1" />
+                              {errors.parentEmail.message}
+                            </p>
+                          )}
+                        </div>
+
+                        <div>
+                          <Label htmlFor="emergencyContact">
+                            Emergency Contact Name *
+                          </Label>
+                          <Input
+                            id="emergencyContact"
+                            {...register("emergencyContact")}
+                            className="mt-1"
+                            placeholder="Emergency contact name"
+                          />
+                          {errors.emergencyContact && (
+                            <p className="text-red-500 text-sm mt-1 flex items-center">
+                              <AlertCircle className="h-4 w-4 mr-1" />
+                              {errors.emergencyContact.message}
+                            </p>
+                          )}
+                        </div>
+
+                        <div>
+                          <Label htmlFor="emergencyPhone">
+                            Emergency Contact Phone *
+                          </Label>
+                          <Input
+                            id="emergencyPhone"
+                            {...register("emergencyPhone")}
+                            className="mt-1"
+                            placeholder="(555) 987-6543"
+                          />
+                          {errors.emergencyPhone && (
+                            <p className="text-red-500 text-sm mt-1 flex items-center">
+                              <AlertCircle className="h-4 w-4 mr-1" />
+                              {errors.emergencyPhone.message}
+                            </p>
+                          )}
+                        </div>
+                      </div>
+                    )}
+
+                    {/* Step 3: Transportation Details */}
+                    {step === 3 && (
+                      <div className="space-y-6">
+                        <div>
+                          <Label htmlFor="serviceType">Service Type *</Label>
+                          <Select
+                            onValueChange={(value) =>
+                              setValue("serviceType", value)
+                            }
+                          >
+                            <SelectTrigger className="mt-1">
+                              <SelectValue placeholder="Select service type" />
+                            </SelectTrigger>
+                            <SelectContent>
+                              <SelectItem value="daily-route">
+                                Daily School Route
+                              </SelectItem>
+                              <SelectItem value="field-trip">
+                                Field Trip Only
+                              </SelectItem>
+                              <SelectItem value="private">
+                                Private Transportation
+                              </SelectItem>
+                              <SelectItem value="special-needs">
+                                Special Needs Support
+                              </SelectItem>
+                            </SelectContent>
+                          </Select>
+                          {errors.serviceType && (
+                            <p className="text-red-500 text-sm mt-1 flex items-center">
+                              <AlertCircle className="h-4 w-4 mr-1" />
+                              {errors.serviceType.message}
+                            </p>
+                          )}
+                        </div>
+
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                          <div>
+                            <Label htmlFor="pickupAddress">
+                              Pickup Address *
+                            </Label>
+                            <Textarea
+                              id="pickupAddress"
+                              {...register("pickupAddress")}
+                              className="mt-1"
+                              placeholder="Enter pickup address"
+                              rows={3}
+                            />
+                            {errors.pickupAddress && (
+                              <p className="text-red-500 text-sm mt-1 flex items-center">
+                                <AlertCircle className="h-4 w-4 mr-1" />
+                                {errors.pickupAddress.message}
+                              </p>
+                            )}
+                          </div>
+
+                          <div>
+                            <Label htmlFor="dropoffAddress">
+                              Drop-off Address *
+                            </Label>
+                            <Textarea
+                              id="dropoffAddress"
+                              {...register("dropoffAddress")}
+                              className="mt-1"
+                              placeholder="Enter drop-off address"
+                              rows={3}
+                            />
+                            {errors.dropoffAddress && (
+                              <p className="text-red-500 text-sm mt-1 flex items-center">
+                                <AlertCircle className="h-4 w-4 mr-1" />
+                                {errors.dropoffAddress.message}
+                              </p>
+                            )}
+                          </div>
+                        </div>
+
+                        <div>
+                          <Label htmlFor="preferredPickupTime">
+                            Preferred Pickup Time *
+                          </Label>
+                          <Select
+                            onValueChange={(value) =>
+                              setValue("preferredPickupTime", value)
+                            }
+                          >
+                            <SelectTrigger className="mt-1">
+                              <SelectValue placeholder="Select preferred pickup time" />
+                            </SelectTrigger>
+                            <SelectContent>
+                              <SelectItem value="6:30">6:30 AM</SelectItem>
+                              <SelectItem value="7:00">7:00 AM</SelectItem>
+                              <SelectItem value="7:30">7:30 AM</SelectItem>
+                              <SelectItem value="8:00">8:00 AM</SelectItem>
+                              <SelectItem value="8:30">8:30 AM</SelectItem>
+                              <SelectItem value="flexible">Flexible</SelectItem>
+                            </SelectContent>
+                          </Select>
+                          {errors.preferredPickupTime && (
+                            <p className="text-red-500 text-sm mt-1 flex items-center">
+                              <AlertCircle className="h-4 w-4 mr-1" />
+                              {errors.preferredPickupTime.message}
+                            </p>
+                          )}
+                        </div>
+                      </div>
+                    )}
+
+                    {/* Step 4: Medical & Agreement */}
+                    {step === 4 && (
+                      <div className="space-y-6">
+                        <div className="bg-school-yellow-50 p-6 rounded-lg">
+                          <h3 className="font-semibold text-gray-900 mb-4 flex items-center">
+                            <Heart className="h-5 w-5 mr-2 text-school-red-500" />
+                            Medical Information (Optional)
+                          </h3>
+
+                          <div className="space-y-4">
+                            <div>
+                              <Label htmlFor="medicalConditions">
+                                Medical Conditions
+                              </Label>
+                              <Textarea
+                                id="medicalConditions"
+                                {...register("medicalConditions")}
+                                className="mt-1"
+                                placeholder="Any medical conditions we should be aware of?"
+                                rows={2}
+                              />
+                            </div>
+
+                            <div>
+                              <Label htmlFor="medications">
+                                Current Medications
+                              </Label>
+                              <Textarea
+                                id="medications"
+                                {...register("medications")}
+                                className="mt-1"
+                                placeholder="List any medications your child takes"
+                                rows={2}
+                              />
+                            </div>
+
+                            <div>
+                              <Label htmlFor="specialNeeds">
+                                Special Needs/Accommodations
+                              </Label>
+                              <Textarea
+                                id="specialNeeds"
+                                {...register("specialNeeds")}
+                                className="mt-1"
+                                placeholder="Any special accommodations needed?"
+                                rows={2}
+                              />
+                            </div>
+                          </div>
+                        </div>
+
+                        <div className="space-y-4">
+                          <div className="flex items-start space-x-3">
+                            <Checkbox
+                              id="photoPermission"
+                              checked={watch("photoPermission")}
+                              onCheckedChange={(checked) =>
+                                setValue("photoPermission", checked as boolean)
+                              }
+                            />
+                            <Label
+                              htmlFor="photoPermission"
+                              className="text-sm leading-relaxed"
+                            >
+                              I give permission for my child to be photographed
+                              for Amogh Van/Bus Services promotional materials
+                              and safety documentation.
+                            </Label>
+                          </div>
+
+                          <div className="flex items-start space-x-3">
+                            <Checkbox
+                              id="termsAccepted"
+                              checked={watch("termsAccepted")}
+                              onCheckedChange={(checked) =>
+                                setValue("termsAccepted", checked as boolean)
+                              }
+                            />
+                            <Label
+                              htmlFor="termsAccepted"
+                              className="text-sm leading-relaxed"
+                            >
+                              I accept the{" "}
+                              <span className="text-school-blue-600 underline cursor-pointer">
+                                Terms of Service
+                              </span>{" "}
+                              and
+                              <span className="text-school-blue-600 underline cursor-pointer">
+                                {" "}
+                                Privacy Policy
+                              </span>
+                              . I understand the transportation policies and
+                              safety procedures. *
+                            </Label>
+                          </div>
+                          {errors.termsAccepted && (
+                            <p className="text-red-500 text-sm flex items-center">
+                              <AlertCircle className="h-4 w-4 mr-1" />
+                              {errors.termsAccepted.message}
+                            </p>
+                          )}
+                        </div>
+                      </div>
+                    )}
+                  </CardContent>
+
+                  {/* Navigation Buttons */}
+                  <div className="flex justify-between items-center p-8 bg-gray-50">
+                    <Button
+                      type="button"
+                      variant="outline"
+                      onClick={prevStep}
+                      disabled={step === 1}
+                      className="flex items-center"
+                    >
+                      <ArrowLeft className="h-4 w-4 mr-2" />
+                      Previous
+                    </Button>
+
+                    <div className="text-sm text-gray-500">
+                      Step {step} of {totalSteps}
+                    </div>
+
+                    {step < totalSteps ? (
+                      <Button
+                        type="button"
+                        onClick={nextStep}
+                        disabled={isSubmitting}
+                        className="btn-primary flex items-center"
+                      >
+                        Next
+                        <ArrowRight className="h-4 w-4 ml-2" />
+                      </Button>
+                    ) : (
+                      <Button
+                        type="submit"
+                        disabled={isSubmitting || !watch("termsAccepted")}
+                        className="btn-primary flex items-center disabled:opacity-50 disabled:cursor-not-allowed"
+                      >
+                        {isSubmitting ? (
+                          <>
+                            <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white mr-2"></div>
+                            Submitting...
+                          </>
+                        ) : (
+                          <>
+                            Submit Registration
+                            <CheckCircle className="h-4 w-4 ml-2" />
+                          </>
+                        )}
+                      </Button>
+                    )}
+                  </div>
+                </Card>
+              </form>
+            </>
+          )}
         </div>
       </div>
     </div>
