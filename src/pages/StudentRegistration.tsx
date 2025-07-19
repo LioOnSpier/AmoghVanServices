@@ -38,6 +38,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import { toast } from "sonner";
+import emailjs from "@emailjs/browser";
 
 const studentSchema = z.object({
   // Student Information
@@ -144,14 +145,107 @@ const StudentRegistration = () => {
   const onSubmit = async (data: StudentFormData) => {
     setIsSubmitting(true);
 
-    // Simulate API call
-    await new Promise((resolve) => setTimeout(resolve, 2000));
+    try {
+      // Initialize EmailJS with your public key
+      emailjs.init("YOUR_PUBLIC_KEY"); // Replace with your actual EmailJS public key
 
-    console.log("Form submitted:", data);
-    toast.success(
-      "Registration submitted successfully! Amogh Van/Bus Services will contact you within 24 hours.",
-    );
-    setIsSubmitting(false);
+      // Format the email template parameters
+      const templateParams = {
+        to_email: "kharwaramog02@gmail.com",
+        from_name: "Amogh Van/Bus Services Website",
+        subject: `New Student Registration - ${data.studentFirstName} ${data.studentLastName}`,
+
+        // Student Information
+        student_name: `${data.studentFirstName} ${data.studentLastName}`,
+        date_of_birth: data.dateOfBirth,
+        grade: data.grade,
+        school: data.school,
+        student_address: data.studentAddress,
+
+        // Parent Information
+        parent_name: `${data.parentFirstName} ${data.parentLastName}`,
+        parent_phone: data.parentPhone,
+        parent_email: data.parentEmail,
+        emergency_contact: data.emergencyContact,
+        emergency_phone: data.emergencyPhone,
+
+        // Transportation Details
+        service_type: data.serviceType,
+        pickup_address: data.pickupAddress,
+        dropoff_address: data.dropoffAddress,
+        preferred_pickup_time: data.preferredPickupTime,
+
+        // Medical Information
+        medical_conditions: data.medicalConditions || "None specified",
+        medications: data.medications || "None specified",
+        special_needs: data.specialNeeds || "None specified",
+
+        // Permissions
+        photo_permission: data.photoPermission ? "Yes" : "No",
+        terms_accepted: data.termsAccepted ? "Yes" : "No",
+
+        // Formatted submission time
+        submission_date: new Date().toLocaleString(),
+
+        // Complete message body
+        message: `
+STUDENT REGISTRATION FORM SUBMISSION
+
+=== STUDENT INFORMATION ===
+Name: ${data.studentFirstName} ${data.studentLastName}
+Date of Birth: ${data.dateOfBirth}
+Grade: ${data.grade}
+School: ${data.school}
+Home Address: ${data.studentAddress}
+
+=== PARENT/GUARDIAN INFORMATION ===
+Name: ${data.parentFirstName} ${data.parentLastName}
+Phone: ${data.parentPhone}
+Email: ${data.parentEmail}
+Emergency Contact: ${data.emergencyContact}
+Emergency Phone: ${data.emergencyPhone}
+
+=== TRANSPORTATION DETAILS ===
+Service Type: ${data.serviceType}
+Pickup Address: ${data.pickupAddress}
+Drop-off Address: ${data.dropoffAddress}
+Preferred Pickup Time: ${data.preferredPickupTime}
+
+=== MEDICAL INFORMATION ===
+Medical Conditions: ${data.medicalConditions || "None specified"}
+Current Medications: ${data.medications || "None specified"}
+Special Needs/Accommodations: ${data.specialNeeds || "None specified"}
+
+=== PERMISSIONS ===
+Photo Permission: ${data.photoPermission ? "Granted" : "Not granted"}
+Terms Accepted: ${data.termsAccepted ? "Yes" : "No"}
+
+Submitted on: ${new Date().toLocaleString()}
+        `,
+      };
+
+      // Send email using EmailJS
+      const result = await emailjs.send(
+        "YOUR_SERVICE_ID", // Replace with your EmailJS service ID
+        "YOUR_TEMPLATE_ID", // Replace with your EmailJS template ID
+        templateParams,
+      );
+
+      console.log("Email sent successfully:", result);
+      toast.success(
+        "Registration submitted successfully! We've sent your details to Amogh Van/Bus Services and they will contact you within 24 hours.",
+      );
+
+      // Reset form after successful submission
+      setStep(1);
+    } catch (error) {
+      console.error("Failed to send email:", error);
+      toast.error(
+        "There was an error submitting your registration. Please try again or contact us directly at kharwaramog02@gmail.com",
+      );
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const renderStepIndicator = () => (
