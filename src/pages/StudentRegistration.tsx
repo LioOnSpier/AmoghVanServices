@@ -143,7 +143,47 @@ const StudentRegistration = () => {
   };
 
   const onSubmit = async (data: StudentFormData) => {
+    // Prevent double submission
+    if (isSubmitting) return;
+
     setIsSubmitting(true);
+
+    // Validate all required fields before submission
+    const requiredFields = [
+      "studentFirstName",
+      "studentLastName",
+      "dateOfBirth",
+      "grade",
+      "school",
+      "studentAddress",
+      "parentFirstName",
+      "parentLastName",
+      "parentPhone",
+      "parentEmail",
+      "emergencyContact",
+      "emergencyPhone",
+      "serviceType",
+      "pickupAddress",
+      "dropoffAddress",
+      "preferredPickupTime",
+    ];
+
+    for (const field of requiredFields) {
+      if (!data[field as keyof StudentFormData]) {
+        toast.error(
+          `Please fill in all required fields. Missing: ${field.replace(/([A-Z])/g, " $1").toLowerCase()}`,
+        );
+        setIsSubmitting(false);
+        return;
+      }
+    }
+
+    // Check terms acceptance
+    if (!data.termsAccepted) {
+      toast.error("Please accept the terms and conditions to continue.");
+      setIsSubmitting(false);
+      return;
+    }
 
     // Check if EmailJS is configured
     const emailjsPublicKey = "StvI1RsGaSZOvZp1H"; // Your actual EmailJS public key
@@ -331,7 +371,15 @@ Submitted on: ${new Date().toLocaleString()}
 
           {renderStepIndicator()}
 
-          <form onSubmit={handleSubmit(onSubmit)}>
+          <form
+            onSubmit={handleSubmit(onSubmit)}
+            onKeyDown={(e) => {
+              // Prevent form submission on Enter key unless on submit button
+              if (e.key === "Enter" && e.target !== e.currentTarget) {
+                e.preventDefault();
+              }
+            }}
+          >
             <Card className="shadow-lg border-0">
               <CardHeader className="bg-gradient-to-r from-school-yellow-50 to-school-blue-50">
                 <CardTitle className="flex items-center text-2xl">
@@ -842,6 +890,7 @@ Submitted on: ${new Date().toLocaleString()}
                   <Button
                     type="button"
                     onClick={nextStep}
+                    disabled={isSubmitting}
                     className="btn-primary flex items-center"
                   >
                     Next
@@ -850,8 +899,8 @@ Submitted on: ${new Date().toLocaleString()}
                 ) : (
                   <Button
                     type="submit"
-                    disabled={isSubmitting}
-                    className="btn-primary flex items-center"
+                    disabled={isSubmitting || !watch("termsAccepted")}
+                    className="btn-primary flex items-center disabled:opacity-50 disabled:cursor-not-allowed"
                   >
                     {isSubmitting ? (
                       <>
