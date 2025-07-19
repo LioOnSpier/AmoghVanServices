@@ -146,9 +146,9 @@ const StudentRegistration = () => {
     setIsSubmitting(true);
 
     // Check if EmailJS is configured
-    const emailjsPublicKey = "YOUR_PUBLIC_KEY"; // Replace with your actual EmailJS public key
+    const emailjsPublicKey = "StvI1RsGaSZOvZp1H"; // Your actual EmailJS public key
     const emailjsServiceId = "service_1nqvjzw"; // Your actual service ID
-    const emailjsTemplateId = "YOUR_TEMPLATE_ID"; // Replace with your actual template ID
+    const emailjsTemplateId = "template_xp7f4jp"; // Your actual template ID
 
     if (
       emailjsPublicKey === "YOUR_PUBLIC_KEY" ||
