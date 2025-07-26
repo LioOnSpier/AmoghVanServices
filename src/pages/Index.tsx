@@ -389,8 +389,108 @@ const Index = () => {
         </div>
       </section>
 
+      {/* About Us Section */}
+      <section id="about" className="py-20 bg-white">
+        <div className="section-container">
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
+            <div className="space-y-8">
+              <div className="space-y-4">
+                <Badge className="bg-school-blue-100 text-school-blue-700">
+                  About Us
+                </Badge>
+                <h2 className="text-4xl font-bold text-gray-900 font-manrope">
+                  Our Story & Mission
+                </h2>
+                <p className="text-lg text-gray-600">
+                  Founded in 2010 by Rajesh Kumar J Kharwar, Amogh Van/Bus Services was born from a vision to provide safe, reliable, and comfortable transportation for school children across Mumbai.
+                </p>
+              </div>
+              
+              <div className="space-y-6">
+                <div className="space-y-2">
+                  <h3 className="text-xl font-semibold text-gray-900">Our Mission</h3>
+                  <p className="text-gray-600">
+                    To provide the safest, most reliable transportation service for students, giving parents peace of mind and schools a trusted partner in student care.
+                  </p>
+                </div>
+                
+                <div className="space-y-2">
+                  <h3 className="text-xl font-semibold text-gray-900">Our Values</h3>
+                  <ul className="space-y-2">
+                    <li className="flex items-start">
+                      <CheckCircle className="h-5 w-5 text-school-green-500 mr-2 mt-0.5" />
+                      <span className="text-gray-600"><span className="font-medium text-gray-900">Safety:</span> The wellbeing of every child is our highest priority</span>
+                    </li>
+                    <li className="flex items-start">
+                      <CheckCircle className="h-5 w-5 text-school-green-500 mr-2 mt-0.5" />
+                      <span className="text-gray-600"><span className="font-medium text-gray-900">Reliability:</span> Consistent, punctual service you can count on every day</span>
+                    </li>
+                    <li className="flex items-start">
+                      <CheckCircle className="h-5 w-5 text-school-green-500 mr-2 mt-0.5" />
+                      <span className="text-gray-600"><span className="font-medium text-gray-900">Trust:</span> Building lasting relationships with families and schools</span>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            
+            <div className="space-y-6">
+              <div className="bg-gray-50 p-8 rounded-2xl shadow-lg">
+                <div className="space-y-4">
+                  <h3 className="text-xl font-semibold text-gray-900">Why Choose Us?</h3>
+                  <div className="grid gap-4">
+                    <div className="flex items-start space-x-3">
+                      <div className="bg-school-yellow-100 p-2 rounded-full">
+                        <Award className="h-5 w-5 text-school-yellow-600" />
+                      </div>
+                      <div>
+                        <h4 className="font-medium text-gray-900">15+ Years of Experience</h4>
+                        <p className="text-sm text-gray-600">Serving Mumbai's schools and families since 2010</p>
+                      </div>
+                    </div>
+                    
+                    <div className="flex items-start space-x-3">
+                      <div className="bg-school-green-100 p-2 rounded-full">
+                        <Users className="h-5 w-5 text-school-green-600" />
+                      </div>
+                      <div>
+                        <h4 className="font-medium text-gray-900">Dedicated Team</h4>
+                        <p className="text-sm text-gray-600">Professional drivers and staff committed to child safety</p>
+                      </div>
+                    </div>
+                    
+                    <div className="flex items-start space-x-3">
+                      <div className="bg-school-blue-100 p-2 rounded-full">
+                        <Heart className="h-5 w-5 text-school-blue-600" />
+                      </div>
+                      <div>
+                        <h4 className="font-medium text-gray-900">Family-Oriented Service</h4>
+                        <p className="text-sm text-gray-600">We treat every child as if they were our own</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+              <div className="bg-school-blue-50 p-6 rounded-xl border border-school-blue-100">
+                <h3 className="text-xl font-semibold text-gray-900 mb-3">Our Commitment</h3>
+                <p className="text-gray-600">
+                  At Amogh Van/Bus Services, we're more than just transportation providers. We're an extension of your child's educational journey, committed to creating a safe, nurturing environment from home to school and back again.
+                </p>
+                <div className="mt-4">
+                  <Link to="/register" className="text-school-blue-600 font-medium hover:text-school-blue-700 inline-flex items-center">
+                    Join our family today
+                    <ArrowRight className="ml-2 h-4 w-4" />
+                  </Link>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Testimonials */}
-      <section className="py-20 bg-white">
+      <section className="py-20 bg-gray-50">
         <div className="section-container">
           <div className="text-center space-y-4 mb-16">
             <Badge className="bg-school-yellow-100 text-school-yellow-700">
@@ -468,7 +568,7 @@ const Index = () => {
       </section>
 
       {/* CTA Section */}
-      <section className="py-20 gradient-bg">
+      <section className="py-20 bg-gradient-to-br from-school-blue-600 to-school-blue-800 text-white">
         <div className="section-container">
           <div className="text-center space-y-8">
             <h2 className="text-4xl font-bold text-white font-manrope">

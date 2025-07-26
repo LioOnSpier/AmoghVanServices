@@ -52,10 +52,10 @@ const studentSchema = z.object({
   // Parent/Guardian Information
   parentFirstName: z.string().min(1, "Parent first name is required"),
   parentLastName: z.string().min(1, "Parent last name is required"),
-  parentPhone: z.string().min(10, "Valid phone number is required"),
+  parentPhone: z.string().regex(/^[0-9]{10}$/, "Phone number must be 10 digits"),
   parentEmail: z.string().email("Valid email is required"),
   emergencyContact: z.string().min(1, "Emergency contact is required"),
-  emergencyPhone: z.string().min(10, "Emergency phone is required"),
+  emergencyPhone: z.string().regex(/^[0-9]{10}$/, "Phone number must be 10 digits"),
 
   // Transportation Details
   serviceType: z.string().min(1, "Service type is required"),
@@ -89,6 +89,7 @@ const StudentRegistration = () => {
     setValue,
     watch,
     trigger,
+    reset,
   } = useForm<StudentFormData>({
     resolver: zodResolver(studentSchema),
     defaultValues: {
@@ -192,9 +193,9 @@ const StudentRegistration = () => {
     const emailjsTemplateId = "template_4dhuycr"; // Your actual template ID
 
     if (
-      emailjsPublicKey === "YOUR_PUBLIC_KEY" ||
-      emailjsServiceId === "YOUR_SERVICE_ID" ||
-      emailjsTemplateId === "YOUR_TEMPLATE_ID"
+      !emailjsPublicKey || 
+      !emailjsServiceId || 
+      !emailjsTemplateId
     ) {
       toast.error(
         "EmailJS is not configured yet. Please contact kharwaramog02@gmail.com directly with your registration details.",
@@ -407,6 +408,10 @@ Submitted on: ${new Date().toLocaleString()}
                     onClick={() => {
                       setIsSubmitted(false);
                       setStep(1);
+                      reset({
+                        photoPermission: false,
+                        termsAccepted: false,
+                      });
                     }}
                     variant="outline"
                     className="border-school-blue-500 text-school-blue-600 hover:bg-school-blue-50 flex items-center"
@@ -930,14 +935,14 @@ Submitted on: ${new Date().toLocaleString()}
                               className="text-sm leading-relaxed"
                             >
                               I accept the{" "}
-                              <span className="text-school-blue-600 underline cursor-pointer">
+                              <Link to="/terms" className="text-school-blue-600 underline cursor-pointer">
                                 Terms of Service
-                              </span>{" "}
+                              </Link>{" "}
                               and
-                              <span className="text-school-blue-600 underline cursor-pointer">
+                              <Link to="/privacy" className="text-school-blue-600 underline cursor-pointer">
                                 {" "}
                                 Privacy Policy
-                              </span>
+                              </Link>
                               . I understand the transportation policies and
                               safety procedures. *
                             </Label>
