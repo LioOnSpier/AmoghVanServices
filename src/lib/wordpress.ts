@@ -1,3 +1,5 @@
+import { fallbackBlogPosts } from './fallback-blog-data';
+
 // WordPress REST API Configuration
 export const WORDPRESS_CONFIG = {
   // Your actual WordPress.com site URL
