@@ -1,7 +1,7 @@
 // WordPress REST API Configuration
 export const WORDPRESS_CONFIG = {
-  // Replace with your actual WordPress.com site URL
-  baseUrl: 'https://amoghvanservices.wordpress.com/wp-json/wp/v2', // Update with your actual site name
+  // Your actual WordPress.com site URL
+  baseUrl: 'https://kharwaramog02-swayq.wordpress.com/wp-json/wp/v2',
   // If you need authentication for private posts
   username: '', // Leave empty for public posts only
   password: '', // Leave empty for public posts only
