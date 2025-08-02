@@ -151,11 +151,19 @@ const About = () => {
             </div>
 
             <div className="relative">
-              <img
-                src="https://cdn.builder.io/api/v1/image/assets%2Fc8b989ac8ec24ba4af6d44fb44068e27%2Fa8aa9404e3d546e7a29ff7809c23add4?format=webp&width=800"
-                alt="About Amogh Van/Bus Services"
-                className="rounded-2xl shadow-2xl"
-              />
+              <div className="bg-gradient-to-br from-school-yellow-100 to-school-blue-100 rounded-2xl shadow-2xl p-12 flex items-center justify-center">
+                <div className="text-center space-y-4">
+                  <div className="bg-school-yellow-500 w-24 h-24 rounded-full flex items-center justify-center mx-auto">
+                    <Bus className="h-12 w-12 text-white" />
+                  </div>
+                  <h3 className="text-2xl font-bold text-gray-900 font-manrope">
+                    Trusted Transportation
+                  </h3>
+                  <p className="text-gray-600">
+                    Serving Mumbai families with dedication
+                  </p>
+                </div>
+              </div>
               <div className="absolute -bottom-6 -left-6 bg-school-yellow-500 text-white p-6 rounded-xl shadow-lg">
                 <div className="text-3xl font-bold">15+</div>
                 <div className="text-sm">Years of Service</div>
