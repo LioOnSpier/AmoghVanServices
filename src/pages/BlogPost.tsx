@@ -17,14 +17,13 @@ import {
   Clock,
   Share2,
 } from "lucide-react";
-import { blogApi, BlogPost, urlFor } from "@/lib/sanity";
+import { wordpressApi, WordPressPost, wpUtils } from "@/lib/wordpress";
 import { toast } from "sonner";
-import { PortableText } from "@portabletext/react";
 
 const BlogPostPage = () => {
   const { slug } = useParams<{ slug: string }>();
-  const [post, setPost] = useState<BlogPost | null>(null);
-  const [recentPosts, setRecentPosts] = useState<BlogPost[]>([]);
+  const [post, setPost] = useState<WordPressPost | null>(null);
+  const [recentPosts, setRecentPosts] = useState<WordPressPost[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -33,8 +32,8 @@ const BlogPostPage = () => {
 
       try {
         const [postData, recent] = await Promise.all([
-          blogApi.getPostBySlug(slug),
-          blogApi.getRecentPosts(4),
+          wordpressApi.getPostBySlug(slug),
+          wordpressApi.getPosts({ per_page: 4 }),
         ]);
 
         if (!postData) {
@@ -44,7 +43,7 @@ const BlogPostPage = () => {
 
         setPost(postData);
         // Filter out current post from recent posts
-        setRecentPosts(recent.filter((p) => p._id !== postData._id));
+        setRecentPosts(recent.filter((p) => p.id !== postData.id));
       } catch (error) {
         console.error("Error fetching blog post:", error);
         toast.error("Failed to load blog post. Please try again later.");
@@ -64,20 +63,9 @@ const BlogPostPage = () => {
     });
   };
 
-  const estimateReadingTime = (content: any[]) => {
+  const estimateReadingTime = (content: string) => {
     if (!content) return 1;
-    const wordCount = content
-      .map((block) => {
-        if (block._type === "block" && block.children) {
-          return block.children
-            .map((child: any) => child.text || "")
-            .join(" ");
-        }
-        return "";
-      })
-      .join(" ")
-      .split(" ").length;
-
+    const wordCount = wordpressApi.stripHtml(content).split(' ').filter(word => word.length > 0).length;
     return Math.max(1, Math.ceil(wordCount / 200)); // Average reading speed
   };
 
@@ -85,8 +73,8 @@ const BlogPostPage = () => {
     if (navigator.share && post) {
       navigator
         .share({
-          title: post.title,
-          text: post.excerpt || "",
+          title: post.title.rendered,
+          text: wpUtils.cleanExcerpt(post.excerpt.rendered) || "",
           url: window.location.href,
         })
         .catch((error) => console.log("Error sharing:", error));
@@ -94,86 +82,6 @@ const BlogPostPage = () => {
       navigator.clipboard.writeText(window.location.href);
       toast.success("Post URL copied to clipboard!");
     }
-  };
-
-  // Custom components for PortableText
-  const portableTextComponents = {
-    types: {
-      image: ({ value }: any) => (
-        <div className="my-8">
-          <img
-            src={urlFor(value).width(800).url()}
-            alt={value.alt || "Blog image"}
-            className="w-full rounded-lg shadow-lg"
-          />
-          {value.caption && (
-            <p className="text-sm text-gray-600 text-center mt-2 italic">
-              {value.caption}
-            </p>
-          )}
-        </div>
-      ),
-    },
-    block: {
-      h2: ({ children }: any) => (
-        <h2 className="text-3xl font-bold text-gray-900 font-manrope mt-12 mb-6">
-          {children}
-        </h2>
-      ),
-      h3: ({ children }: any) => (
-        <h3 className="text-2xl font-semibold text-gray-900 font-manrope mt-8 mb-4">
-          {children}
-        </h3>
-      ),
-      h4: ({ children }: any) => (
-        <h4 className="text-xl font-semibold text-gray-900 font-manrope mt-6 mb-3">
-          {children}
-        </h4>
-      ),
-      normal: ({ children }: any) => (
-        <p className="text-lg text-gray-700 leading-relaxed mb-6">{children}</p>
-      ),
-      blockquote: ({ children }: any) => (
-        <blockquote className="border-l-4 border-school-yellow-500 pl-6 my-8 italic text-gray-600 bg-school-yellow-50 py-4 rounded-r-lg">
-          {children}
-        </blockquote>
-      ),
-    },
-    marks: {
-      link: ({ children, value }: any) => (
-        <a
-          href={value.href}
-          className="text-school-blue-600 hover:text-school-blue-700 underline"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          {children}
-        </a>
-      ),
-      strong: ({ children }: any) => (
-        <strong className="font-semibold text-gray-900">{children}</strong>
-      ),
-    },
-    list: {
-      bullet: ({ children }: any) => (
-        <ul className="list-disc list-inside space-y-2 mb-6 ml-4">
-          {children}
-        </ul>
-      ),
-      number: ({ children }: any) => (
-        <ol className="list-decimal list-inside space-y-2 mb-6 ml-4">
-          {children}
-        </ol>
-      ),
-    },
-    listItem: {
-      bullet: ({ children }: any) => (
-        <li className="text-lg text-gray-700">{children}</li>
-      ),
-      number: ({ children }: any) => (
-        <li className="text-lg text-gray-700">{children}</li>
-      ),
-    },
   };
 
   if (loading) {
