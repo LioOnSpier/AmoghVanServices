@@ -1,4 +1,3 @@
-import { fallbackBlogPosts } from './fallback-blog-data';
 import { wpRssClient, convertRssToWpPost } from './wordpress-rss';
 
 // WordPress REST API Configuration
@@ -134,9 +133,8 @@ export class WordPressAPI {
         return convertedPosts.slice(0, perPage)
 
       } catch (rssError) {
-        console.error('RSS feed also failed, using fallback data:', rssError)
-        // Use fallback data as last resort
-        return this.filterFallbackPosts(params)
+        console.error('RSS feed also failed:', rssError)
+        throw new Error('Unable to load blog posts from WordPress')
       }
     }
   }
@@ -164,9 +162,8 @@ export class WordPressAPI {
         return rssPost ? convertRssToWpPost(rssPost) : null
 
       } catch (rssError) {
-        console.error('RSS feed also failed, using fallback data:', rssError)
-        // Use fallback data as last resort
-        return fallbackBlogPosts.find(post => post.slug === slug) || null
+        console.error('RSS feed also failed:', rssError)
+        return null
       }
     }
   }
@@ -241,25 +238,7 @@ export class WordPressAPI {
     return text.split(' ').filter(word => word.length > 0).length
   }
 
-  // Helper method to filter fallback posts based on search params
-  private filterFallbackPosts(params: any): WordPressPost[] {
-    let filtered = [...fallbackBlogPosts]
 
-    // Apply search filter
-    if (params.search) {
-      const searchTerm = params.search.toLowerCase()
-      filtered = filtered.filter(post =>
-        post.title.rendered.toLowerCase().includes(searchTerm) ||
-        this.stripHtml(post.excerpt.rendered).toLowerCase().includes(searchTerm)
-      )
-    }
-
-    // Apply limit
-    const perPage = parseInt(params.per_page) || 10
-    filtered = filtered.slice(0, perPage)
-
-    return filtered
-  }
 
   // Helper method to strip HTML tags for excerpts
   stripHtml(html: string): string {
