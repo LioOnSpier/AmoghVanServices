@@ -53,12 +53,12 @@ const Index = () => {
               >
                 Safety
               </a>
-              <a
-                href="#about"
+              <Link
+                to="/blog"
                 className="text-gray-600 hover:text-school-blue-600 transition-colors"
               >
-                About
-              </a>
+                Blog
+              </Link>
               <a
                 href="#contact"
                 className="text-gray-600 hover:text-school-blue-600 transition-colors"
