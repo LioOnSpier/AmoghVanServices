@@ -50,11 +50,11 @@ const AdminLogin = () => {
       // Store admin session (in production, use proper JWT tokens)
       localStorage.setItem("amogh_admin_logged_in", "true");
       localStorage.setItem("amogh_admin_login_time", Date.now().toString());
-      
+
       toast.success("Welcome back! Redirecting to admin panel...");
-      
+
       // Redirect to Sanity Studio
-      window.location.href = "https://your-project-id.sanity.studio/"; // Replace with your Sanity Studio URL
+      window.location.href = "https://m1twzp1b.sanity.studio/";
     } else {
       toast.error("Invalid credentials. Please try again.");
     }

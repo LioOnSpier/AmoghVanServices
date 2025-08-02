@@ -3,11 +3,11 @@ import imageUrlBuilder from '@sanity/image-url'
 
 // Sanity configuration
 export const client = createClient({
-  projectId: 'YOUR_PROJECT_ID', // Replace with your Sanity project ID
+  projectId: 'm1twzp1b', // Your actual Sanity project ID
   dataset: 'production', // or the name of your dataset
   useCdn: true, // `false` if you want to ensure fresh data
   apiVersion: '2023-05-03', // use a UTC date string
-  token: 'YOUR_TOKEN', // Only needed for write operations (admin panel)
+  token: '', // Add your token when you get it from Sanity dashboard
 })
 
 // Helper function for generating image URLs
