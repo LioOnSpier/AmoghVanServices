@@ -1,4 +1,5 @@
 import { fallbackBlogPosts } from './fallback-blog-data';
+import { wpRssClient, convertRssToWpPost } from './wordpress-rss';
 
 // WordPress REST API Configuration
 export const WORDPRESS_CONFIG = {
@@ -101,6 +102,7 @@ export class WordPressAPI {
     })
 
     try {
+      // First try the REST API
       const response = await fetch(`${this.baseUrl}/posts?${searchParams}`)
       if (!response.ok) {
         throw new Error(`WordPress API error: ${response.status}`)
@@ -111,9 +113,31 @@ export class WordPressAPI {
       // Enhance posts with additional info
       return posts.map(post => this.enhancePost(post))
     } catch (error) {
-      console.error('Error fetching WordPress posts, using fallback data:', error)
-      // Use fallback data when WordPress API is not available
-      return this.filterFallbackPosts(params)
+      console.error('WordPress REST API not available, trying RSS feed:', error)
+
+      try {
+        // Try RSS feed as fallback
+        const rssPosts = await wpRssClient.getPosts()
+        const convertedPosts = rssPosts.map(convertRssToWpPost)
+
+        // Apply search filter if needed
+        if (params.search) {
+          const searchTerm = params.search.toLowerCase()
+          return convertedPosts.filter(post =>
+            post.title.rendered.toLowerCase().includes(searchTerm) ||
+            this.stripHtml(post.excerpt.rendered).toLowerCase().includes(searchTerm)
+          )
+        }
+
+        // Apply limit
+        const perPage = parseInt(params.per_page as string) || 10
+        return convertedPosts.slice(0, perPage)
+
+      } catch (rssError) {
+        console.error('RSS feed also failed, using fallback data:', rssError)
+        // Use fallback data as last resort
+        return this.filterFallbackPosts(params)
+      }
     }
   }
 
@@ -132,9 +156,18 @@ export class WordPressAPI {
 
       return this.enhancePost(posts[0])
     } catch (error) {
-      console.error('Error fetching WordPress post, using fallback data:', error)
-      // Use fallback data when WordPress API is not available
-      return fallbackBlogPosts.find(post => post.slug === slug) || null
+      console.error('WordPress REST API not available, trying RSS feed:', error)
+
+      try {
+        // Try RSS feed as fallback
+        const rssPost = await wpRssClient.getPostBySlug(slug)
+        return rssPost ? convertRssToWpPost(rssPost) : null
+
+      } catch (rssError) {
+        console.error('RSS feed also failed, using fallback data:', rssError)
+        // Use fallback data as last resort
+        return fallbackBlogPosts.find(post => post.slug === slug) || null
+      }
     }
   }
 
