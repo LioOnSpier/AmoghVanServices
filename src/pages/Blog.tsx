@@ -19,12 +19,12 @@ import {
   ArrowRight,
   BookOpen,
 } from "lucide-react";
-import { blogApi, BlogPost, urlFor } from "@/lib/sanity";
+import { wordpressApi, WordPressPost, wpUtils } from "@/lib/wordpress";
 import { toast } from "sonner";
 
 const Blog = () => {
-  const [posts, setPosts] = useState<BlogPost[]>([]);
-  const [featuredPosts, setFeaturedPosts] = useState<BlogPost[]>([]);
+  const [posts, setPosts] = useState<WordPressPost[]>([]);
+  const [featuredPosts, setFeaturedPosts] = useState<WordPressPost[]>([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [loading, setLoading] = useState(true);
 
@@ -32,8 +32,8 @@ const Blog = () => {
     const fetchBlogData = async () => {
       try {
         const [allPosts, featured] = await Promise.all([
-          blogApi.getAllPosts(),
-          blogApi.getFeaturedPosts(),
+          wordpressApi.getPosts({ per_page: 20 }),
+          wordpressApi.getFeaturedPosts(3),
         ]);
         setPosts(allPosts);
         setFeaturedPosts(featured);
@@ -50,16 +50,12 @@ const Blog = () => {
 
   const filteredPosts = posts.filter(
     (post) =>
-      post.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      post.excerpt?.toLowerCase().includes(searchTerm.toLowerCase())
+      post.title.rendered.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      wpUtils.cleanExcerpt(post.excerpt.rendered).toLowerCase().includes(searchTerm.toLowerCase())
   );
 
   const formatDate = (dateString: string) => {
-    return new Date(dateString).toLocaleDateString("en-US", {
-      year: "numeric",
-      month: "long",
-      day: "numeric",
-    });
+    return wordpressApi.formatDate(dateString);
   };
 
   if (loading) {
@@ -188,14 +184,14 @@ const Blog = () => {
             <div className="grid md:grid-cols-3 gap-8">
               {featuredPosts.map((post) => (
                 <Card
-                  key={post._id}
+                  key={post.id}
                   className="card-hover border-0 shadow-lg overflow-hidden"
                 >
-                  {post.mainImage && (
+                  {post.featured_image_url && (
                     <div className="aspect-video overflow-hidden">
                       <img
-                        src={urlFor(post.mainImage).width(400).height(225).url()}
-                        alt={post.mainImage.alt || post.title}
+                        src={post.featured_image_url}
+                        alt={post.title.rendered}
                         className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
                       />
                     </div>
@@ -203,19 +199,19 @@ const Blog = () => {
                   <CardHeader>
                     <div className="flex items-center text-sm text-gray-500 mb-2">
                       <Calendar className="h-4 w-4 mr-1" />
-                      {formatDate(post.publishedAt)}
+                      {formatDate(post.date)}
                     </div>
                     <CardTitle className="text-xl line-clamp-2">
-                      {post.title}
+                      {post.title.rendered}
                     </CardTitle>
-                    {post.excerpt && (
+                    {post.excerpt.rendered && (
                       <CardDescription className="line-clamp-3">
-                        {post.excerpt}
+                        {wpUtils.cleanExcerpt(post.excerpt.rendered)}
                       </CardDescription>
                     )}
                   </CardHeader>
                   <CardContent>
-                    <Link to={`/blog/${post.slug.current}`}>
+                    <Link to={`/blog/${post.slug}`}>
                       <Button
                         variant="outline"
                         className="w-full border-school-blue-500 text-school-blue-600 hover:bg-school-blue-50"
@@ -264,53 +260,50 @@ const Blog = () => {
             <div className="grid lg:grid-cols-2 gap-8">
               {filteredPosts.map((post) => (
                 <Card
-                  key={post._id}
+                  key={post.id}
                   className="card-hover border-0 shadow-lg overflow-hidden bg-white"
                 >
                   <div className="md:flex">
-                    {post.mainImage && (
+                    {post.featured_image_url && (
                       <div className="md:w-1/3 aspect-video md:aspect-square overflow-hidden">
                         <img
-                          src={urlFor(post.mainImage)
-                            .width(300)
-                            .height(200)
-                            .url()}
-                          alt={post.mainImage.alt || post.title}
+                          src={post.featured_image_url}
+                          alt={post.title.rendered}
                           className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
                         />
                       </div>
                     )}
-                    <div className={`${post.mainImage ? "md:w-2/3" : "w-full"}`}>
+                    <div className={`${post.featured_image_url ? "md:w-2/3" : "w-full"}`}>
                       <CardHeader>
                         <div className="flex items-center justify-between mb-2">
                           <div className="flex items-center text-sm text-gray-500">
                             <Calendar className="h-4 w-4 mr-1" />
-                            {formatDate(post.publishedAt)}
+                            {formatDate(post.date)}
                           </div>
-                          {post.featured && (
+                          {post.category_names && post.category_names.length > 0 && (
                             <Badge className="bg-school-yellow-100 text-school-yellow-700">
-                              Featured
+                              {post.category_names[0]}
                             </Badge>
                           )}
                         </div>
                         <CardTitle className="text-xl line-clamp-2">
-                          {post.title}
+                          {post.title.rendered}
                         </CardTitle>
-                        {post.excerpt && (
+                        {post.excerpt.rendered && (
                           <CardDescription className="line-clamp-2">
-                            {post.excerpt}
+                            {wpUtils.cleanExcerpt(post.excerpt.rendered)}
                           </CardDescription>
                         )}
                       </CardHeader>
                       <CardContent>
                         <div className="flex items-center justify-between">
-                          {post.author && (
+                          {post.author_info && (
                             <div className="flex items-center text-sm text-gray-600">
                               <User className="h-4 w-4 mr-1" />
-                              {post.author.name}
+                              {post.author_info.name}
                             </div>
                           )}
-                          <Link to={`/blog/${post.slug.current}`}>
+                          <Link to={`/blog/${post.slug}`}>
                             <Button
                               variant="outline"
                               size="sm"
