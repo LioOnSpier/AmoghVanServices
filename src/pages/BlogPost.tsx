@@ -238,44 +238,44 @@ const BlogPostPage = () => {
                 </div>
 
                 <h1 className="text-4xl lg:text-5xl font-bold text-gray-900 font-manrope mb-6 leading-tight">
-                  {post.title}
+                  {post.title.rendered}
                 </h1>
 
-                {post.excerpt && (
+                {post.excerpt.rendered && (
                   <p className="text-xl text-gray-600 mb-6 leading-relaxed">
-                    {post.excerpt}
+                    {wpUtils.cleanExcerpt(post.excerpt.rendered)}
                   </p>
                 )}
 
                 <div className="flex flex-wrap items-center gap-6 text-sm text-gray-500">
                   <div className="flex items-center">
                     <Calendar className="h-4 w-4 mr-2" />
-                    {formatDate(post.publishedAt)}
+                    {formatDate(post.date)}
                   </div>
-                  {post.author && (
+                  {post.author_info && (
                     <div className="flex items-center">
                       <User className="h-4 w-4 mr-2" />
-                      {post.author.name}
+                      {post.author_info.name}
                     </div>
                   )}
                   <div className="flex items-center">
                     <Clock className="h-4 w-4 mr-2" />
-                    {estimateReadingTime(post.content)} min read
+                    {estimateReadingTime(post.content.rendered)} min read
                   </div>
-                  {post.featured && (
+                  {post.category_names && post.category_names.length > 0 && (
                     <Badge className="bg-school-yellow-100 text-school-yellow-700">
-                      Featured
+                      {post.category_names[0]}
                     </Badge>
                   )}
                 </div>
               </header>
 
               {/* Featured Image */}
-              {post.mainImage && (
+              {post.featured_image_url && (
                 <div className="mb-12">
                   <img
-                    src={urlFor(post.mainImage).width(1200).height(600).url()}
-                    alt={post.mainImage.alt || post.title}
+                    src={post.featured_image_url}
+                    alt={post.title.rendered}
                     className="w-full aspect-video object-cover rounded-xl shadow-lg"
                   />
                 </div>
@@ -283,20 +283,20 @@ const BlogPostPage = () => {
 
               {/* Content */}
               <div className="prose prose-lg max-w-none">
-                <PortableText
-                  value={post.content}
-                  components={portableTextComponents}
+                <div
+                  className="wordpress-content"
+                  dangerouslySetInnerHTML={{ __html: post.content.rendered }}
                 />
               </div>
 
               {/* Categories */}
-              {post.categories && post.categories.length > 0 && (
+              {post.category_names && post.category_names.length > 0 && (
                 <div className="mt-12 pt-8 border-t border-gray-200">
                   <h3 className="text-lg font-semibold text-gray-900 mb-4">
                     Categories:
                   </h3>
                   <div className="flex flex-wrap gap-2">
-                    {post.categories.map((category, index) => (
+                    {post.category_names.map((category, index) => (
                       <Badge
                         key={index}
                         variant="secondary"
@@ -322,30 +322,27 @@ const BlogPostPage = () => {
                     <CardContent className="p-0">
                       <div className="space-y-6">
                         {recentPosts.map((recentPost) => (
-                          <div key={recentPost._id} className="group">
+                          <div key={recentPost.id} className="group">
                             <Link
-                              to={`/blog/${recentPost.slug.current}`}
+                              to={`/blog/${recentPost.slug}`}
                               className="block"
                             >
                               <div className="flex space-x-3">
-                                {recentPost.mainImage && (
+                                {recentPost.featured_image_url && (
                                   <div className="flex-shrink-0">
                                     <img
-                                      src={urlFor(recentPost.mainImage)
-                                        .width(80)
-                                        .height(60)
-                                        .url()}
-                                      alt={recentPost.title}
+                                      src={recentPost.featured_image_url}
+                                      alt={recentPost.title.rendered}
                                       className="w-20 h-15 object-cover rounded"
                                     />
                                   </div>
                                 )}
                                 <div className="flex-1 min-w-0">
                                   <h4 className="text-sm font-semibold text-gray-900 group-hover:text-school-blue-600 transition-colors line-clamp-2">
-                                    {recentPost.title}
+                                    {recentPost.title.rendered}
                                   </h4>
                                   <p className="text-xs text-gray-500 mt-1">
-                                    {formatDate(recentPost.publishedAt)}
+                                    {formatDate(recentPost.date)}
                                   </p>
                                 </div>
                               </div>
