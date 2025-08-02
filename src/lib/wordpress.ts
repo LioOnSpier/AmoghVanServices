@@ -1,7 +1,7 @@
 // WordPress REST API Configuration
 export const WORDPRESS_CONFIG = {
-  // Replace with your WordPress site URL
-  baseUrl: 'https://your-wordpress-site.com/wp-json/wp/v2',
+  // Replace with your actual WordPress.com site URL
+  baseUrl: 'https://amoghvanservices.wordpress.com/wp-json/wp/v2', // Update with your actual site name
   // If you need authentication for private posts
   username: '', // Leave empty for public posts only
   password: '', // Leave empty for public posts only
@@ -103,9 +103,9 @@ export class WordPressAPI {
       if (!response.ok) {
         throw new Error(`WordPress API error: ${response.status}`)
       }
-      
+
       const posts: WordPressPost[] = await response.json()
-      
+
       // Enhance posts with additional info
       return posts.map(post => this.enhancePost(post))
     } catch (error) {
@@ -121,12 +121,12 @@ export class WordPressAPI {
       if (!response.ok) {
         throw new Error(`WordPress API error: ${response.status}`)
       }
-      
+
       const posts: WordPressPost[] = await response.json()
       if (posts.length === 0) {
         return null
       }
-      
+
       return this.enhancePost(posts[0])
     } catch (error) {
       console.error('Error fetching WordPress post:', error)
@@ -151,7 +151,7 @@ export class WordPressAPI {
       if (!response.ok) {
         throw new Error(`WordPress API error: ${response.status}`)
       }
-      
+
       return await response.json()
     } catch (error) {
       console.error('Error fetching WordPress categories:', error)
@@ -232,7 +232,7 @@ export const wpUtils = {
   // Get responsive image URL
   getResponsiveImageUrl: (post: WordPressPost, size: 'thumbnail' | 'medium' | 'large' | 'full' = 'medium') => {
     if (!post.featured_image_url) return null
-    
+
     // For better performance, you might want to use WordPress image sizes
     // This is a basic implementation - WordPress can provide different sizes
     return post.featured_image_url

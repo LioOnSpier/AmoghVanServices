@@ -54,7 +54,7 @@ const AdminLogin = () => {
       toast.success("Welcome back! Redirecting to admin panel...");
 
       // Redirect to WordPress Admin (update with your WordPress site)
-      window.location.href = "https://your-wordpress-site.com/wp-admin"; // Replace with your WordPress admin URL
+      window.location.href = "https://amoghvanservices.wordpress.com/wp-admin"; // Replace with your actual site name
     } else {
       toast.error("Invalid credentials. Please try again.");
     }
