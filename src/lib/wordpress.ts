@@ -109,8 +109,9 @@ export class WordPressAPI {
       // Enhance posts with additional info
       return posts.map(post => this.enhancePost(post))
     } catch (error) {
-      console.error('Error fetching WordPress posts:', error)
-      throw error
+      console.error('Error fetching WordPress posts, using fallback data:', error)
+      // Use fallback data when WordPress API is not available
+      return this.filterFallbackPosts(params)
     }
   }
 
@@ -129,8 +130,9 @@ export class WordPressAPI {
 
       return this.enhancePost(posts[0])
     } catch (error) {
-      console.error('Error fetching WordPress post:', error)
-      return null
+      console.error('Error fetching WordPress post, using fallback data:', error)
+      // Use fallback data when WordPress API is not available
+      return fallbackBlogPosts.find(post => post.slug === slug) || null
     }
   }
 
@@ -202,6 +204,26 @@ export class WordPressAPI {
     // Remove HTML tags and count words
     const text = html.replace(/<[^>]*>/g, ' ').replace(/\s+/g, ' ').trim()
     return text.split(' ').filter(word => word.length > 0).length
+  }
+
+  // Helper method to filter fallback posts based on search params
+  private filterFallbackPosts(params: any): WordPressPost[] {
+    let filtered = [...fallbackBlogPosts]
+
+    // Apply search filter
+    if (params.search) {
+      const searchTerm = params.search.toLowerCase()
+      filtered = filtered.filter(post =>
+        post.title.rendered.toLowerCase().includes(searchTerm) ||
+        this.stripHtml(post.excerpt.rendered).toLowerCase().includes(searchTerm)
+      )
+    }
+
+    // Apply limit
+    const perPage = parseInt(params.per_page) || 10
+    filtered = filtered.slice(0, perPage)
+
+    return filtered
   }
 
   // Helper method to strip HTML tags for excerpts
