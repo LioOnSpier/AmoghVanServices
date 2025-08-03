@@ -84,7 +84,12 @@ const BlogPostPage = () => {
           text: wpUtils.cleanExcerpt(post.excerpt.rendered) || "",
           url: window.location.href,
         })
-        .catch((error) => console.log("Error sharing:", error));
+        .catch((error) => {
+          // If native sharing fails, fall back to copying URL
+          console.log("Native sharing failed, falling back to clipboard:", error);
+          navigator.clipboard.writeText(window.location.href);
+          toast.success("Post URL copied to clipboard!");
+        });
     } else {
       navigator.clipboard.writeText(window.location.href);
       toast.success("Post URL copied to clipboard!");
