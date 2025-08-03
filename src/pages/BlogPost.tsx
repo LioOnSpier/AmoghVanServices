@@ -16,6 +16,13 @@ import {
   ArrowRight,
   Clock,
   Share2,
+  Facebook,
+  Twitter,
+  Linkedin,
+  MessageCircle,
+  Copy,
+  Mail,
+  Send,
 } from "lucide-react";
 import { wordpressApi, WordPressPost, wpUtils } from "@/lib/wordpress";
 import { toast } from "sonner";
@@ -81,6 +88,47 @@ const BlogPostPage = () => {
     } else {
       navigator.clipboard.writeText(window.location.href);
       toast.success("Post URL copied to clipboard!");
+    }
+  };
+
+  const shareOnSocialMedia = (platform: string) => {
+    if (!post) return;
+
+    const url = encodeURIComponent(window.location.href);
+    const title = encodeURIComponent(post.title.rendered);
+    const text = encodeURIComponent(wpUtils.cleanExcerpt(post.excerpt.rendered) || post.title.rendered);
+
+    let shareUrl = "";
+
+    switch (platform) {
+      case "facebook":
+        shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${url}`;
+        break;
+      case "twitter":
+        shareUrl = `https://twitter.com/intent/tweet?url=${url}&text=${title}`;
+        break;
+      case "linkedin":
+        shareUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${url}`;
+        break;
+      case "whatsapp":
+        shareUrl = `https://wa.me/?text=${title}%20${url}`;
+        break;
+      case "telegram":
+        shareUrl = `https://t.me/share/url?url=${url}&text=${title}`;
+        break;
+      case "email":
+        shareUrl = `mailto:?subject=${title}&body=Check out this blog post: ${url}`;
+        break;
+      case "copy":
+        navigator.clipboard.writeText(window.location.href);
+        toast.success("Link copied to clipboard!");
+        return;
+      default:
+        return;
+    }
+
+    if (shareUrl) {
+      window.open(shareUrl, "_blank", "width=600,height=400");
     }
   };
 
@@ -287,6 +335,73 @@ const BlogPostPage = () => {
                   className="wordpress-content min-h-96 overflow-visible"
                   dangerouslySetInnerHTML={{ __html: post.content.rendered }}
                 />
+              </div>
+
+              {/* Social Media Sharing */}
+              <div className="mb-12 p-6 bg-gradient-to-r from-school-yellow-50 to-school-blue-50 rounded-xl border border-school-yellow-200">
+                <h3 className="text-lg font-semibold text-gray-900 mb-4 flex items-center">
+                  <Share2 className="mr-2 h-5 w-5" />
+                  Share this post
+                </h3>
+                <div className="flex flex-wrap gap-3">
+                  <Button
+                    onClick={() => shareOnSocialMedia("facebook")}
+                    className="bg-blue-600 hover:bg-blue-700 text-white flex items-center"
+                    size="sm"
+                  >
+                    <Facebook className="mr-2 h-4 w-4" />
+                    Facebook
+                  </Button>
+                  <Button
+                    onClick={() => shareOnSocialMedia("twitter")}
+                    className="bg-black hover:bg-gray-800 text-white flex items-center"
+                    size="sm"
+                  >
+                    <Twitter className="mr-2 h-4 w-4" />
+                    Twitter
+                  </Button>
+                  <Button
+                    onClick={() => shareOnSocialMedia("linkedin")}
+                    className="bg-blue-700 hover:bg-blue-800 text-white flex items-center"
+                    size="sm"
+                  >
+                    <Linkedin className="mr-2 h-4 w-4" />
+                    LinkedIn
+                  </Button>
+                  <Button
+                    onClick={() => shareOnSocialMedia("whatsapp")}
+                    className="bg-green-500 hover:bg-green-600 text-white flex items-center"
+                    size="sm"
+                  >
+                    <MessageCircle className="mr-2 h-4 w-4" />
+                    WhatsApp
+                  </Button>
+                  <Button
+                    onClick={() => shareOnSocialMedia("telegram")}
+                    className="bg-blue-500 hover:bg-blue-600 text-white flex items-center"
+                    size="sm"
+                  >
+                    <Send className="mr-2 h-4 w-4" />
+                    Telegram
+                  </Button>
+                  <Button
+                    onClick={() => shareOnSocialMedia("email")}
+                    className="bg-gray-600 hover:bg-gray-700 text-white flex items-center"
+                    size="sm"
+                  >
+                    <Mail className="mr-2 h-4 w-4" />
+                    Email
+                  </Button>
+                  <Button
+                    onClick={() => shareOnSocialMedia("copy")}
+                    variant="outline"
+                    className="border-gray-300 text-gray-700 hover:bg-gray-50 flex items-center"
+                    size="sm"
+                  >
+                    <Copy className="mr-2 h-4 w-4" />
+                    Copy Link
+                  </Button>
+                </div>
               </div>
 
               {/* Categories */}
