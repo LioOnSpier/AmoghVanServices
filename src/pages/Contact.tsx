@@ -38,7 +38,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import { toast } from "sonner";
-import emailjs from '@emailjs/browser';
+import emailjs from "@emailjs/browser";
 
 const contactSchema = z.object({
   name: z.string().min(1, "Name is required"),
@@ -111,26 +111,28 @@ Form Type: Contact Inquiry
 ---
 This inquiry was submitted through the Amogh Van/Bus Services website contact form.
 Please respond to the contact within 24 hours as promised.
-        `
+        `,
       };
 
       // Send email using EmailJS with same configuration as registration
       const result = await emailjs.send(
         "service_1nqvjzw", // Same service ID as registration
         "template_4dhuycr", // Same template ID as registration
-        templateParams
+        templateParams,
       );
 
       console.log("Contact email sent successfully:", result);
 
       toast.success(
-        "Message sent successfully! We'll get back to you within 24 hours."
+        "Message sent successfully! We'll get back to you within 24 hours.",
       );
 
       reset();
     } catch (error) {
       console.error("Failed to send contact email:", error);
-      toast.error("Failed to send message. Please try calling us directly at 9870525637.");
+      toast.error(
+        "Failed to send message. Please try calling us directly at 9870525637.",
+      );
     } finally {
       setIsSubmitting(false);
     }
@@ -150,35 +152,35 @@ Please respond to the contact within 24 hours as promised.
                 Amogh Van/Bus Services
               </span>
             </Link>
-              <div className="hidden md:flex items-center space-x-8">
-                <Link
-                  to="/"
-                  className="text-gray-600 hover:text-school-blue-600 transition-colors"
-                >
-                  Home
-                </Link>
-                <Link
-                  to="/about"
-                  className="text-gray-600 hover:text-school-blue-600 transition-colors"
-                >
-                  About
-                </Link>
-                <Link
-                  to="/blog"
-                  className="text-gray-600 hover:text-school-blue-600 transition-colors"
-                >
-                  Blog
-                </Link>
-                <Link
-                  to="/contact"
-                  className="text-school-blue-600 font-semibold"
-                >
-                  Contact
-                </Link>
-                <Link to="/register" className="btn-primary">
-                  Register Student
-                </Link>
-              </div>
+            <div className="hidden md:flex items-center space-x-8">
+              <Link
+                to="/"
+                className="text-gray-600 hover:text-school-blue-600 transition-colors"
+              >
+                Home
+              </Link>
+              <Link
+                to="/about"
+                className="text-gray-600 hover:text-school-blue-600 transition-colors"
+              >
+                About
+              </Link>
+              <Link
+                to="/blog"
+                className="text-gray-600 hover:text-school-blue-600 transition-colors"
+              >
+                Blog
+              </Link>
+              <Link
+                to="/contact"
+                className="text-school-blue-600 font-semibold"
+              >
+                Contact
+              </Link>
+              <Link to="/register" className="btn-primary">
+                Register Student
+              </Link>
+            </div>
           </div>
         </div>
       </nav>
@@ -195,7 +197,8 @@ Please respond to the contact within 24 hours as promised.
               Contact Us
             </h1>
             <p className="text-xl text-gray-600 leading-relaxed">
-              Have questions about our transportation services? We're here to help you find the perfect solution for your child's daily commute.
+              Have questions about our transportation services? We're here to
+              help you find the perfect solution for your child's daily commute.
             </p>
           </div>
         </div>
@@ -288,7 +291,8 @@ Please respond to the contact within 24 hours as promised.
                     Send Us a Message
                   </CardTitle>
                   <CardDescription className="text-base">
-                    Fill out the form below and we'll get back to you as soon as possible.
+                    Fill out the form below and we'll get back to you as soon as
+                    possible.
                   </CardDescription>
                 </CardHeader>
 
@@ -348,17 +352,29 @@ Please respond to the contact within 24 hours as promised.
                     <div>
                       <Label htmlFor="inquiryType">Type of Inquiry *</Label>
                       <Select
-                        onValueChange={(value) => setValue("inquiryType", value)}
+                        onValueChange={(value) =>
+                          setValue("inquiryType", value)
+                        }
                       >
                         <SelectTrigger className="mt-1">
                           <SelectValue placeholder="Select inquiry type" />
                         </SelectTrigger>
                         <SelectContent>
-                          <SelectItem value="new-registration">New Student Registration</SelectItem>
-                          <SelectItem value="pricing">Pricing Information</SelectItem>
-                          <SelectItem value="routes">Route Information</SelectItem>
-                          <SelectItem value="safety">Safety Questions</SelectItem>
-                          <SelectItem value="general">General Inquiry</SelectItem>
+                          <SelectItem value="new-registration">
+                            New Student Registration
+                          </SelectItem>
+                          <SelectItem value="pricing">
+                            Pricing Information
+                          </SelectItem>
+                          <SelectItem value="routes">
+                            Route Information
+                          </SelectItem>
+                          <SelectItem value="safety">
+                            Safety Questions
+                          </SelectItem>
+                          <SelectItem value="general">
+                            General Inquiry
+                          </SelectItem>
                         </SelectContent>
                       </Select>
                       {errors.inquiryType && (
@@ -487,15 +503,21 @@ Please respond to the contact within 24 hours as promised.
                     </li>
                     <li className="flex items-start space-x-2">
                       <CheckCircle className="h-4 w-4 text-school-green-500 mt-0.5 flex-shrink-0" />
-                      <span>Emergency contact available for registered families</span>
+                      <span>
+                        Emergency contact available for registered families
+                      </span>
                     </li>
                     <li className="flex items-start space-x-2">
                       <CheckCircle className="h-4 w-4 text-school-green-500 mt-0.5 flex-shrink-0" />
-                      <span>Free consultation for new student registrations</span>
+                      <span>
+                        Free consultation for new student registrations
+                      </span>
                     </li>
                     <li className="flex items-start space-x-2">
                       <CheckCircle className="h-4 w-4 text-school-green-500 mt-0.5 flex-shrink-0" />
-                      <span>Multilingual support available (Hindi, Marathi, English)</span>
+                      <span>
+                        Multilingual support available (Hindi, Marathi, English)
+                      </span>
                     </li>
                   </ul>
                 </CardContent>
@@ -516,7 +538,8 @@ Please respond to the contact within 24 hours as promised.
               Common Questions
             </h2>
             <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-              Find quick answers to the most common questions about our services.
+              Find quick answers to the most common questions about our
+              services.
             </p>
           </div>
 
@@ -527,7 +550,8 @@ Please respond to the contact within 24 hours as promised.
                   What areas do you cover in Mumbai?
                 </h3>
                 <p className="text-gray-600">
-                  We primarily serve Prabhadevi, Dadar West, and surrounding areas. Contact us to check if we cover your specific location.
+                  We primarily serve Prabhadevi, Dadar West, and surrounding
+                  areas. Contact us to check if we cover your specific location.
                 </p>
               </CardContent>
             </Card>
@@ -538,7 +562,9 @@ Please respond to the contact within 24 hours as promised.
                   How do I register my child?
                 </h3>
                 <p className="text-gray-600">
-                  You can register online through our website or call us directly. We'll need basic information about your child and transportation needs.
+                  You can register online through our website or call us
+                  directly. We'll need basic information about your child and
+                  transportation needs.
                 </p>
               </CardContent>
             </Card>
@@ -549,7 +575,9 @@ Please respond to the contact within 24 hours as promised.
                   What safety measures do you have?
                 </h3>
                 <p className="text-gray-600">
-                  All our drivers are licensed and trained, vehicles are regularly inspected, and we use GPS tracking for real-time monitoring.
+                  All our drivers are licensed and trained, vehicles are
+                  regularly inspected, and we use GPS tracking for real-time
+                  monitoring.
                 </p>
               </CardContent>
             </Card>
@@ -560,15 +588,15 @@ Please respond to the contact within 24 hours as promised.
                   Can I track my child's bus?
                 </h3>
                 <p className="text-gray-600">
-                  Yes, we provide real-time location updates through our GPS tracking system. Contact our office during service hours for updates.
+                  Yes, we provide real-time location updates through our GPS
+                  tracking system. Contact our office during service hours for
+                  updates.
                 </p>
               </CardContent>
             </Card>
           </div>
         </div>
       </section>
-
-
 
       {/* CTA Section */}
       <section className="py-20 gradient-bg">
@@ -577,7 +605,8 @@ Please respond to the contact within 24 hours as promised.
             Ready to Get Started?
           </h2>
           <p className="text-xl text-white/90 mb-8 max-w-2xl mx-auto">
-            Join hundreds of families who trust Amogh Van/Bus Services for safe, reliable student transportation.
+            Join hundreds of families who trust Amogh Van/Bus Services for safe,
+            reliable student transportation.
           </p>
           <Link to="/register">
             <Button className="bg-white text-school-blue-600 hover:bg-gray-50 font-semibold px-8 py-4 text-lg">

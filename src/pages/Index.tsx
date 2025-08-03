@@ -69,10 +69,7 @@ const Index = () => {
               >
                 Contact
               </Link>
-              <Link
-                to="/register"
-                className="btn-primary"
-              >
+              <Link to="/register" className="btn-primary">
                 Register Student
               </Link>
             </div>

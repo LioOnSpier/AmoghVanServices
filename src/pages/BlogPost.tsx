@@ -1,12 +1,7 @@
 import { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import {
-  Card,
-  CardContent,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import {
   Bus,
@@ -72,7 +67,10 @@ const BlogPostPage = () => {
 
   const estimateReadingTime = (content: string) => {
     if (!content) return 1;
-    const wordCount = wordpressApi.stripHtml(content).split(' ').filter(word => word.length > 0).length;
+    const wordCount = wordpressApi
+      .stripHtml(content)
+      .split(" ")
+      .filter((word) => word.length > 0).length;
     return Math.max(1, Math.ceil(wordCount / 200)); // Average reading speed
   };
 
@@ -86,7 +84,10 @@ const BlogPostPage = () => {
         })
         .catch((error) => {
           // If native sharing fails, fall back to legacy copy method
-          console.log("Native sharing failed, falling back to legacy copy:", error);
+          console.log(
+            "Native sharing failed, falling back to legacy copy:",
+            error,
+          );
           fallbackCopyToClipboard(window.location.href);
         });
     } else {
@@ -98,12 +99,15 @@ const BlogPostPage = () => {
     try {
       // Try modern clipboard API first
       if (navigator.clipboard && window.isSecureContext) {
-        navigator.clipboard.writeText(text).then(() => {
-          toast.success("Post URL copied to clipboard!");
-        }).catch(() => {
-          // If modern clipboard fails, use legacy method
-          legacyCopyToClipboard(text);
-        });
+        navigator.clipboard
+          .writeText(text)
+          .then(() => {
+            toast.success("Post URL copied to clipboard!");
+          })
+          .catch(() => {
+            // If modern clipboard fails, use legacy method
+            legacyCopyToClipboard(text);
+          });
       } else {
         // Use legacy method directly
         legacyCopyToClipboard(text);
@@ -126,7 +130,7 @@ const BlogPostPage = () => {
       textArea.select();
 
       // Try to copy using the legacy execCommand
-      const successful = document.execCommand('copy');
+      const successful = document.execCommand("copy");
       document.body.removeChild(textArea);
 
       if (successful) {
@@ -148,7 +152,7 @@ const BlogPostPage = () => {
         <p className="mb-2">Copy this URL manually:</p>
         <p className="text-xs bg-gray-100 p-2 rounded break-all">{text}</p>
       </div>,
-      { duration: 8000 }
+      { duration: 8000 },
     );
   };
 
@@ -157,7 +161,9 @@ const BlogPostPage = () => {
 
     const url = encodeURIComponent(window.location.href);
     const title = encodeURIComponent(post.title.rendered);
-    const text = encodeURIComponent(wpUtils.cleanExcerpt(post.excerpt.rendered) || post.title.rendered);
+    const text = encodeURIComponent(
+      wpUtils.cleanExcerpt(post.excerpt.rendered) || post.title.rendered,
+    );
 
     let shareUrl = "";
 
@@ -286,10 +292,7 @@ const BlogPostPage = () => {
               >
                 Home
               </Link>
-              <Link
-                to="/blog"
-                className="text-school-blue-600 font-semibold"
-              >
+              <Link to="/blog" className="text-school-blue-600 font-semibold">
                 Blog
               </Link>
               <Link to="/register" className="btn-primary">
@@ -312,7 +315,9 @@ const BlogPostPage = () => {
               Blog
             </Link>
             <span className="text-gray-400">/</span>
-            <span className="text-gray-900 font-medium">{post.title.rendered}</span>
+            <span className="text-gray-900 font-medium">
+              {post.title.rendered}
+            </span>
           </div>
         </div>
       </div>

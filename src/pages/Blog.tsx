@@ -51,7 +51,10 @@ const Blog = () => {
   const filteredPosts = posts.filter(
     (post) =>
       post.title.rendered.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      wpUtils.cleanExcerpt(post.excerpt.rendered).toLowerCase().includes(searchTerm.toLowerCase())
+      wpUtils
+        .cleanExcerpt(post.excerpt.rendered)
+        .toLowerCase()
+        .includes(searchTerm.toLowerCase()),
   );
 
   const formatDate = (dateString: string) => {
@@ -80,10 +83,7 @@ const Blog = () => {
                 >
                   Home
                 </Link>
-                <Link
-                  to="/blog"
-                  className="text-school-blue-600 font-semibold"
-                >
+                <Link to="/blog" className="text-school-blue-600 font-semibold">
                   Blog
                 </Link>
                 <Link to="/register" className="btn-primary">
@@ -134,10 +134,7 @@ const Blog = () => {
               >
                 About
               </Link>
-              <Link
-                to="/blog"
-                className="text-school-blue-600 font-semibold"
-              >
+              <Link to="/blog" className="text-school-blue-600 font-semibold">
                 Blog
               </Link>
               <Link
@@ -285,18 +282,21 @@ const Blog = () => {
                         />
                       </div>
                     )}
-                    <div className={`${post.featured_image_url ? "md:w-2/3" : "w-full"}`}>
+                    <div
+                      className={`${post.featured_image_url ? "md:w-2/3" : "w-full"}`}
+                    >
                       <CardHeader>
                         <div className="flex items-center justify-between mb-2">
                           <div className="flex items-center text-sm text-gray-500">
                             <Calendar className="h-4 w-4 mr-1" />
                             {formatDate(post.date)}
                           </div>
-                          {post.category_names && post.category_names.length > 0 && (
-                            <Badge className="bg-school-yellow-100 text-school-yellow-700">
-                              {post.category_names[0]}
-                            </Badge>
-                          )}
+                          {post.category_names &&
+                            post.category_names.length > 0 && (
+                              <Badge className="bg-school-yellow-100 text-school-yellow-700">
+                                {post.category_names[0]}
+                              </Badge>
+                            )}
                         </div>
                         <CardTitle className="text-xl line-clamp-2">
                           {post.title.rendered}

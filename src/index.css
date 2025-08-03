@@ -133,7 +133,8 @@
     @apply mb-6 text-gray-700 leading-relaxed;
   }
 
-  .wordpress-content ul, .wordpress-content ol {
+  .wordpress-content ul,
+  .wordpress-content ol {
     @apply mb-6 ml-4 text-gray-700;
   }
 
@@ -157,7 +158,8 @@
     @apply text-school-blue-600 hover:text-school-blue-700 underline;
   }
 
-  .wordpress-content strong, .wordpress-content b {
+  .wordpress-content strong,
+  .wordpress-content b {
     @apply font-semibold text-gray-900;
   }
 
@@ -177,7 +179,8 @@
     @apply w-full border-collapse border border-gray-300 my-6 overflow-x-auto;
   }
 
-  .wordpress-content th, .wordpress-content td {
+  .wordpress-content th,
+  .wordpress-content td {
     @apply border border-gray-300 px-4 py-2;
   }
 

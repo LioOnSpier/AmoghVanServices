@@ -51,10 +51,7 @@ const About = () => {
               >
                 Home
               </Link>
-              <Link
-                to="/about"
-                className="text-school-blue-600 font-semibold"
-              >
+              <Link to="/about" className="text-school-blue-600 font-semibold">
                 About
               </Link>
               <Link
@@ -88,7 +85,9 @@ const About = () => {
               Our Story & Mission
             </h1>
             <p className="text-xl text-gray-600 leading-relaxed">
-              Founded in 2010 by Rajesh Kumar J Kharwar, Amogh Van/Bus Services was born from a simple yet powerful vision: to provide the safest, most reliable transportation for school children across Mumbai.
+              Founded in 2010 by Rajesh Kumar J Kharwar, Amogh Van/Bus Services
+              was born from a simple yet powerful vision: to provide the safest,
+              most reliable transportation for school children across Mumbai.
             </p>
           </div>
         </div>
@@ -104,10 +103,16 @@ const About = () => {
                   Our Story
                 </h2>
                 <p className="text-lg text-gray-600 leading-relaxed">
-                  Founded in 2010 by Rajesh Kumar J Kharwar, Amogh Van/Bus Services was born from a simple yet powerful vision: to provide the safest, most reliable transportation for school children across Mumbai.
+                  Founded in 2010 by Rajesh Kumar J Kharwar, Amogh Van/Bus
+                  Services was born from a simple yet powerful vision: to
+                  provide the safest, most reliable transportation for school
+                  children across Mumbai.
                 </p>
                 <p className="text-lg text-gray-600 leading-relaxed">
-                  What started as a small operation with just one vehicle has grown into Mumbai's trusted transportation partner, serving hundreds of families across Prabhadevi, Dadar West, and surrounding areas.
+                  What started as a small operation with just one vehicle has
+                  grown into Mumbai's trusted transportation partner, serving
+                  hundreds of families across Prabhadevi, Dadar West, and
+                  surrounding areas.
                 </p>
               </div>
 
@@ -116,7 +121,9 @@ const About = () => {
                   Our Mission
                 </h3>
                 <p className="text-lg text-gray-600 leading-relaxed">
-                  To provide the safest, most reliable transportation service for students, giving parents peace of mind and schools a trusted partner in student care.
+                  To provide the safest, most reliable transportation service
+                  for students, giving parents peace of mind and schools a
+                  trusted partner in student care.
                 </p>
               </div>
 
@@ -128,22 +135,34 @@ const About = () => {
                   <div className="flex items-start space-x-3">
                     <CheckCircle className="h-5 w-5 text-school-green-500 mt-1 flex-shrink-0" />
                     <div>
-                      <span className="font-semibold text-gray-900">Safety:</span>
-                      <span className="text-gray-600 ml-1">The wellbeing of every child is our highest priority</span>
+                      <span className="font-semibold text-gray-900">
+                        Safety:
+                      </span>
+                      <span className="text-gray-600 ml-1">
+                        The wellbeing of every child is our highest priority
+                      </span>
                     </div>
                   </div>
                   <div className="flex items-start space-x-3">
                     <CheckCircle className="h-5 w-5 text-school-green-500 mt-1 flex-shrink-0" />
                     <div>
-                      <span className="font-semibold text-gray-900">Reliability:</span>
-                      <span className="text-gray-600 ml-1">Consistent, punctual service you can count on every day</span>
+                      <span className="font-semibold text-gray-900">
+                        Reliability:
+                      </span>
+                      <span className="text-gray-600 ml-1">
+                        Consistent, punctual service you can count on every day
+                      </span>
                     </div>
                   </div>
                   <div className="flex items-start space-x-3">
                     <CheckCircle className="h-5 w-5 text-school-green-500 mt-1 flex-shrink-0" />
                     <div>
-                      <span className="font-semibold text-gray-900">Trust:</span>
-                      <span className="text-gray-600 ml-1">Building lasting relationships with families and schools</span>
+                      <span className="font-semibold text-gray-900">
+                        Trust:
+                      </span>
+                      <span className="text-gray-600 ml-1">
+                        Building lasting relationships with families and schools
+                      </span>
                     </div>
                   </div>
                 </div>
@@ -184,7 +203,8 @@ const About = () => {
               What Makes Us Different
             </h2>
             <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-              We're more than just transportation providers. We're an extension of your child's educational journey.
+              We're more than just transportation providers. We're an extension
+              of your child's educational journey.
             </p>
           </div>
 
@@ -203,7 +223,8 @@ const About = () => {
               </CardHeader>
               <CardContent className="text-center">
                 <p className="text-gray-600">
-                  Over a decade of trusted service with hundreds of satisfied families and partnerships with leading schools across Mumbai.
+                  Over a decade of trusted service with hundreds of satisfied
+                  families and partnerships with leading schools across Mumbai.
                 </p>
               </CardContent>
             </Card>
@@ -222,7 +243,9 @@ const About = () => {
               </CardHeader>
               <CardContent className="text-center">
                 <p className="text-gray-600">
-                  Our team is carefully selected, thoroughly trained, and genuinely cares about providing the best possible experience for your child.
+                  Our team is carefully selected, thoroughly trained, and
+                  genuinely cares about providing the best possible experience
+                  for your child.
                 </p>
               </CardContent>
             </Card>
@@ -241,7 +264,8 @@ const About = () => {
               </CardHeader>
               <CardContent className="text-center">
                 <p className="text-gray-600">
-                  Building personal relationships with families and understanding each child's unique needs is what sets us apart.
+                  Building personal relationships with families and
+                  understanding each child's unique needs is what sets us apart.
                 </p>
               </CardContent>
             </Card>
@@ -262,10 +286,15 @@ const About = () => {
                   Beyond Transportation
                 </h2>
                 <p className="text-lg text-gray-600 leading-relaxed">
-                  At Amogh Van/Bus Services, we're more than transportation providers. We're an extension of your child's educational journey, committed to creating a safe, nurturing environment from home to school and back again.
+                  At Amogh Van/Bus Services, we're more than transportation
+                  providers. We're an extension of your child's educational
+                  journey, committed to creating a safe, nurturing environment
+                  from home to school and back again.
                 </p>
                 <p className="text-lg text-gray-600 leading-relaxed">
-                  <strong>Join our family today.</strong> Experience the peace of mind that comes with knowing your child is in the best possible hands.
+                  <strong>Join our family today.</strong> Experience the peace
+                  of mind that comes with knowing your child is in the best
+                  possible hands.
                 </p>
               </div>
 
@@ -277,19 +306,29 @@ const About = () => {
                 <ul className="space-y-3">
                   <li className="flex items-start space-x-3">
                     <CheckCircle className="h-5 w-5 text-school-green-500 mt-0.5 flex-shrink-0" />
-                    <span className="text-gray-700">Punctual, reliable service every single day</span>
+                    <span className="text-gray-700">
+                      Punctual, reliable service every single day
+                    </span>
                   </li>
                   <li className="flex items-start space-x-3">
                     <CheckCircle className="h-5 w-5 text-school-green-500 mt-0.5 flex-shrink-0" />
-                    <span className="text-gray-700">The highest safety standards with regular vehicle inspections</span>
+                    <span className="text-gray-700">
+                      The highest safety standards with regular vehicle
+                      inspections
+                    </span>
                   </li>
                   <li className="flex items-start space-x-3">
                     <CheckCircle className="h-5 w-5 text-school-green-500 mt-0.5 flex-shrink-0" />
-                    <span className="text-gray-700">Professional, caring staff who treat your child with respect</span>
+                    <span className="text-gray-700">
+                      Professional, caring staff who treat your child with
+                      respect
+                    </span>
                   </li>
                   <li className="flex items-start space-x-3">
                     <CheckCircle className="h-5 w-5 text-school-green-500 mt-0.5 flex-shrink-0" />
-                    <span className="text-gray-700">Open communication and transparency with parents</span>
+                    <span className="text-gray-700">
+                      Open communication and transparency with parents
+                    </span>
                   </li>
                 </ul>
               </div>
@@ -307,7 +346,9 @@ const About = () => {
                         Our Vision
                       </h4>
                       <p className="text-gray-600">
-                        To be Mumbai's most trusted and preferred school transportation service, setting the standard for safety and reliability in student transport.
+                        To be Mumbai's most trusted and preferred school
+                        transportation service, setting the standard for safety
+                        and reliability in student transport.
                       </p>
                     </div>
                   </div>
@@ -325,7 +366,9 @@ const About = () => {
                         Community Partnership
                       </h4>
                       <p className="text-gray-600">
-                        Working closely with schools, parents, and local communities to create the safest possible environment for children's daily commute.
+                        Working closely with schools, parents, and local
+                        communities to create the safest possible environment
+                        for children's daily commute.
                       </p>
                     </div>
                   </div>
@@ -343,7 +386,9 @@ const About = () => {
                         Continuous Improvement
                       </h4>
                       <p className="text-gray-600">
-                        Constantly investing in better vehicles, training, and technology to enhance the safety and comfort of every journey.
+                        Constantly investing in better vehicles, training, and
+                        technology to enhance the safety and comfort of every
+                        journey.
                       </p>
                     </div>
                   </div>
@@ -394,7 +439,8 @@ const About = () => {
               Contact Our Team
             </h2>
             <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-              Have questions about our services? We're here to help you find the perfect transportation solution for your child.
+              Have questions about our services? We're here to help you find the
+              perfect transportation solution for your child.
             </p>
           </div>
 
@@ -467,7 +513,8 @@ const About = () => {
             Ready to Join the Amogh Family?
           </h2>
           <p className="text-xl text-white/90 mb-8 max-w-2xl mx-auto">
-            Experience the peace of mind that comes with Mumbai's most trusted school transportation service.
+            Experience the peace of mind that comes with Mumbai's most trusted
+            school transportation service.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link to="/register">
