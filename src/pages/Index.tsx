@@ -22,10 +22,14 @@ import {
   Heart,
   Award,
   ArrowRight,
+  Menu,
+  X,
 } from "lucide-react";
 import { Link } from "react-router-dom";
+import { useState } from "react";
 
 const Index = () => {
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   return (
     <div className="min-h-screen bg-gradient-to-b from-blue-50 to-white">
       {/* Navigation */}
@@ -76,8 +80,65 @@ const Index = () => {
                 Register Student
               </Link>
             </div>
+
+            {/* Mobile menu button */}
+            <div className="md:hidden">
+              <button
+                onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                className="text-gray-600 hover:text-gray-900 focus:outline-none focus:text-gray-900"
+              >
+                {isMobileMenuOpen ? (
+                  <X className="h-6 w-6" />
+                ) : (
+                  <Menu className="h-6 w-6" />
+                )}
+              </button>
+            </div>
           </div>
         </div>
+
+        {/* Mobile Navigation Menu */}
+        {isMobileMenuOpen && (
+          <div className="md:hidden bg-white border-t border-gray-200">
+            <div className="px-2 pt-2 pb-3 space-y-1">
+              <a
+                href="#services"
+                className="block px-3 py-2 text-gray-600 hover:text-school-blue-600 transition-colors"
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                Services
+              </a>
+              <Link
+                to="/about"
+                className="block px-3 py-2 text-gray-600 hover:text-school-blue-600 transition-colors"
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                About
+              </Link>
+              <Link
+                to="/blog"
+                className="block px-3 py-2 text-gray-600 hover:text-school-blue-600 transition-colors"
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                Blog
+              </Link>
+              <Link
+                to="/contact"
+                className="block px-3 py-2 text-gray-600 hover:text-school-blue-600 transition-colors"
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                Contact
+              </Link>
+              <Link
+                to="/register"
+                className="block px-3 py-2 bg-school-yellow-500 text-white rounded-lg font-semibold mt-2"
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                Register Student
+              </Link>
+            </div>
+          </div>
+        )}
       </nav>
 
       {/* Hero Section */}
@@ -121,6 +182,14 @@ const Index = () => {
                     Call Us Now
                   </Button>
                 </a>
+              </div>
+
+              {/* Navigation Test Buttons - Remove after testing */}
+              <div className="flex flex-wrap gap-2 mt-4 text-sm">
+                <Link to="/about" className="bg-blue-500 text-white px-3 py-1 rounded">Test About</Link>
+                <Link to="/blog" className="bg-green-500 text-white px-3 py-1 rounded">Test Blog</Link>
+                <Link to="/contact" className="bg-purple-500 text-white px-3 py-1 rounded">Test Contact</Link>
+                <Link to="/register" className="bg-red-500 text-white px-3 py-1 rounded">Test Register</Link>
               </div>
 
               <div className="grid grid-cols-3 gap-6 pt-8">
