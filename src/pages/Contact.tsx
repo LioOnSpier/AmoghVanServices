@@ -471,14 +471,6 @@ Please respond to the contact within 24 hours as promised.
                       Register Your Student
                     </Button>
                   </Link>
-                  <Button variant="outline" className="w-full justify-start">
-                    <FileText className="mr-2 h-4 w-4" />
-                    Download Route Map
-                  </Button>
-                  <Button variant="outline" className="w-full justify-start">
-                    <Calendar className="mr-2 h-4 w-4" />
-                    Schedule a Visit
-                  </Button>
                 </CardContent>
               </Card>
 
@@ -578,27 +570,7 @@ Please respond to the contact within 24 hours as promised.
         </div>
       </section>
 
-      {/* Emergency Contact */}
-      <section className="py-20 bg-school-red-500">
-        <div className="section-container text-center">
-          <div className="text-white space-y-6">
-            <h2 className="text-4xl font-bold font-manrope">
-              Emergency Contact
-            </h2>
-            <p className="text-xl opacity-90 max-w-2xl mx-auto">
-              For registered families: If you have an emergency during school hours, contact us immediately.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <a href="tel:9870525637">
-                <Button className="bg-white text-school-red-600 hover:bg-gray-50 font-semibold px-8 py-4 text-lg">
-                  <Phone className="mr-2 h-5 w-5" />
-                  Emergency: 9870525637
-                </Button>
-              </a>
-            </div>
-          </div>
-        </div>
-      </section>
+
 
       {/* CTA Section */}
       <section className="py-20 gradient-bg">
