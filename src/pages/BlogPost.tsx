@@ -85,15 +85,71 @@ const BlogPostPage = () => {
           url: window.location.href,
         })
         .catch((error) => {
-          // If native sharing fails, fall back to copying URL
-          console.log("Native sharing failed, falling back to clipboard:", error);
-          navigator.clipboard.writeText(window.location.href);
-          toast.success("Post URL copied to clipboard!");
+          // If native sharing fails, fall back to legacy copy method
+          console.log("Native sharing failed, falling back to legacy copy:", error);
+          fallbackCopyToClipboard(window.location.href);
         });
     } else {
-      navigator.clipboard.writeText(window.location.href);
-      toast.success("Post URL copied to clipboard!");
+      fallbackCopyToClipboard(window.location.href);
     }
+  };
+
+  const fallbackCopyToClipboard = (text: string) => {
+    try {
+      // Try modern clipboard API first
+      if (navigator.clipboard && window.isSecureContext) {
+        navigator.clipboard.writeText(text).then(() => {
+          toast.success("Post URL copied to clipboard!");
+        }).catch(() => {
+          // If modern clipboard fails, use legacy method
+          legacyCopyToClipboard(text);
+        });
+      } else {
+        // Use legacy method directly
+        legacyCopyToClipboard(text);
+      }
+    } catch (error) {
+      legacyCopyToClipboard(text);
+    }
+  };
+
+  const legacyCopyToClipboard = (text: string) => {
+    try {
+      // Create a temporary textarea element
+      const textArea = document.createElement("textarea");
+      textArea.value = text;
+      textArea.style.position = "fixed";
+      textArea.style.left = "-999999px";
+      textArea.style.top = "-999999px";
+      document.body.appendChild(textArea);
+      textArea.focus();
+      textArea.select();
+
+      // Try to copy using the legacy execCommand
+      const successful = document.execCommand('copy');
+      document.body.removeChild(textArea);
+
+      if (successful) {
+        toast.success("Post URL copied to clipboard!");
+      } else {
+        // If all methods fail, show the URL for manual copying
+        showUrlForManualCopy(text);
+      }
+    } catch (error) {
+      // If all methods fail, show the URL for manual copying
+      showUrlForManualCopy(text);
+    }
+  };
+
+  const showUrlForManualCopy = (text: string) => {
+    // Show a toast with the URL for manual copying
+    toast.success(
+      <div>
+        <p className="mb-2">Copy this URL manually:</p>
+        <p className="text-xs bg-gray-100 p-2 rounded break-all">{text}</p>
+      </div>,
+      { duration: 8000 }
+    );
   };
 
   const shareOnSocialMedia = (platform: string) => {
