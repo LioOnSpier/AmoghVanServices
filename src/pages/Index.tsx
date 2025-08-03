@@ -184,14 +184,6 @@ const Index = () => {
                 </a>
               </div>
 
-              {/* Navigation Test Buttons - Remove after testing */}
-              <div className="flex flex-wrap gap-2 mt-4 text-sm">
-                <Link to="/about" className="bg-blue-500 text-white px-3 py-1 rounded">Test About</Link>
-                <Link to="/blog" className="bg-green-500 text-white px-3 py-1 rounded">Test Blog</Link>
-                <Link to="/contact" className="bg-purple-500 text-white px-3 py-1 rounded">Test Contact</Link>
-                <Link to="/register" className="bg-red-500 text-white px-3 py-1 rounded">Test Register</Link>
-              </div>
-
               <div className="grid grid-cols-3 gap-6 pt-8">
                 <div className="text-center">
                   <div className="text-3xl font-bold text-school-blue-600">
