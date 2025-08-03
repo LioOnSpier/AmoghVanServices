@@ -55,7 +55,7 @@ const About = () => {
                 to="/about"
                 className="text-school-blue-600 font-semibold"
               >
-                About Us
+                About
               </Link>
               <Link
                 to="/blog"
@@ -63,12 +63,12 @@ const About = () => {
               >
                 Blog
               </Link>
-              <a
-                href="#contact"
+              <Link
+                to="/contact"
                 className="text-gray-600 hover:text-school-blue-600 transition-colors"
               >
                 Contact
-              </a>
+              </Link>
               <Link to="/register" className="btn-primary">
                 Register Student
               </Link>
