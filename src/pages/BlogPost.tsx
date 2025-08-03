@@ -203,16 +203,16 @@ const BlogPostPage = () => {
               Blog
             </Link>
             <span className="text-gray-400">/</span>
-            <span className="text-gray-900 font-medium">{post.title}</span>
+            <span className="text-gray-900 font-medium">{post.title.rendered}</span>
           </div>
         </div>
       </div>
 
-      <div className="py-12">
+      <div className="py-12 min-h-screen">
         <div className="section-container">
           <div className="grid lg:grid-cols-4 gap-12">
             {/* Main Content */}
-            <article className="lg:col-span-3">
+            <article className="lg:col-span-3 relative z-10">
               {/* Header */}
               <header className="mb-8">
                 <div className="flex items-center gap-4 mb-6">
@@ -282,9 +282,9 @@ const BlogPostPage = () => {
               )}
 
               {/* Content */}
-              <div className="prose prose-lg max-w-none">
+              <div className="prose prose-lg max-w-none mb-12">
                 <div
-                  className="wordpress-content"
+                  className="wordpress-content min-h-96 overflow-visible"
                   dangerouslySetInnerHTML={{ __html: post.content.rendered }}
                 />
               </div>

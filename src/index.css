@@ -107,6 +107,14 @@
   /* WordPress Content Styling */
   .wordpress-content {
     @apply text-lg text-gray-700 leading-relaxed;
+    min-height: 200px;
+    overflow: visible;
+    z-index: 1;
+    position: relative;
+  }
+
+  .wordpress-content h1 {
+    @apply text-4xl font-bold text-gray-900 font-manrope mt-8 mb-6;
   }
 
   .wordpress-content h2 {
@@ -122,11 +130,11 @@
   }
 
   .wordpress-content p {
-    @apply mb-6;
+    @apply mb-6 text-gray-700 leading-relaxed;
   }
 
   .wordpress-content ul, .wordpress-content ol {
-    @apply mb-6 ml-4;
+    @apply mb-6 ml-4 text-gray-700;
   }
 
   .wordpress-content ul {
@@ -138,7 +146,7 @@
   }
 
   .wordpress-content li {
-    @apply text-lg text-gray-700;
+    @apply text-lg text-gray-700 mb-2;
   }
 
   .wordpress-content blockquote {
@@ -149,12 +157,12 @@
     @apply text-school-blue-600 hover:text-school-blue-700 underline;
   }
 
-  .wordpress-content strong {
+  .wordpress-content strong, .wordpress-content b {
     @apply font-semibold text-gray-900;
   }
 
   .wordpress-content img {
-    @apply w-full rounded-lg shadow-lg my-8;
+    @apply w-full max-w-full h-auto rounded-lg shadow-lg my-8;
   }
 
   .wordpress-content code {
@@ -166,7 +174,7 @@
   }
 
   .wordpress-content table {
-    @apply w-full border-collapse border border-gray-300 my-6;
+    @apply w-full border-collapse border border-gray-300 my-6 overflow-x-auto;
   }
 
   .wordpress-content th, .wordpress-content td {
@@ -175,5 +183,18 @@
 
   .wordpress-content th {
     @apply bg-gray-100 font-semibold;
+  }
+
+  /* Ensure content is fully visible */
+  .wordpress-content * {
+    max-width: 100%;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+  }
+
+  /* Fix any potential z-index issues */
+  .wordpress-content {
+    position: relative;
+    z-index: 1;
   }
 }
