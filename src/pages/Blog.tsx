@@ -129,10 +129,22 @@ const Blog = () => {
                 Home
               </Link>
               <Link
+                to="/about"
+                className="text-gray-600 hover:text-school-blue-600 transition-colors"
+              >
+                About
+              </Link>
+              <Link
                 to="/blog"
                 className="text-school-blue-600 font-semibold"
               >
                 Blog
+              </Link>
+              <Link
+                to="/contact"
+                className="text-gray-600 hover:text-school-blue-600 transition-colors"
+              >
+                Contact
               </Link>
               <Link to="/register" className="btn-primary">
                 Register Student
