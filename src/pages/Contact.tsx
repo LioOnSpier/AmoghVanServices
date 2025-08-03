@@ -69,13 +69,13 @@ const Contact = () => {
     try {
       // Simulate form submission (replace with actual API call)
       await new Promise((resolve) => setTimeout(resolve, 2000));
-      
+
       console.log("Contact form submitted:", data);
-      
+
       toast.success(
         "Message sent successfully! We'll get back to you within 24 hours."
       );
-      
+
       reset();
     } catch (error) {
       toast.error("Failed to send message. Please try calling us directly.");
@@ -98,35 +98,35 @@ const Contact = () => {
                 Amogh Van/Bus Services
               </span>
             </Link>
-            <div className="hidden md:flex items-center space-x-8">
-              <Link
-                to="/"
-                className="text-gray-600 hover:text-school-blue-600 transition-colors"
-              >
-                Home
-              </Link>
-              <Link
-                to="/about"
-                className="text-gray-600 hover:text-school-blue-600 transition-colors"
-              >
-                About
-              </Link>
-              <Link
-                to="/blog"
-                className="text-gray-600 hover:text-school-blue-600 transition-colors"
-              >
-                Blog
-              </Link>
-              <Link
-                to="/contact"
-                className="text-school-blue-600 font-semibold"
-              >
-                Contact
-              </Link>
-              <Link to="/register" className="btn-primary">
-                Register Student
-              </Link>
-            </div>
+              <div className="hidden md:flex items-center space-x-8">
+                <Link
+                  to="/"
+                  className="text-gray-600 hover:text-school-blue-600 transition-colors"
+                >
+                  Home
+                </Link>
+                <Link
+                  to="/about"
+                  className="text-gray-600 hover:text-school-blue-600 transition-colors"
+                >
+                  About
+                </Link>
+                <Link
+                  to="/blog"
+                  className="text-gray-600 hover:text-school-blue-600 transition-colors"
+                >
+                  Blog
+                </Link>
+                <Link
+                  to="/contact"
+                  className="text-school-blue-600 font-semibold"
+                >
+                  Contact
+                </Link>
+                <Link to="/register" className="btn-primary">
+                  Register Student
+                </Link>
+              </div>
           </div>
         </div>
       </nav>
