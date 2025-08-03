@@ -38,6 +38,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import { toast } from "sonner";
+import emailjs from '@emailjs/browser';
 
 const contactSchema = z.object({
   name: z.string().min(1, "Name is required"),
@@ -67,10 +68,60 @@ const Contact = () => {
     setIsSubmitting(true);
 
     try {
-      // Simulate form submission (replace with actual API call)
-      await new Promise((resolve) => setTimeout(resolve, 2000));
+      // Initialize EmailJS with the same configuration as registration form
+      emailjs.init("StvI1RsGaSZOvZp1H"); // Same public key as registration
 
-      console.log("Contact form submitted:", data);
+      // Format the email template parameters similar to parent details
+      const templateParams = {
+        to_email: "kharwaramog02@gmail.com",
+        from_name: "Amogh Van/Bus Services Contact Form",
+        subject: `Contact Form Inquiry: ${data.subject}`,
+
+        // Contact Information (similar to parent details format)
+        contact_name: data.name,
+        contact_email: data.email,
+        contact_phone: data.phone,
+        inquiry_type: data.inquiryType,
+        inquiry_subject: data.subject,
+        contact_message: data.message,
+
+        // Formatted submission time
+        submission_date: new Date().toLocaleString(),
+
+        // Complete message body formatted like registration form
+        message: `
+CONTACT FORM INQUIRY SUBMISSION
+
+=== CONTACT INFORMATION ===
+Name: ${data.name}
+Email: ${data.email}
+Phone: ${data.phone}
+
+=== INQUIRY DETAILS ===
+Inquiry Type: ${data.inquiryType}
+Subject: ${data.subject}
+
+=== MESSAGE ===
+${data.message}
+
+=== SUBMISSION INFO ===
+Submitted on: ${new Date().toLocaleString()}
+Form Type: Contact Inquiry
+
+---
+This inquiry was submitted through the Amogh Van/Bus Services website contact form.
+Please respond to the contact within 24 hours as promised.
+        `
+      };
+
+      // Send email using EmailJS with same configuration as registration
+      const result = await emailjs.send(
+        "service_1nqvjzw", // Same service ID as registration
+        "template_4dhuycr", // Same template ID as registration
+        templateParams
+      );
+
+      console.log("Contact email sent successfully:", result);
 
       toast.success(
         "Message sent successfully! We'll get back to you within 24 hours."
@@ -78,7 +129,8 @@ const Contact = () => {
 
       reset();
     } catch (error) {
-      toast.error("Failed to send message. Please try calling us directly.");
+      console.error("Failed to send contact email:", error);
+      toast.error("Failed to send message. Please try calling us directly at 9870525637.");
     } finally {
       setIsSubmitting(false);
     }
