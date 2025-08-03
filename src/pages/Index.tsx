@@ -50,22 +50,29 @@ const Index = () => {
               <Link
                 to="/about"
                 className="text-gray-600 hover:text-school-blue-600 transition-colors"
+                onClick={() => console.log('Navigating to About')}
               >
                 About
               </Link>
               <Link
                 to="/blog"
                 className="text-gray-600 hover:text-school-blue-600 transition-colors"
+                onClick={() => console.log('Navigating to Blog')}
               >
                 Blog
               </Link>
               <Link
                 to="/contact"
                 className="text-gray-600 hover:text-school-blue-600 transition-colors"
+                onClick={() => console.log('Navigating to Contact')}
               >
                 Contact
               </Link>
-              <Link to="/register" className="btn-primary">
+              <Link
+                to="/register"
+                className="btn-primary"
+                onClick={() => console.log('Navigating to Register')}
+              >
                 Register Student
               </Link>
             </div>
