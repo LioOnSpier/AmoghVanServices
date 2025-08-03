@@ -359,8 +359,6 @@ Please respond to the contact within 24 hours as promised.
                           <SelectItem value="routes">Route Information</SelectItem>
                           <SelectItem value="safety">Safety Questions</SelectItem>
                           <SelectItem value="general">General Inquiry</SelectItem>
-                          <SelectItem value="complaint">Complaint</SelectItem>
-                          <SelectItem value="feedback">Feedback</SelectItem>
                         </SelectContent>
                       </Select>
                       {errors.inquiryType && (
