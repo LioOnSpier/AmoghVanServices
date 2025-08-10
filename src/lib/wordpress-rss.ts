@@ -129,39 +129,24 @@ export class WordPressRSSClient {
 
   // Get all posts from RSS feed
   async getPosts(): Promise<RSSPost[]> {
-    try {
-      // Use a CORS proxy to fetch RSS feed with timeout
-      const rssUrl = `${this.baseUrl}/feed/`;
-      const proxyUrl = `https://api.allorigins.win/raw?url=${encodeURIComponent(rssUrl)}`;
+    // Use a CORS proxy to fetch RSS feed
+    const rssUrl = `${this.baseUrl}/feed/`;
+    const proxyUrl = `https://api.allorigins.win/raw?url=${encodeURIComponent(rssUrl)}`;
 
-      const controller = new AbortController();
-      const timeoutId = setTimeout(() => controller.abort(), 8000); // 8 second timeout for RSS
+    const response = await safeRssFetch(proxyUrl);
 
-      const response = await fetch(proxyUrl, {
-        signal: controller.signal,
-        headers: {
-          'Accept': 'application/rss+xml, application/xml, text/xml',
-        }
-      });
-
-      clearTimeout(timeoutId);
-
-      if (!response.ok) {
-        throw new Error(`RSS fetch failed: ${response.status}`);
+    if (response && response.ok) {
+      try {
+        const xmlText = await response.text();
+        return this.parseRSSFeed(xmlText);
+      } catch (error) {
+        // XML parsing failed
+        return [];
       }
-
-      const xmlText = await response.text();
-      return this.parseRSSFeed(xmlText);
-    } catch (error) {
-      // Handle different error types
-      if (error instanceof TypeError || error.name === 'AbortError') {
-        // Network/timeout error
-        return []; // Return empty array instead of throwing
-      } else if (process.env.NODE_ENV === "development") {
-        console.warn("RSS feed unavailable:", error.message);
-      }
-      return []; // Return empty array instead of throwing
     }
+
+    // RSS fetch failed or unavailable
+    return [];
   }
 
   // Get post by slug
