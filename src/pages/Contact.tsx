@@ -167,7 +167,7 @@ Please respond to the contact within 24 hours as promised.
         description="Contact Amogh Van/Bus Services for reliable school transportation in Mumbai. Call 9870525637 or 9321025627. Email: kharwaramog02@gmail.com. Located in Prabhadevi, Dadar West. Get instant quote!"
         keywords="contact school bus service Mumbai, school transport contact number Mumbai, Amogh Van Services phone number, school transport inquiry Mumbai, get school bus quote Mumbai"
         canonicalUrl="https://amoghvanservices.com/contact"
-        schema={contactSchema}
+        schema={contactPageSchema}
       />
       {/* Navigation */}
       <nav className="bg-white shadow-sm sticky top-0 z-50">
