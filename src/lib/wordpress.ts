@@ -136,13 +136,11 @@ export class WordPressAPI {
         const perPage = parseInt(params.per_page as string) || 10;
         return convertedPosts.slice(0, perPage);
       } catch (rssError) {
-        // Only log errors in development or when both methods fail
+        // Return empty array instead of throwing to prevent crashes
         if (process.env.NODE_ENV === "development") {
-          console.warn(
-            "Blog loading failed - both REST API and RSS unavailable",
-          );
+          console.warn("Blog loading failed - both REST API and RSS unavailable");
         }
-        throw new Error("Unable to load blog posts from WordPress");
+        return []; // Return empty array instead of throwing
       }
     }
   }
