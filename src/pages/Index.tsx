@@ -74,6 +74,7 @@ const Index = () => {
         canonicalUrl="https://amoghvanservices.com/"
         schema={organizationSchema}
       />
+      <LocalBusinessSchema />
       {/* Navigation */}
       <nav className="bg-white shadow-sm sticky top-0 z-50" role="navigation" aria-label="Main navigation">
         <div className="section-container">
