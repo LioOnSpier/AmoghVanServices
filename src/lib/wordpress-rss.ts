@@ -128,11 +128,22 @@ export class WordPressRSSClient {
   // Get all posts from RSS feed
   async getPosts(): Promise<RSSPost[]> {
     try {
-      // Use a CORS proxy to fetch RSS feed
+      // Use a CORS proxy to fetch RSS feed with timeout
       const rssUrl = `${this.baseUrl}/feed/`;
       const proxyUrl = `https://api.allorigins.win/raw?url=${encodeURIComponent(rssUrl)}`;
 
-      const response = await fetch(proxyUrl);
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 8000); // 8 second timeout for RSS
+
+      const response = await fetch(proxyUrl, {
+        signal: controller.signal,
+        headers: {
+          'Accept': 'application/rss+xml, application/xml, text/xml',
+        }
+      });
+
+      clearTimeout(timeoutId);
+
       if (!response.ok) {
         throw new Error(`RSS fetch failed: ${response.status}`);
       }
@@ -140,11 +151,14 @@ export class WordPressRSSClient {
       const xmlText = await response.text();
       return this.parseRSSFeed(xmlText);
     } catch (error) {
-      // Only log in development to reduce console noise
-      if (process.env.NODE_ENV === "development") {
+      // Handle different error types
+      if (error instanceof TypeError || error.name === 'AbortError') {
+        // Network/timeout error
+        return []; // Return empty array instead of throwing
+      } else if (process.env.NODE_ENV === "development") {
         console.warn("RSS feed unavailable:", error.message);
       }
-      throw error;
+      return []; // Return empty array instead of throwing
     }
   }
 
