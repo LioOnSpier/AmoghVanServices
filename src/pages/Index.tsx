@@ -31,8 +31,48 @@ import SEO from "@/components/SEO";
 
 const Index = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+  const organizationSchema = {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "Amogh Van/Bus Services",
+    "url": "https://amoghvanservices.com",
+    "logo": "https://amoghvanservices.com/logo.jpg",
+    "description": "Mumbai's most trusted school transportation service since 2010, providing safe and reliable van & bus services for students",
+    "founder": {
+      "@type": "Person",
+      "name": "Rajesh Kumar J Kharwar"
+    },
+    "foundingDate": "2010",
+    "contactPoint": {
+      "@type": "ContactPoint",
+      "telephone": "+91-9870525637",
+      "contactType": "customer service",
+      "areaServed": "Mumbai",
+      "availableLanguage": ["English", "Hindi", "Marathi"]
+    },
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "Prabhadevi",
+      "addressLocality": "Dadar West",
+      "addressRegion": "Maharashtra",
+      "addressCountry": "India"
+    },
+    "sameAs": [
+      "https://kharwaramog02-swayq.wordpress.com"
+    ]
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-b from-blue-50 to-white">
+      <SEO
+        title="Amogh Van/Bus Services - Safe & Reliable School Transportation in Mumbai"
+        description="Mumbai's most trusted school transportation service since 2010. Safe, reliable van & bus services for students in Prabhadevi, Dadar West. GPS tracking, trained drivers, 500+ satisfied families. Call 9870525637"
+        keywords="school bus services Mumbai, school van services Mumbai, student transportation Mumbai, school transport Prabhadevi, school transport Dadar West, safe school bus Mumbai, GPS tracking school transport, reliable school van service, Mumbai school pickup drop, school transport rates Mumbai"
+        ogType="website"
+        canonicalUrl="https://amoghvanservices.com/"
+        schema={organizationSchema}
+      />
       {/* Navigation */}
       <nav className="bg-white shadow-sm sticky top-0 z-50">
         <div className="section-container">
