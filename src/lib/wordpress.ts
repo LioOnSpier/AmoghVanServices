@@ -144,8 +144,23 @@ export class WordPressAPI {
       const perPage = parseInt(params.per_page as string) || 10;
       return convertedPosts.slice(0, perPage);
     } catch (rssError) {
-      // Return empty array instead of throwing
-      return [];
+      // Use fallback data when both WordPress API and RSS fail
+      const perPage = parseInt(params.per_page as string) || 10;
+      const fallbackPosts = getFallbackPosts(perPage);
+
+      // Apply search filter to fallback data if needed
+      if (params.search) {
+        const searchTerm = params.search.toLowerCase();
+        return fallbackPosts.filter(
+          (post) =>
+            post.title.rendered.toLowerCase().includes(searchTerm) ||
+            this.stripHtml(post.excerpt.rendered)
+              .toLowerCase()
+              .includes(searchTerm),
+        );
+      }
+
+      return fallbackPosts;
     }
   }
 
