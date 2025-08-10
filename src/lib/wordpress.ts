@@ -103,46 +103,42 @@ export class WordPressAPI {
       ),
     });
 
-    try {
-      // First try the REST API (expected to fail on WordPress.com free accounts)
-      const response = await fetch(`${this.baseUrl}/posts?${searchParams}`);
-      if (!response.ok) {
-        throw new Error(`WordPress API error: ${response.status}`);
-      }
+    // Try the REST API (expected to fail on WordPress.com free accounts)
+    const response = await safeFetch(`${this.baseUrl}/posts?${searchParams}`);
 
-      const posts: WordPressPost[] = await response.json();
-
-      // Enhance posts with additional info
-      return posts.map((post) => this.enhancePost(post));
-    } catch (error) {
-      // Silently fallback to RSS feed (this is expected behavior)
+    if (response && response.ok) {
       try {
-        // Try RSS feed as fallback
-        const rssPosts = await wpRssClient.getPosts();
-        const convertedPosts = rssPosts.map(convertRssToWpPost);
-
-        // Apply search filter if needed
-        if (params.search) {
-          const searchTerm = params.search.toLowerCase();
-          return convertedPosts.filter(
-            (post) =>
-              post.title.rendered.toLowerCase().includes(searchTerm) ||
-              this.stripHtml(post.excerpt.rendered)
-                .toLowerCase()
-                .includes(searchTerm),
-          );
-        }
-
-        // Apply limit
-        const perPage = parseInt(params.per_page as string) || 10;
-        return convertedPosts.slice(0, perPage);
-      } catch (rssError) {
-        // Return empty array instead of throwing to prevent crashes
-        if (process.env.NODE_ENV === "development") {
-          console.warn("Blog loading failed - both REST API and RSS unavailable");
-        }
-        return []; // Return empty array instead of throwing
+        const posts: WordPressPost[] = await response.json();
+        // Enhance posts with additional info
+        return posts.map((post) => this.enhancePost(post));
+      } catch (jsonError) {
+        // JSON parsing failed, fall through to RSS
       }
+    }
+
+    // REST API failed or unavailable, try RSS feed as fallback
+    try {
+      const rssPosts = await wpRssClient.getPosts();
+      const convertedPosts = rssPosts.map(convertRssToWpPost);
+
+      // Apply search filter if needed
+      if (params.search) {
+        const searchTerm = params.search.toLowerCase();
+        return convertedPosts.filter(
+          (post) =>
+            post.title.rendered.toLowerCase().includes(searchTerm) ||
+            this.stripHtml(post.excerpt.rendered)
+              .toLowerCase()
+              .includes(searchTerm),
+        );
+      }
+
+      // Apply limit
+      const perPage = parseInt(params.per_page as string) || 10;
+      return convertedPosts.slice(0, perPage);
+    } catch (rssError) {
+      // Return empty array instead of throwing to prevent crashes
+      return []; // Return empty array instead of throwing
     }
   }
 
