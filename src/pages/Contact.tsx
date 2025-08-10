@@ -141,7 +141,7 @@ Please respond to the contact within 24 hours as promised.
     }
   };
 
-  const contactSchema = {
+  const contactPageSchema = {
     "@context": "https://schema.org",
     "@type": "ContactPage",
     "mainEntity": {
