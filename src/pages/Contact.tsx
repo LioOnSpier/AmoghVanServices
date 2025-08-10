@@ -39,6 +39,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import { toast } from "sonner";
 import emailjs from "@emailjs/browser";
+import SEO from "@/components/SEO";
 
 const contactSchema = z.object({
   name: z.string().min(1, "Name is required"),
