@@ -57,7 +57,6 @@ const Blog = () => {
         }
       } catch (error) {
         // This should rarely happen now, but keep as final safety net
-        console.warn("Blog loading failed:", error);
         toast.error(
           "Blog posts are temporarily unavailable. Please try again later.",
         );
