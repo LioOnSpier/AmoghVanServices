@@ -134,8 +134,37 @@ const Blog = () => {
     );
   }
 
+  const blogSchema = {
+    "@context": "https://schema.org",
+    "@type": "Blog",
+    "mainEntity": {
+      "@type": "ItemList",
+      "name": "Amogh Van/Bus Services Blog",
+      "description": "Latest news, safety tips, and updates about school transportation services in Mumbai",
+      "itemListElement": posts.map((post, index) => ({
+        "@type": "BlogPosting",
+        "position": index + 1,
+        "headline": post.title.rendered,
+        "description": wpUtils.cleanExcerpt(post.excerpt.rendered),
+        "url": `https://amoghvanservices.com/blog/${post.slug}`,
+        "datePublished": post.date,
+        "author": {
+          "@type": "Person",
+          "name": post.author_info?.name || "Amogh Van Services"
+        }
+      }))
+    }
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-b from-blue-50 to-white">
+      <SEO
+        title="Blog - Amogh Van/Bus Services | School Transportation Tips & News Mumbai"
+        description="Read the latest blog posts from Amogh Van/Bus Services about school transportation safety, tips for parents, and news about our services in Mumbai. Stay updated with school transport insights."
+        keywords="school transport blog Mumbai, school bus safety tips, parent transportation guide Mumbai, school transport news, Mumbai school bus updates, student safety tips"
+        canonicalUrl="https://amoghvanservices.com/blog"
+        schema={blogSchema}
+      />
       {/* Navigation */}
       <nav className="bg-white shadow-sm sticky top-0 z-50">
         <div className="section-container">
