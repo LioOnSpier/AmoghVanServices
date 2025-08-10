@@ -1,4 +1,5 @@
 import { wpRssClient, convertRssToWpPost } from "./wordpress-rss";
+import { safeFetch } from "./safe-fetch";
 
 // WordPress REST API Configuration
 export const WORDPRESS_CONFIG = {
