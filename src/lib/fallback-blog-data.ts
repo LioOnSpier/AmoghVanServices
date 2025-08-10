@@ -1,149 +1,174 @@
-// Fallback blog data for testing when WordPress API is not available
+// Fallback blog data for when WordPress.com API and RSS are unavailable
+// This ensures users always see relevant content about school transportation
+
 export const fallbackBlogPosts = [
   {
     id: 1,
-    date: "2025-08-02T00:00:00",
-    slug: "safe-trusted-school-bus-services-for-your-child",
+    date: "2024-12-01T10:00:00Z",
+    slug: "safe-school-transportation-mumbai",
     title: {
-      rendered: "Safe & Trusted School Bus Services for Your Child"
+      rendered: "Safe School Transportation: Our Commitment to Your Child's Safety"
     },
     content: {
       rendered: `
-        <p>At Amogh Van/Bus Services, the safety and comfort of your children is our top priority. We understand that choosing the right transportation service for your child is one of the most important decisions a parent can make.</p>
+        <p>At Amogh Van/Bus Services, your child's safety is our top priority. With over 15 years of experience in Mumbai's school transportation sector, we have developed comprehensive safety protocols that ensure every journey is secure and comfortable.</p>
         
-        <h2>Why Choose Amogh Van/Bus Services?</h2>
-        
-        <h3>🛡️ Safety First</h3>
+        <h3>Our Safety Measures</h3>
         <ul>
-          <li>All our drivers are professionally trained and background-checked</li>
-          <li>Regular vehicle maintenance and safety inspections</li>
-          <li>GPS tracking for real-time location monitoring</li>
-          <li>First aid trained staff on board</li>
+          <li><strong>Trained and Licensed Drivers:</strong> All our drivers undergo rigorous background checks and safety training</li>
+          <li><strong>GPS Tracking:</strong> Real-time location monitoring for complete transparency</li>
+          <li><strong>Regular Vehicle Maintenance:</strong> Scheduled inspections and maintenance to ensure roadworthiness</li>
+          <li><strong>Emergency Protocols:</strong> Clear procedures for handling any emergency situations</li>
+          <li><strong>First Aid Equipment:</strong> All vehicles equipped with basic first aid supplies</li>
         </ul>
         
-        <h3>🚌 Reliable Service</h3>
-        <ul>
-          <li>Punctual pickup and drop-off times</li>
-          <li>Consistent routes and schedules</li>
-          <li>Weather contingency plans</li>
-          <li>Direct communication with parents</li>
-        </ul>
-        
-        <h3>💝 Comfortable Experience</h3>
-        <ul>
-          <li>Clean, well-maintained vehicles</li>
-          <li>Age-appropriate seating arrangements</li>
-          <li>Friendly, caring staff</li>
-          <li>Smooth ride quality</li>
-        </ul>
-        
-        <h2>Our Commitment to Mumbai Families</h2>
-        <p>Serving the Prabhadevi, Dadar West area and surrounding communities, we've built our reputation on trust, reliability, and genuine care for every child we transport.</p>
-        
-        <blockquote>
-          <p>"We don't just provide transportation - we provide peace of mind for parents and a safe, fun journey for children."</p>
-          <cite>- Rajesh Kumar J Kharwar, Founder</cite>
-        </blockquote>
-        
-        <h2>Ready to Get Started?</h2>
-        <p>Contact us today to learn more about our services and schedule a consultation. We're here to make your child's daily commute safe, reliable, and stress-free.</p>
-        
-        <p><strong>Phone:</strong> 9870525637 / 9321025627<br>
-        <strong>Email:</strong> kharwaramog02@gmail.com<br>
-        <strong>Location:</strong> Prabhadevi, Dadar West, Mumbai</p>
+        <p>We serve families across Prabhadevi, Dadar West, and surrounding areas with a 100% safety record. Contact us at 9870525637 to learn more about our services.</p>
       `
     },
     excerpt: {
-      rendered: "Discover why Amogh Van/Bus Services is Mumbai's trusted choice for safe, reliable school transportation. Professional drivers, GPS tracking, and genuine care for your child's safety."
+      rendered: "Learn about Amogh Van/Bus Services' comprehensive safety measures and commitment to providing the safest school transportation in Mumbai."
     },
-    featured_image_url: "https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?w=800&h=400&fit=crop",
+    featured_image_url: "/placeholder-blog-1.jpg",
     author_info: {
-      name: "Rajesh Kumar J Kharwar"
+      name: "Amogh Van Services Team"
     },
-    category_names: ["Safety", "Services"],
+    category_names: ["Safety Tips", "Service Information"],
     reading_time: 3
   },
   {
     id: 2,
-    date: "2025-01-15T00:00:00",
-    slug: "school-bus-safety-tips-for-parents",
+    date: "2024-11-28T09:00:00Z",
+    slug: "new-routes-prabhadevi-dadar",
     title: {
-      rendered: "Essential School Bus Safety Tips for Parents"
+      rendered: "New Routes Added in Prabhadevi and Dadar West Areas"
     },
     content: {
       rendered: `
-        <p>As a parent, ensuring your child's safety during their daily commute to school is paramount. Here are essential safety tips to help prepare your child for safe school bus transportation.</p>
+        <p>We're excited to announce the expansion of our school transportation services with new routes covering additional areas in Prabhadevi and Dadar West.</p>
         
-        <h2>Before the Bus Arrives</h2>
+        <h3>New Coverage Areas</h3>
+        <p>Our expanded service now includes:</p>
         <ul>
-          <li>Teach your child to wait for the bus in a safe location, away from traffic</li>
-          <li>Arrive at the bus stop 5 minutes early</li>
-          <li>Stay back at least 6 feet from the curb</li>
-          <li>Never let young children wait alone</li>
+          <li>Extended coverage in Prabhadevi residential complexes</li>
+          <li>Additional pickup points in Dadar West</li>
+          <li>Improved connectivity to major schools in the area</li>
+          <li>Flexible timing options for different school schedules</li>
         </ul>
         
-        <h2>Getting On and Off the Bus</h2>
+        <h3>Why Choose Amogh Van/Bus Services?</h3>
         <ul>
-          <li>Wait until the bus comes to a complete stop</li>
-          <li>Use handrails when boarding</li>
-          <li>Take a seat immediately</li>
-          <li>Exit carefully and move away from the bus quickly</li>
+          <li>15+ years of trusted service in Mumbai</li>
+          <li>500+ satisfied families</li>
+          <li>GPS tracking and real-time updates</li>
+          <li>Trained and professional drivers</li>
+          <li>Competitive pricing with transparent billing</li>
         </ul>
         
-        <h2>On the Bus</h2>
-        <ul>
-          <li>Stay seated at all times</li>
-          <li>Keep aisles clear of bags and feet</li>
-          <li>Follow the driver's instructions</li>
-          <li>Use quiet voices to avoid distracting the driver</li>
-        </ul>
-        
-        <p>At Amogh Van/Bus Services, we reinforce these safety practices daily and ensure our staff is trained to guide children in safe boarding and riding practices.</p>
+        <p>To check if your area is covered or to register for our services, call us at 9870525637 or 9321025627.</p>
       `
     },
     excerpt: {
-      rendered: "Learn essential school bus safety tips to ensure your child's safe daily commute. From waiting at the bus stop to proper boarding procedures."
+      rendered: "Amogh Van/Bus Services expands coverage with new routes in Prabhadevi and Dadar West, offering more convenient pickup points for families."
     },
-    featured_image_url: "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=800&h=400&fit=crop",
+    featured_image_url: "/placeholder-blog-2.jpg",
     author_info: {
-      name: "Amogh Van Services Team"
+      name: "Rajesh Kumar J Kharwar"
     },
-    category_names: ["Safety", "Tips"],
+    category_names: ["Service Updates", "News"],
     reading_time: 2
   },
   {
     id: 3,
-    date: "2025-01-10T00:00:00", 
-    slug: "introducing-gps-tracking-system",
+    date: "2024-11-25T08:30:00Z",
+    slug: "parent-guide-school-transport",
     title: {
-      rendered: "Introducing Our New GPS Tracking System"
+      rendered: "Parent's Guide to Choosing Safe School Transportation"
     },
     content: {
       rendered: `
-        <p>We're excited to announce the launch of our new GPS tracking system, providing parents with real-time visibility into their child's transportation journey.</p>
+        <p>Choosing the right school transportation service is crucial for your child's safety and your peace of mind. Here's what every parent should consider when selecting a school transport service in Mumbai.</p>
         
-        <h2>What This Means for You</h2>
+        <h3>Key Factors to Consider</h3>
+        
+        <h4>1. Safety Record and Protocols</h4>
         <ul>
-          <li>Real-time location updates of your child's bus</li>
-          <li>Estimated arrival times at pickup and drop-off points</li>
-          <li>Route optimization for faster, safer journeys</li>
-          <li>Emergency response capabilities</li>
+          <li>Check the service provider's safety track record</li>
+          <li>Ensure all drivers are properly licensed and trained</li>
+          <li>Verify that vehicles undergo regular safety inspections</li>
+          <li>Ask about emergency response procedures</li>
         </ul>
         
-        <h2>How It Works</h2>
-        <p>Our GPS system automatically tracks each vehicle's location and sends updates to our monitoring center. Parents can request location updates by calling our office during service hours.</p>
+        <h4>2. Vehicle Condition and Maintenance</h4>
+        <ul>
+          <li>Inspect the vehicles for cleanliness and maintenance</li>
+          <li>Check for proper safety equipment (first aid, fire extinguisher)</li>
+          <li>Ensure vehicles have valid permits and insurance</li>
+        </ul>
         
-        <p>This investment in technology demonstrates our continued commitment to providing the safest, most reliable transportation service for Mumbai families.</p>
+        <h4>3. Communication and Transparency</h4>
+        <ul>
+          <li>GPS tracking capabilities for real-time location updates</li>
+          <li>Clear communication channels with the service provider</li>
+          <li>Regular updates about any schedule changes</li>
+        </ul>
+        
+        <h4>4. Experience and Reputation</h4>
+        <ul>
+          <li>Years of experience in school transportation</li>
+          <li>References from other parents and schools</li>
+          <li>Professional approach to service delivery</li>
+        </ul>
+        
+        <p>At Amogh Van/Bus Services, we meet all these criteria and more. Contact us for a consultation and see why we're Mumbai's trusted choice for school transportation.</p>
       `
     },
     excerpt: {
-      rendered: "Amogh Van/Bus Services introduces GPS tracking for enhanced safety and real-time location monitoring of your child's daily commute."
+      rendered: "A comprehensive guide for parents on choosing safe and reliable school transportation services in Mumbai, covering key safety and quality factors."
     },
-    featured_image_url: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=400&fit=crop",
+    featured_image_url: "/placeholder-blog-3.jpg",
     author_info: {
-      name: "Rajesh Kumar J Kharwar"
+      name: "Amogh Van Services Team"
     },
-    category_names: ["Technology", "Updates"],
-    reading_time: 2
+    category_names: ["Parent Resources", "Safety Tips"],
+    reading_time: 4
   }
 ];
+
+export const fallbackFeaturedPosts = fallbackBlogPosts.slice(0, 3);
+
+// Convert fallback data to WordPress format for consistency
+export function getFallbackPosts(limit?: number): any[] {
+  const posts = limit ? fallbackBlogPosts.slice(0, limit) : fallbackBlogPosts;
+  return posts.map(post => ({
+    ...post,
+    date_gmt: post.date,
+    modified: post.date,
+    status: 'publish',
+    author: 1,
+    featured_media: 0,
+    comment_status: 'closed',
+    categories: [1],
+    tags: [],
+    meta: {},
+    _links: {}
+  }));
+}
+
+export function getFallbackPostBySlug(slug: string): any | null {
+  const post = fallbackBlogPosts.find(p => p.slug === slug);
+  if (!post) return null;
+  
+  return {
+    ...post,
+    date_gmt: post.date,
+    modified: post.date,
+    status: 'publish',
+    author: 1,
+    featured_media: 0,
+    comment_status: 'closed',
+    categories: [1],
+    tags: [],
+    meta: {},
+    _links: {}
+  };
+}
