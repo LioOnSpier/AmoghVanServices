@@ -23,19 +23,19 @@ export class WordPressRSSClient {
   private parseRSSFeed(xmlText: string): RSSPost[] {
     const parser = new DOMParser()
     const xmlDoc = parser.parseFromString(xmlText, 'text/xml')
-    
+
     const items = xmlDoc.querySelectorAll('item')
     const posts: RSSPost[] = []
 
     items.forEach((item, index) => {
       const title = item.querySelector('title')?.textContent || ''
       const link = item.querySelector('link')?.textContent || ''
-      const content = item.querySelector('content\\:encoded, encoded')?.textContent || 
+      const content = item.querySelector('content\\:encoded, encoded')?.textContent ||
                     item.querySelector('description')?.textContent || ''
       const pubDate = item.querySelector('pubDate')?.textContent || ''
       const author = item.querySelector('dc\\:creator, creator')?.textContent || 'Amogh Van Services'
       const guid = item.querySelector('guid')?.textContent || link
-      
+
       // Extract categories
       const categoryElements = item.querySelectorAll('category')
       const categories: string[] = []
@@ -98,13 +98,13 @@ export class WordPressRSSClient {
   private createExcerpt(content: string, maxLength: number = 160): string {
     // Remove HTML tags
     const textOnly = content.replace(/<[^>]*>/g, ' ').replace(/\s+/g, ' ').trim()
-    
+
     if (textOnly.length <= maxLength) return textOnly
-    
+
     // Cut at word boundary
     const truncated = textOnly.substring(0, maxLength)
     const lastSpace = truncated.lastIndexOf(' ')
-    
+
     return (lastSpace > 0 ? truncated.substring(0, lastSpace) : truncated) + '...'
   }
 
@@ -120,16 +120,19 @@ export class WordPressRSSClient {
       // Use a CORS proxy to fetch RSS feed
       const rssUrl = `${this.baseUrl}/feed/`
       const proxyUrl = `https://api.allorigins.win/raw?url=${encodeURIComponent(rssUrl)}`
-      
+
       const response = await fetch(proxyUrl)
       if (!response.ok) {
         throw new Error(`RSS fetch failed: ${response.status}`)
       }
-      
+
       const xmlText = await response.text()
       return this.parseRSSFeed(xmlText)
     } catch (error) {
-      console.error('Error fetching RSS feed:', error)
+      // Only log in development to reduce console noise
+      if (process.env.NODE_ENV === 'development') {
+        console.warn('RSS feed unavailable:', error.message)
+      }
       throw error
     }
   }
@@ -140,7 +143,7 @@ export class WordPressRSSClient {
       const posts = await this.getPosts()
       return posts.find(post => post.slug === slug) || null
     } catch (error) {
-      console.error('Error fetching post by slug:', error)
+      // Silently fail - error already logged in getPosts
       return null
     }
   }
@@ -151,7 +154,7 @@ export class WordPressRSSClient {
       const posts = await this.getPosts()
       return posts.slice(0, limit)
     } catch (error) {
-      console.error('Error fetching featured posts:', error)
+      // Silently fail - error already logged in getPosts
       return []
     }
   }
@@ -161,14 +164,14 @@ export class WordPressRSSClient {
     try {
       const posts = await this.getPosts()
       const searchTerm = query.toLowerCase()
-      
-      return posts.filter(post => 
+
+      return posts.filter(post =>
         post.title.toLowerCase().includes(searchTerm) ||
         post.excerpt.toLowerCase().includes(searchTerm) ||
         post.content.toLowerCase().includes(searchTerm)
       )
     } catch (error) {
-      console.error('Error searching posts:', error)
+      // Silently fail - error already logged in getPosts
       return []
     }
   }
