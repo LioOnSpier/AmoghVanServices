@@ -150,26 +150,30 @@ export class WordPressAPI {
 
   // Get single post by slug
   async getPostBySlug(slug: string): Promise<WordPressPost | null> {
-    // Try the REST API (expected to fail on WordPress.com free accounts)
-    const response = await safeFetch(`${this.baseUrl}/posts?slug=${slug}&_embed=true`);
+    // Skip WordPress REST API for WordPress.com sites to avoid CORS errors
+    const isWordPressCom = this.baseUrl.includes('wordpress.com');
 
-    if (response && response.ok) {
-      try {
-        const posts: WordPressPost[] = await response.json();
-        if (posts.length > 0) {
-          return this.enhancePost(posts[0]);
+    if (!isWordPressCom) {
+      // Only try REST API for self-hosted WordPress sites
+      const response = await safeFetch(`${this.baseUrl}/posts?slug=${slug}&_embed=true`);
+
+      if (response && response.ok) {
+        try {
+          const posts: WordPressPost[] = await response.json();
+          if (posts.length > 0) {
+            return this.enhancePost(posts[0]);
+          }
+        } catch (jsonError) {
+          // JSON parsing failed, fall through to RSS
         }
-      } catch (jsonError) {
-        // JSON parsing failed, fall through to RSS
       }
     }
 
-    // REST API failed or unavailable, try RSS feed as fallback
+    // Use RSS feed (primary method for WordPress.com, fallback for self-hosted)
     try {
       const rssPost = await wpRssClient.getPostBySlug(slug);
       return rssPost ? convertRssToWpPost(rssPost) : null;
     } catch (rssError) {
-      // Silently return null
       return null;
     }
   }
