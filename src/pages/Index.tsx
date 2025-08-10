@@ -74,7 +74,7 @@ const Index = () => {
         schema={organizationSchema}
       />
       {/* Navigation */}
-      <nav className="bg-white shadow-sm sticky top-0 z-50">
+      <nav className="bg-white shadow-sm sticky top-0 z-50" role="navigation" aria-label="Main navigation">
         <div className="section-container">
           <div className="flex items-center justify-between h-16">
             <div className="flex items-center space-x-3">
