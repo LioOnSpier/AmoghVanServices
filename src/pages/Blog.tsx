@@ -35,17 +35,11 @@ const Blog = () => {
         // Handle each request individually to prevent Promise.all from failing completely
         const allPostsPromise = wordpressApi
           .getPosts({ per_page: 20 })
-          .catch((error) => {
-            console.warn("Failed to load main posts:", error.message);
-            return []; // Return empty array as fallback
-          });
+          .catch(() => []);  // Return empty array as fallback
 
         const featuredPromise = wordpressApi
           .getFeaturedPosts(3)
-          .catch((error) => {
-            console.warn("Failed to load featured posts:", error.message);
-            return []; // Return empty array as fallback
-          });
+          .catch(() => []);  // Return empty array as fallback
 
         const [allPosts, featured] = await Promise.all([
           allPostsPromise,
