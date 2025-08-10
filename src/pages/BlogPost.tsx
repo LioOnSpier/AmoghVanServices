@@ -21,6 +21,7 @@ import {
 } from "lucide-react";
 import { wordpressApi, WordPressPost, wpUtils } from "@/lib/wordpress";
 import { toast } from "sonner";
+import SEO from "@/components/SEO";
 
 const BlogPostPage = () => {
   const { slug } = useParams<{ slug: string }>();
