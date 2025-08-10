@@ -28,6 +28,7 @@ import {
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import SEO from "@/components/SEO";
+import LocalBusinessSchema from "@/components/LocalBusinessSchema";
 
 const Index = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
