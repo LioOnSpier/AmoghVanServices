@@ -56,7 +56,6 @@ const BlogPostPage = () => {
         setRecentPosts(recent.filter((p) => p.id !== postData.id));
       } catch (error) {
         // This should rarely happen now, but keep as final safety net
-        console.warn("Blog post loading failed:", error);
         toast.error("Failed to load blog post. Please try again later.");
       } finally {
         setLoading(false);
