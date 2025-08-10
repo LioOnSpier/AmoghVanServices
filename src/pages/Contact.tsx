@@ -41,6 +41,7 @@ import { toast } from "sonner";
 import emailjs from "@emailjs/browser";
 import SEO from "@/components/SEO";
 
+// Define schema at the top level to avoid hoisting issues
 const contactSchema = z.object({
   name: z.string().min(1, "Name is required"),
   email: z.string().email("Valid email is required"),
