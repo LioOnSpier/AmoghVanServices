@@ -3,8 +3,9 @@ import { safeFetch } from "./safe-fetch";
 
 // WordPress REST API Configuration
 export const WORDPRESS_CONFIG = {
-  // Your actual WordPress.com site URL
-  baseUrl: "https://kharwaramog02-swayq.wordpress.com/wp-json/wp/v2",
+  // WordPress site URL from environment variables
+  baseUrl: import.meta.env.VITE_WORDPRESS_BASE_URL || "https://kharwaramog02-swayq.wordpress.com/wp-json/wp/v2",
+  siteUrl: import.meta.env.VITE_WORDPRESS_SITE_URL || "https://kharwaramog02-swayq.wordpress.com",
   // If you need authentication for private posts
   username: "", // Leave empty for public posts only
   password: "", // Leave empty for public posts only
