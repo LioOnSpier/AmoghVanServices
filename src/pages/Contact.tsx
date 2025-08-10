@@ -41,20 +41,21 @@ import { toast } from "sonner";
 import emailjs from "@emailjs/browser";
 import SEO from "@/components/SEO";
 
-// Define schema at the top level to avoid hoisting issues
-const contactSchema = z.object({
-  name: z.string().min(1, "Name is required"),
-  email: z.string().email("Valid email is required"),
-  phone: z.string().min(10, "Valid phone number is required"),
-  subject: z.string().min(1, "Subject is required"),
-  inquiryType: z.string().min(1, "Please select inquiry type"),
-  message: z.string().min(10, "Message must be at least 10 characters"),
-});
-
-type ContactFormData = z.infer<typeof contactSchema>;
-
+// Define schema inside component to avoid initialization issues
 const Contact = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
+
+  // Define schema within component
+  const contactSchema = z.object({
+    name: z.string().min(1, "Name is required"),
+    email: z.string().email("Valid email is required"),
+    phone: z.string().min(10, "Valid phone number is required"),
+    subject: z.string().min(1, "Subject is required"),
+    inquiryType: z.string().min(1, "Please select inquiry type"),
+    message: z.string().min(10, "Message must be at least 10 characters"),
+  });
+
+  type ContactFormData = z.infer<typeof contactSchema>;
 
   const {
     register,
