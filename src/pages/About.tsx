@@ -31,8 +31,36 @@ import { Link } from "react-router-dom";
 import SEO from "@/components/SEO";
 
 const About = () => {
+  const aboutSchema = {
+    "@context": "https://schema.org",
+    "@type": "AboutPage",
+    "mainEntity": {
+      "@type": "Organization",
+      "name": "Amogh Van/Bus Services",
+      "description": "Founded in 2010 by Rajesh Kumar J Kharwar, Amogh Van/Bus Services provides safe and reliable school transportation in Mumbai",
+      "founder": {
+        "@type": "Person",
+        "name": "Rajesh Kumar J Kharwar"
+      },
+      "foundingDate": "2010",
+      "numberOfEmployees": "15+",
+      "areaServed": {
+        "@type": "City",
+        "name": "Mumbai",
+        "addressRegion": "Maharashtra"
+      }
+    }
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-b from-blue-50 to-white">
+      <SEO
+        title="About Amogh Van/Bus Services - 15+ Years of Safe School Transportation in Mumbai"
+        description="Learn about Amogh Van/Bus Services, founded by Rajesh Kumar J Kharwar in 2010. 15+ years of experience providing safe, reliable school transportation in Mumbai. Serving 500+ families with 100% safety record."
+        keywords="about Amogh Van Services, Rajesh Kumar J Kharwar, school transport Mumbai history, experienced school bus service Mumbai, trusted school transportation Mumbai, school transport company profile"
+        canonicalUrl="https://amoghvanservices.com/about"
+        schema={aboutSchema}
+      />
       {/* Navigation */}
       <nav className="bg-white shadow-sm sticky top-0 z-50">
         <div className="section-container">
