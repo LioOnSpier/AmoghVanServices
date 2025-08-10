@@ -286,8 +286,49 @@ const BlogPostPage = () => {
     );
   }
 
+  const blogPostSchema = post ? {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": post.title.rendered,
+    "description": wpUtils.cleanExcerpt(post.excerpt.rendered),
+    "image": post.featured_image_url || "https://amoghvanservices.com/default-blog-image.jpg",
+    "author": {
+      "@type": "Person",
+      "name": post.author_info?.name || "Amogh Van Services"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Amogh Van/Bus Services",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://amoghvanservices.com/logo.jpg"
+      }
+    },
+    "datePublished": post.date,
+    "dateModified": post.modified || post.date,
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": `https://amoghvanservices.com/blog/${post.slug}`
+    },
+    "articleSection": post.category_names?.[0] || "School Transportation",
+    "keywords": post.category_names?.join(", ") || "school transport, Mumbai, safety",
+    "wordCount": estimateReadingTime(post.content.rendered) * 200,
+    "timeRequired": `PT${estimateReadingTime(post.content.rendered)}M`
+  } : null;
+
   return (
     <div className="min-h-screen bg-gradient-to-b from-blue-50 to-white">
+      {post && (
+        <SEO
+          title={`${post.title.rendered} - Amogh Van/Bus Services Blog`}
+          description={wpUtils.cleanExcerpt(post.excerpt.rendered) || `Read ${post.title.rendered} on Amogh Van/Bus Services blog. School transportation insights, safety tips, and updates from Mumbai's trusted transport service.`}
+          keywords={`${post.category_names?.join(", ") || "school transport, Mumbai, safety"}, school bus Mumbai, student transportation, Amogh Van Services`}
+          canonicalUrl={`https://amoghvanservices.com/blog/${post.slug}`}
+          ogImage={post.featured_image_url || "/default-blog-image.jpg"}
+          ogType="article"
+          schema={blogPostSchema}
+        />
+      )}
       {/* Navigation */}
       <nav className="bg-white shadow-sm sticky top-0 z-50">
         <div className="section-container">
