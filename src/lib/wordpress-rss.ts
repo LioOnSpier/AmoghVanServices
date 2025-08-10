@@ -17,7 +17,7 @@ export interface RSSPost {
 export class WordPressRSSClient {
   private baseUrl: string;
 
-  constructor(wpSiteUrl: string = "https://kharwaramog02-swayq.wordpress.com") {
+  constructor(wpSiteUrl: string = import.meta.env.VITE_WORDPRESS_SITE_URL || "https://kharwaramog02-swayq.wordpress.com") {
     this.baseUrl = wpSiteUrl;
   }
 
