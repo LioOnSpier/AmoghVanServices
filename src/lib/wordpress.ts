@@ -101,7 +101,7 @@ export class WordPressAPI {
     })
 
     try {
-      // First try the REST API
+      // First try the REST API (expected to fail on WordPress.com free accounts)
       const response = await fetch(`${this.baseUrl}/posts?${searchParams}`)
       if (!response.ok) {
         throw new Error(`WordPress API error: ${response.status}`)
@@ -112,8 +112,7 @@ export class WordPressAPI {
       // Enhance posts with additional info
       return posts.map(post => this.enhancePost(post))
     } catch (error) {
-      console.error('WordPress REST API not available, trying RSS feed:', error)
-
+      // Silently fallback to RSS feed (this is expected behavior)
       try {
         // Try RSS feed as fallback
         const rssPosts = await wpRssClient.getPosts()
@@ -133,7 +132,10 @@ export class WordPressAPI {
         return convertedPosts.slice(0, perPage)
 
       } catch (rssError) {
-        console.error('RSS feed also failed:', rssError)
+        // Only log errors in development or when both methods fail
+        if (process.env.NODE_ENV === 'development') {
+          console.warn('Blog loading failed - both REST API and RSS unavailable')
+        }
         throw new Error('Unable to load blog posts from WordPress')
       }
     }
@@ -154,15 +156,17 @@ export class WordPressAPI {
 
       return this.enhancePost(posts[0])
     } catch (error) {
-      console.error('WordPress REST API not available, trying RSS feed:', error)
-
+      // Silently fallback to RSS feed (this is expected behavior)
       try {
         // Try RSS feed as fallback
         const rssPost = await wpRssClient.getPostBySlug(slug)
         return rssPost ? convertRssToWpPost(rssPost) : null
 
       } catch (rssError) {
-        console.error('RSS feed also failed:', rssError)
+        // Only log in development
+        if (process.env.NODE_ENV === 'development') {
+          console.warn(`Blog post "${slug}" could not be loaded from either source`)
+        }
         return null
       }
     }
