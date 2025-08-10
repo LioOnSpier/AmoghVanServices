@@ -261,18 +261,18 @@ const Index = () => {
       </header>
 
       {/* Services Section */}
-      <section id="services" className="py-20 bg-white">
+      <section id="services" className="py-20 bg-white" role="main" aria-labelledby="services-heading">
         <div className="section-container">
           <div className="text-center space-y-4 mb-16">
             <Badge className="bg-school-blue-100 text-school-blue-700">
-              Our Services
+              Our School Transportation Services
             </Badge>
-            <h2 className="text-4xl font-bold text-gray-900 font-manrope">
-              Transportation Solutions
+            <h2 id="services-heading" className="text-4xl font-bold text-gray-900 font-manrope">
+              Safe School Transportation Solutions in Mumbai
             </h2>
             <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-              Comprehensive transportation services designed to meet all your
-              educational institution's needs.
+              Comprehensive school bus and van transportation services designed to meet all your
+              student transportation needs in Mumbai, Prabhadevi, and Dadar West areas.
             </p>
           </div>
 
