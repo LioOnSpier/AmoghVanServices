@@ -258,7 +258,7 @@ const Index = () => {
             </div>
           </div>
         </div>
-      </section>
+      </header>
 
       {/* Services Section */}
       <section id="services" className="py-20 bg-white">
