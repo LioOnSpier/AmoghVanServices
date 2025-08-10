@@ -139,8 +139,34 @@ Please respond to the contact within 24 hours as promised.
     }
   };
 
+  const contactSchema = {
+    "@context": "https://schema.org",
+    "@type": "ContactPage",
+    "mainEntity": {
+      "@type": "Organization",
+      "name": "Amogh Van/Bus Services",
+      "telephone": ["+91-9870525637", "+91-9321025627"],
+      "email": "kharwaramog02@gmail.com",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Prabhadevi",
+        "addressLocality": "Dadar West",
+        "addressRegion": "Maharashtra",
+        "addressCountry": "India"
+      },
+      "openingHours": "Mo-Sa 07:00-19:00"
+    }
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-b from-blue-50 to-white">
+      <SEO
+        title="Contact Amogh Van/Bus Services - Get School Transportation Quote in Mumbai"
+        description="Contact Amogh Van/Bus Services for reliable school transportation in Mumbai. Call 9870525637 or 9321025627. Email: kharwaramog02@gmail.com. Located in Prabhadevi, Dadar West. Get instant quote!"
+        keywords="contact school bus service Mumbai, school transport contact number Mumbai, Amogh Van Services phone number, school transport inquiry Mumbai, get school bus quote Mumbai"
+        canonicalUrl="https://amoghvanservices.com/contact"
+        schema={contactSchema}
+      />
       {/* Navigation */}
       <nav className="bg-white shadow-sm sticky top-0 z-50">
         <div className="section-container">
