@@ -93,31 +93,36 @@ export class WordPressAPI {
       order?: "asc" | "desc";
     } = {},
   ): Promise<WordPressPost[]> {
-    const searchParams = new URLSearchParams({
-      status: "publish",
-      _embed: "true", // Include author and media info
-      per_page: "10",
-      orderby: "date",
-      order: "desc",
-      ...Object.fromEntries(
-        Object.entries(params).map(([key, value]) => [key, String(value)]),
-      ),
-    });
+    // Skip WordPress REST API entirely for WordPress.com sites to avoid CORS errors
+    // Go directly to RSS feed which works reliably
+    const isWordPressCom = this.baseUrl.includes('wordpress.com');
 
-    // Try the REST API (expected to fail on WordPress.com free accounts)
-    const response = await safeFetch(`${this.baseUrl}/posts?${searchParams}`);
+    if (!isWordPressCom) {
+      // Only try REST API for self-hosted WordPress sites
+      const searchParams = new URLSearchParams({
+        status: "publish",
+        _embed: "true",
+        per_page: "10",
+        orderby: "date",
+        order: "desc",
+        ...Object.fromEntries(
+          Object.entries(params).map(([key, value]) => [key, String(value)]),
+        ),
+      });
 
-    if (response && response.ok) {
-      try {
-        const posts: WordPressPost[] = await response.json();
-        // Enhance posts with additional info
-        return posts.map((post) => this.enhancePost(post));
-      } catch (jsonError) {
-        // JSON parsing failed, fall through to RSS
+      const response = await safeFetch(`${this.baseUrl}/posts?${searchParams}`);
+
+      if (response && response.ok) {
+        try {
+          const posts: WordPressPost[] = await response.json();
+          return posts.map((post) => this.enhancePost(post));
+        } catch (jsonError) {
+          // JSON parsing failed, fall through to RSS
+        }
       }
     }
 
-    // REST API failed or unavailable, try RSS feed as fallback
+    // Use RSS feed (primary method for WordPress.com, fallback for self-hosted)
     try {
       const rssPosts = await wpRssClient.getPosts();
       const convertedPosts = rssPosts.map(convertRssToWpPost);
@@ -138,8 +143,8 @@ export class WordPressAPI {
       const perPage = parseInt(params.per_page as string) || 10;
       return convertedPosts.slice(0, perPage);
     } catch (rssError) {
-      // Return empty array instead of throwing to prevent crashes
-      return []; // Return empty array instead of throwing
+      // Return empty array instead of throwing
+      return [];
     }
   }
 
