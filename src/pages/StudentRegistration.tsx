@@ -352,6 +352,14 @@ Submitted on: ${new Date().toLocaleString()}
         </div>
       </nav>
 
+      <SEO
+        title="Student Registration - Amogh Van/Bus Services | Register for School Transport Mumbai"
+        description="Register your child for safe and reliable school transportation in Mumbai. Quick online registration for Amogh Van/Bus Services. Serving Prabhadevi, Dadar West. GPS tracking, trained drivers. Start now!"
+        keywords="student registration Mumbai, school transport registration, school bus registration Mumbai, school van registration, Mumbai school transport enrollment"
+        canonicalUrl="https://amoghvanservices.com/register"
+        noIndex={false}
+      />
+
       <div className="py-12">
         <div className="section-container max-w-4xl">
           {/* Success Screen */}
