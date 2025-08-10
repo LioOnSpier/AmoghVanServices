@@ -190,7 +190,8 @@ export class WordPressAPI {
       const rssPost = await wpRssClient.getPostBySlug(slug);
       return rssPost ? convertRssToWpPost(rssPost) : null;
     } catch (rssError) {
-      return null;
+      // Use fallback data when both WordPress API and RSS fail
+      return getFallbackPostBySlug(slug);
     }
   }
 
