@@ -1,0 +1,11 @@
+{
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "build:prod": "tsc && vite build --mode production",
+    "build:hostinger": "chmod +x scripts/build-production.sh && ./scripts/build-production.sh",
+    "preview": "vite preview",
+    "preview:prod": "vite preview --mode production --port 4173",
+    "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0"
+  }
+}
