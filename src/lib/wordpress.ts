@@ -148,9 +148,22 @@ export class WordPressAPI {
   // Get single post by slug
   async getPostBySlug(slug: string): Promise<WordPressPost | null> {
     try {
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 5000);
+
       const response = await fetch(
         `${this.baseUrl}/posts?slug=${slug}&_embed=true`,
+        {
+          signal: controller.signal,
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+          }
+        }
       );
+
+      clearTimeout(timeoutId);
+
       if (!response.ok) {
         throw new Error(`WordPress API error: ${response.status}`);
       }
@@ -162,18 +175,20 @@ export class WordPressAPI {
 
       return this.enhancePost(posts[0]);
     } catch (error) {
+      // Handle network errors gracefully
+      if (error instanceof TypeError || error.name === 'AbortError') {
+        // Network/timeout error - silently fallback
+      } else if (process.env.NODE_ENV === "development") {
+        console.warn("WordPress REST API unavailable for post:", slug);
+      }
+
       // Silently fallback to RSS feed (this is expected behavior)
       try {
         // Try RSS feed as fallback
         const rssPost = await wpRssClient.getPostBySlug(slug);
         return rssPost ? convertRssToWpPost(rssPost) : null;
       } catch (rssError) {
-        // Only log in development
-        if (process.env.NODE_ENV === "development") {
-          console.warn(
-            `Blog post "${slug}" could not be loaded from either source`,
-          );
-        }
+        // Silently return null instead of logging in production
         return null;
       }
     }
