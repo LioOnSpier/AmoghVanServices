@@ -1,10 +1,15 @@
 // Safe fetch wrapper that suppresses expected WordPress.com errors
 export async function safeFetch(url: string, options?: RequestInit): Promise<Response | null> {
+  // For WordPress.com URLs, don't even attempt fetch to avoid CORS preflight
+  if (url.includes('wordpress.com')) {
+    return null;
+  }
+
   try {
     // Add timeout to prevent hanging requests
     const controller = new AbortController();
     const timeoutId = setTimeout(() => controller.abort(), 3000); // 3 second timeout
-    
+
     const response = await fetch(url, {
       ...options,
       signal: controller.signal,
@@ -14,12 +19,11 @@ export async function safeFetch(url: string, options?: RequestInit): Promise<Res
         ...options?.headers,
       }
     });
-    
+
     clearTimeout(timeoutId);
     return response;
   } catch (error) {
-    // Suppress all fetch-related errors for WordPress.com
-    // This is expected behavior for free WordPress.com accounts
+    // Suppress all fetch-related errors
     return null;
   }
 }
@@ -29,7 +33,7 @@ export async function safeRssFetch(url: string, options?: RequestInit): Promise<
   try {
     const controller = new AbortController();
     const timeoutId = setTimeout(() => controller.abort(), 5000); // 5 second timeout for RSS
-    
+
     const response = await fetch(url, {
       ...options,
       signal: controller.signal,
@@ -38,7 +42,7 @@ export async function safeRssFetch(url: string, options?: RequestInit): Promise<
         ...options?.headers,
       }
     });
-    
+
     clearTimeout(timeoutId);
     return response;
   } catch (error) {
