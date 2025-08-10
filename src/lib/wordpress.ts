@@ -1,5 +1,6 @@
 import { wpRssClient, convertRssToWpPost } from "./wordpress-rss";
 import { safeFetch } from "./safe-fetch";
+import { getFallbackPosts, getFallbackPostBySlug } from "./fallback-blog-data";
 
 // WordPress REST API Configuration
 export const WORDPRESS_CONFIG = {
