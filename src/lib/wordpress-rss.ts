@@ -1,66 +1,72 @@
 // WordPress RSS Feed Client - Works with any WordPress site
 export interface RSSPost {
-  id: string
-  title: string
-  link: string
-  slug: string
-  content: string
-  excerpt: string
-  pubDate: string
-  author: string
-  categories: string[]
-  featured_image?: string
+  id: string;
+  title: string;
+  link: string;
+  slug: string;
+  content: string;
+  excerpt: string;
+  pubDate: string;
+  author: string;
+  categories: string[];
+  featured_image?: string;
 }
 
 export class WordPressRSSClient {
-  private baseUrl: string
+  private baseUrl: string;
 
-  constructor(wpSiteUrl: string = 'https://kharwaramog02-swayq.wordpress.com') {
-    this.baseUrl = wpSiteUrl
+  constructor(wpSiteUrl: string = "https://kharwaramog02-swayq.wordpress.com") {
+    this.baseUrl = wpSiteUrl;
   }
 
   // Convert RSS XML to JSON posts
   private parseRSSFeed(xmlText: string): RSSPost[] {
-    const parser = new DOMParser()
-    const xmlDoc = parser.parseFromString(xmlText, 'text/xml')
+    const parser = new DOMParser();
+    const xmlDoc = parser.parseFromString(xmlText, "text/xml");
 
-    const items = xmlDoc.querySelectorAll('item')
-    const posts: RSSPost[] = []
+    const items = xmlDoc.querySelectorAll("item");
+    const posts: RSSPost[] = [];
 
     items.forEach((item, index) => {
-      const title = item.querySelector('title')?.textContent || ''
-      const link = item.querySelector('link')?.textContent || ''
-      const content = item.querySelector('content\\:encoded, encoded')?.textContent ||
-                    item.querySelector('description')?.textContent || ''
-      const pubDate = item.querySelector('pubDate')?.textContent || ''
-      const author = item.querySelector('dc\\:creator, creator')?.textContent || 'Amogh Van Services'
-      const guid = item.querySelector('guid')?.textContent || link
+      const title = item.querySelector("title")?.textContent || "";
+      const link = item.querySelector("link")?.textContent || "";
+      const content =
+        item.querySelector("content\\:encoded, encoded")?.textContent ||
+        item.querySelector("description")?.textContent ||
+        "";
+      const pubDate = item.querySelector("pubDate")?.textContent || "";
+      const author =
+        item.querySelector("dc\\:creator, creator")?.textContent ||
+        "Amogh Van Services";
+      const guid = item.querySelector("guid")?.textContent || link;
 
       // Extract categories
-      const categoryElements = item.querySelectorAll('category')
-      const categories: string[] = []
-      categoryElements.forEach(cat => {
-        const catText = cat.textContent
-        if (catText && !catText.includes('http')) { // Filter out category URLs
-          categories.push(catText)
+      const categoryElements = item.querySelectorAll("category");
+      const categories: string[] = [];
+      categoryElements.forEach((cat) => {
+        const catText = cat.textContent;
+        if (catText && !catText.includes("http")) {
+          // Filter out category URLs
+          categories.push(catText);
         }
-      })
+      });
 
       // Create slug from title or extract from link
-      let slug = link.split('/').filter(Boolean).pop() || ''
+      let slug = link.split("/").filter(Boolean).pop() || "";
       if (!slug) {
-        slug = title.toLowerCase()
-          .replace(/[^a-z0-9\s-]/g, '')
-          .replace(/\s+/g, '-')
-          .replace(/-+/g, '-')
-          .trim()
+        slug = title
+          .toLowerCase()
+          .replace(/[^a-z0-9\s-]/g, "")
+          .replace(/\s+/g, "-")
+          .replace(/-+/g, "-")
+          .trim();
       }
 
       // Clean excerpt from content
-      const excerpt = this.createExcerpt(content)
+      const excerpt = this.createExcerpt(content);
 
       // Try to extract featured image from content
-      const featured_image = this.extractFeaturedImage(content)
+      const featured_image = this.extractFeaturedImage(content);
 
       posts.push({
         id: `post-${index + 1}`,
@@ -71,155 +77,166 @@ export class WordPressRSSClient {
         excerpt,
         pubDate,
         author,
-        categories: categories.length > 0 ? categories : ['General'],
-        featured_image
-      })
-    })
+        categories: categories.length > 0 ? categories : ["General"],
+        featured_image,
+      });
+    });
 
-    return posts
+    return posts;
   }
 
   // Clean HTML entities and text
   private cleanText(text: string): string {
     return text
-      .replace(/&amp;/g, '&')
-      .replace(/&lt;/g, '<')
-      .replace(/&gt;/g, '>')
+      .replace(/&amp;/g, "&")
+      .replace(/&lt;/g, "<")
+      .replace(/&gt;/g, ">")
       .replace(/&quot;/g, '"')
       .replace(/&#8217;/g, "'")
       .replace(/&#8220;/g, '"')
       .replace(/&#8221;/g, '"')
-      .replace(/&#8211;/g, '–')
-      .replace(/&#8212;/g, '—')
-      .trim()
+      .replace(/&#8211;/g, "–")
+      .replace(/&#8212;/g, "—")
+      .trim();
   }
 
   // Create excerpt from content
   private createExcerpt(content: string, maxLength: number = 160): string {
     // Remove HTML tags
-    const textOnly = content.replace(/<[^>]*>/g, ' ').replace(/\s+/g, ' ').trim()
+    const textOnly = content
+      .replace(/<[^>]*>/g, " ")
+      .replace(/\s+/g, " ")
+      .trim();
 
-    if (textOnly.length <= maxLength) return textOnly
+    if (textOnly.length <= maxLength) return textOnly;
 
     // Cut at word boundary
-    const truncated = textOnly.substring(0, maxLength)
-    const lastSpace = truncated.lastIndexOf(' ')
+    const truncated = textOnly.substring(0, maxLength);
+    const lastSpace = truncated.lastIndexOf(" ");
 
-    return (lastSpace > 0 ? truncated.substring(0, lastSpace) : truncated) + '...'
+    return (
+      (lastSpace > 0 ? truncated.substring(0, lastSpace) : truncated) + "..."
+    );
   }
 
   // Extract first image from content as featured image
   private extractFeaturedImage(content: string): string | undefined {
-    const imgMatch = content.match(/<img[^>]+src=['"](https?:\/\/[^'"]+)['"]/i)
-    return imgMatch ? imgMatch[1] : undefined
+    const imgMatch = content.match(/<img[^>]+src=['"](https?:\/\/[^'"]+)['"]/i);
+    return imgMatch ? imgMatch[1] : undefined;
   }
 
   // Get all posts from RSS feed
   async getPosts(): Promise<RSSPost[]> {
     try {
       // Use a CORS proxy to fetch RSS feed
-      const rssUrl = `${this.baseUrl}/feed/`
-      const proxyUrl = `https://api.allorigins.win/raw?url=${encodeURIComponent(rssUrl)}`
+      const rssUrl = `${this.baseUrl}/feed/`;
+      const proxyUrl = `https://api.allorigins.win/raw?url=${encodeURIComponent(rssUrl)}`;
 
-      const response = await fetch(proxyUrl)
+      const response = await fetch(proxyUrl);
       if (!response.ok) {
-        throw new Error(`RSS fetch failed: ${response.status}`)
+        throw new Error(`RSS fetch failed: ${response.status}`);
       }
 
-      const xmlText = await response.text()
-      return this.parseRSSFeed(xmlText)
+      const xmlText = await response.text();
+      return this.parseRSSFeed(xmlText);
     } catch (error) {
       // Only log in development to reduce console noise
-      if (process.env.NODE_ENV === 'development') {
-        console.warn('RSS feed unavailable:', error.message)
+      if (process.env.NODE_ENV === "development") {
+        console.warn("RSS feed unavailable:", error.message);
       }
-      throw error
+      throw error;
     }
   }
 
   // Get post by slug
   async getPostBySlug(slug: string): Promise<RSSPost | null> {
     try {
-      const posts = await this.getPosts()
-      return posts.find(post => post.slug === slug) || null
+      const posts = await this.getPosts();
+      return posts.find((post) => post.slug === slug) || null;
     } catch (error) {
       // Silently fail - error already logged in getPosts
-      return null
+      return null;
     }
   }
 
   // Get featured posts (first 3)
   async getFeaturedPosts(limit: number = 3): Promise<RSSPost[]> {
     try {
-      const posts = await this.getPosts()
-      return posts.slice(0, limit)
+      const posts = await this.getPosts();
+      return posts.slice(0, limit);
     } catch (error) {
       // Silently fail - error already logged in getPosts
-      return []
+      return [];
     }
   }
 
   // Search posts
   async searchPosts(query: string): Promise<RSSPost[]> {
     try {
-      const posts = await this.getPosts()
-      const searchTerm = query.toLowerCase()
+      const posts = await this.getPosts();
+      const searchTerm = query.toLowerCase();
 
-      return posts.filter(post =>
-        post.title.toLowerCase().includes(searchTerm) ||
-        post.excerpt.toLowerCase().includes(searchTerm) ||
-        post.content.toLowerCase().includes(searchTerm)
-      )
+      return posts.filter(
+        (post) =>
+          post.title.toLowerCase().includes(searchTerm) ||
+          post.excerpt.toLowerCase().includes(searchTerm) ||
+          post.content.toLowerCase().includes(searchTerm),
+      );
     } catch (error) {
       // Silently fail - error already logged in getPosts
-      return []
+      return [];
     }
   }
 
   // Format date
   formatDate(dateString: string): string {
-    return new Date(dateString).toLocaleDateString('en-US', {
-      year: 'numeric',
-      month: 'long',
-      day: 'numeric',
-    })
+    return new Date(dateString).toLocaleDateString("en-US", {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+    });
   }
 
   // Strip HTML from content
   stripHtml(html: string): string {
-    return html.replace(/<[^>]*>/g, '').replace(/\s+/g, ' ').trim()
+    return html
+      .replace(/<[^>]*>/g, "")
+      .replace(/\s+/g, " ")
+      .trim();
   }
 
   // Calculate reading time
   getReadingTime(content: string): number {
-    const wordCount = this.stripHtml(content).split(' ').filter(word => word.length > 0).length
-    return Math.max(1, Math.ceil(wordCount / 200))
+    const wordCount = this.stripHtml(content)
+      .split(" ")
+      .filter((word) => word.length > 0).length;
+    return Math.max(1, Math.ceil(wordCount / 200));
   }
 }
 
 // Create default instance
-export const wpRssClient = new WordPressRSSClient()
+export const wpRssClient = new WordPressRSSClient();
 
 // Convert RSS post to WordPress post format for compatibility
 export function convertRssToWpPost(rssPost: RSSPost): any {
   return {
-    id: parseInt(rssPost.id.replace('post-', '')),
+    id: parseInt(rssPost.id.replace("post-", "")),
     date: rssPost.pubDate,
     slug: rssPost.slug,
     title: {
-      rendered: rssPost.title
+      rendered: rssPost.title,
     },
     content: {
-      rendered: rssPost.content
+      rendered: rssPost.content,
     },
     excerpt: {
-      rendered: rssPost.excerpt
+      rendered: rssPost.excerpt,
     },
     featured_image_url: rssPost.featured_image,
     author_info: {
-      name: rssPost.author
+      name: rssPost.author,
     },
     category_names: rssPost.categories,
-    reading_time: new WordPressRSSClient().getReadingTime(rssPost.content)
-  }
+    reading_time: new WordPressRSSClient().getReadingTime(rssPost.content),
+  };
 }

@@ -32,15 +32,19 @@ const Blog = () => {
     const fetchBlogData = async () => {
       try {
         // Handle each request individually to prevent Promise.all from failing completely
-        const allPostsPromise = wordpressApi.getPosts({ per_page: 20 }).catch(error => {
-          console.warn("Failed to load main posts:", error.message);
-          return []; // Return empty array as fallback
-        });
+        const allPostsPromise = wordpressApi
+          .getPosts({ per_page: 20 })
+          .catch((error) => {
+            console.warn("Failed to load main posts:", error.message);
+            return []; // Return empty array as fallback
+          });
 
-        const featuredPromise = wordpressApi.getFeaturedPosts(3).catch(error => {
-          console.warn("Failed to load featured posts:", error.message);
-          return []; // Return empty array as fallback
-        });
+        const featuredPromise = wordpressApi
+          .getFeaturedPosts(3)
+          .catch((error) => {
+            console.warn("Failed to load featured posts:", error.message);
+            return []; // Return empty array as fallback
+          });
 
         const [allPosts, featured] = await Promise.all([
           allPostsPromise,
@@ -52,12 +56,16 @@ const Blog = () => {
 
         // Show user-friendly message only if both failed
         if (allPosts.length === 0 && featured.length === 0) {
-          toast.error("Blog posts are temporarily unavailable. Please try again later.");
+          toast.error(
+            "Blog posts are temporarily unavailable. Please try again later.",
+          );
         }
       } catch (error) {
         // This should rarely happen now, but keep as final safety net
         console.warn("Blog loading failed:", error);
-        toast.error("Blog posts are temporarily unavailable. Please try again later.");
+        toast.error(
+          "Blog posts are temporarily unavailable. Please try again later.",
+        );
       } finally {
         setLoading(false);
       }

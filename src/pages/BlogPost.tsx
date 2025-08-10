@@ -34,15 +34,17 @@ const BlogPostPage = () => {
 
       try {
         // Handle each request individually to prevent Promise.all from failing completely
-        const postPromise = wordpressApi.getPostBySlug(slug).catch(error => {
+        const postPromise = wordpressApi.getPostBySlug(slug).catch((error) => {
           console.warn("Failed to load blog post:", error.message);
           return null; // Return null as fallback
         });
 
-        const recentPromise = wordpressApi.getPosts({ per_page: 4 }).catch(error => {
-          console.warn("Failed to load recent posts:", error.message);
-          return []; // Return empty array as fallback
-        });
+        const recentPromise = wordpressApi
+          .getPosts({ per_page: 4 })
+          .catch((error) => {
+            console.warn("Failed to load recent posts:", error.message);
+            return []; // Return empty array as fallback
+          });
 
         const [postData, recent] = await Promise.all([
           postPromise,
