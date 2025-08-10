@@ -33,13 +33,24 @@ const BlogPostPage = () => {
       if (!slug) return;
 
       try {
+        // Handle each request individually to prevent Promise.all from failing completely
+        const postPromise = wordpressApi.getPostBySlug(slug).catch(error => {
+          console.warn("Failed to load blog post:", error.message);
+          return null; // Return null as fallback
+        });
+
+        const recentPromise = wordpressApi.getPosts({ per_page: 4 }).catch(error => {
+          console.warn("Failed to load recent posts:", error.message);
+          return []; // Return empty array as fallback
+        });
+
         const [postData, recent] = await Promise.all([
-          wordpressApi.getPostBySlug(slug),
-          wordpressApi.getPosts({ per_page: 4 }),
+          postPromise,
+          recentPromise,
         ]);
 
         if (!postData) {
-          toast.error("Blog post not found.");
+          toast.error("Blog post not found or temporarily unavailable.");
           return;
         }
 
@@ -47,7 +58,8 @@ const BlogPostPage = () => {
         // Filter out current post from recent posts
         setRecentPosts(recent.filter((p) => p.id !== postData.id));
       } catch (error) {
-        console.error("Error fetching blog post:", error);
+        // This should rarely happen now, but keep as final safety net
+        console.warn("Blog post loading failed:", error);
         toast.error("Failed to load blog post. Please try again later.");
       } finally {
         setLoading(false);
