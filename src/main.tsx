@@ -54,4 +54,31 @@ window.addEventListener('error', (event) => {
   }
 });
 
+// Override console methods to suppress WordPress.com CORS errors
+const originalError = console.error;
+const originalWarn = console.warn;
+
+console.error = (...args) => {
+  const message = args.join(' ');
+  if (message.includes('wordpress.com') ||
+      message.includes('CORS policy') ||
+      message.includes('Access-Control-Allow-Origin') ||
+      message.includes('safe-fetch.ts')) {
+    // Suppress WordPress.com related errors
+    return;
+  }
+  originalError.apply(console, args);
+};
+
+console.warn = (...args) => {
+  const message = args.join(' ');
+  if (message.includes('wordpress.com') ||
+      message.includes('CORS policy') ||
+      message.includes('Access-Control-Allow-Origin')) {
+    // Suppress WordPress.com related warnings
+    return;
+  }
+  originalWarn.apply(console, args);
+};
+
 createRoot(document.getElementById("root")!).render(<App />);
