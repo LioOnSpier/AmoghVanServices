@@ -1,14 +1,18 @@
-User-agent: Googlebot
-Allow: /
-
-User-agent: Bingbot
-Allow: /
-
-User-agent: Twitterbot
-Allow: /
-
-User-agent: facebookexternalhit
-Allow: /
-
 User-agent: *
 Allow: /
+
+# Important pages
+Allow: /about
+Allow: /contact
+Allow: /register
+Allow: /blog
+
+# Disallow admin and private areas
+Disallow: /admin
+Disallow: /private
+
+# Sitemap location
+Sitemap: https://amoghvanservices.com/sitemap.xml
+
+# Crawl-delay for better server performance
+Crawl-delay: 1
