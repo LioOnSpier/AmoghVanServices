@@ -1,4 +1,6 @@
 // WordPress RSS Feed Client - Works with any WordPress site
+import { safeRssFetch } from "./safe-fetch";
+
 export interface RSSPost {
   id: string;
   title: string;
