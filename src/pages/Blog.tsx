@@ -35,11 +35,11 @@ const Blog = () => {
         // Handle each request individually to prevent Promise.all from failing completely
         const allPostsPromise = wordpressApi
           .getPosts({ per_page: 20 })
-          .catch(() => []);  // Return empty array as fallback
+          .catch(() => []); // Return empty array as fallback
 
         const featuredPromise = wordpressApi
           .getFeaturedPosts(3)
-          .catch(() => []);  // Return empty array as fallback
+          .catch(() => []); // Return empty array as fallback
 
         const [allPosts, featured] = await Promise.all([
           allPostsPromise,
@@ -130,23 +130,24 @@ const Blog = () => {
   const blogSchema = {
     "@context": "https://schema.org",
     "@type": "Blog",
-    "mainEntity": {
+    mainEntity: {
       "@type": "ItemList",
-      "name": "Amogh Van/Bus Services Blog",
-      "description": "Latest news, safety tips, and updates about school transportation services in Mumbai",
-      "itemListElement": posts.map((post, index) => ({
+      name: "Amogh Van/Bus Services Blog",
+      description:
+        "Latest news, safety tips, and updates about school transportation services in Mumbai",
+      itemListElement: posts.map((post, index) => ({
         "@type": "BlogPosting",
-        "position": index + 1,
-        "headline": post.title.rendered,
-        "description": wpUtils.cleanExcerpt(post.excerpt.rendered),
-        "url": `https://amoghvanservices.com/blog/${post.slug}`,
-        "datePublished": post.date,
-        "author": {
+        position: index + 1,
+        headline: post.title.rendered,
+        description: wpUtils.cleanExcerpt(post.excerpt.rendered),
+        url: `https://amoghvanservices.com/blog/${post.slug}`,
+        datePublished: post.date,
+        author: {
           "@type": "Person",
-          "name": post.author_info?.name || "Amogh Van Services"
-        }
-      }))
-    }
+          name: post.author_info?.name || "Amogh Van Services",
+        },
+      })),
+    },
   };
 
   return (

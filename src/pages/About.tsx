@@ -34,22 +34,23 @@ const About = () => {
   const aboutSchema = {
     "@context": "https://schema.org",
     "@type": "AboutPage",
-    "mainEntity": {
+    mainEntity: {
       "@type": "Organization",
-      "name": "Amogh Van/Bus Services",
-      "description": "Founded in 2010 by Rajesh Kumar J Kharwar, Amogh Van/Bus Services provides safe and reliable school transportation in Mumbai",
-      "founder": {
+      name: "Amogh Van/Bus Services",
+      description:
+        "Founded in 2010 by Rajesh Kumar J Kharwar, Amogh Van/Bus Services provides safe and reliable school transportation in Mumbai",
+      founder: {
         "@type": "Person",
-        "name": "Rajesh Kumar J Kharwar"
+        name: "Rajesh Kumar J Kharwar",
       },
-      "foundingDate": "2010",
-      "numberOfEmployees": "15+",
-      "areaServed": {
+      foundingDate: "2010",
+      numberOfEmployees: "15+",
+      areaServed: {
         "@type": "City",
-        "name": "Mumbai",
-        "addressRegion": "Maharashtra"
-      }
-    }
+        name: "Mumbai",
+        addressRegion: "Maharashtra",
+      },
+    },
   };
 
   return (
@@ -114,7 +115,8 @@ const About = () => {
               Our Story & Mission
             </h1>
             <p className="text-xl text-gray-600 leading-relaxed">
-              Founded in 2010 by Rajesh Kumar J Kharwar, <span className="font-company-name">Amogh Van/Bus Services</span>
+              Founded in 2010 by Rajesh Kumar J Kharwar,{" "}
+              <span className="font-company-name">Amogh Van/Bus Services</span>
               was born from a simple yet powerful vision: to provide the safest,
               most reliable transportation for school children across Mumbai.
             </p>

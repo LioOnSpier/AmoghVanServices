@@ -144,20 +144,20 @@ Please respond to the contact within 24 hours as promised.
   const contactPageSchema = {
     "@context": "https://schema.org",
     "@type": "ContactPage",
-    "mainEntity": {
+    mainEntity: {
       "@type": "Organization",
-      "name": "Amogh Van/Bus Services",
-      "telephone": ["+91-9870525637", "+91-9321025627"],
-      "email": "kharwaramog02@gmail.com",
-      "address": {
+      name: "Amogh Van/Bus Services",
+      telephone: ["+91-9870525637", "+91-9321025627"],
+      email: "kharwaramog02@gmail.com",
+      address: {
         "@type": "PostalAddress",
-        "streetAddress": "Prabhadevi",
-        "addressLocality": "Dadar West",
-        "addressRegion": "Maharashtra",
-        "addressCountry": "India"
+        streetAddress: "Prabhadevi",
+        addressLocality: "Dadar West",
+        addressRegion: "Maharashtra",
+        addressCountry: "India",
       },
-      "openingHours": "Mo-Sa 07:00-19:00"
-    }
+      openingHours: "Mo-Sa 07:00-19:00",
+    },
   };
 
   return (

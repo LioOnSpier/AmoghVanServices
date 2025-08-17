@@ -36,32 +36,31 @@ const Index = () => {
   const organizationSchema = {
     "@context": "https://schema.org",
     "@type": "Organization",
-    "name": "Amogh Van/Bus Services",
-    "url": "https://amoghvanservices.com",
-    "logo": "https://amoghvanservices.com/logo.jpg",
-    "description": "Mumbai's most trusted school transportation service since 2010, providing safe and reliable van & bus services for students",
-    "founder": {
+    name: "Amogh Van/Bus Services",
+    url: "https://amoghvanservices.com",
+    logo: "https://amoghvanservices.com/logo.jpg",
+    description:
+      "Mumbai's most trusted school transportation service since 2010, providing safe and reliable van & bus services for students",
+    founder: {
       "@type": "Person",
-      "name": "Rajesh Kumar J Kharwar"
+      name: "Rajesh Kumar J Kharwar",
     },
-    "foundingDate": "2010",
-    "contactPoint": {
+    foundingDate: "2010",
+    contactPoint: {
       "@type": "ContactPoint",
-      "telephone": "+91-9870525637",
-      "contactType": "customer service",
-      "areaServed": "Mumbai",
-      "availableLanguage": ["English", "Hindi", "Marathi"]
+      telephone: "+91-9870525637",
+      contactType: "customer service",
+      areaServed: "Mumbai",
+      availableLanguage: ["English", "Hindi", "Marathi"],
     },
-    "address": {
+    address: {
       "@type": "PostalAddress",
-      "streetAddress": "Prabhadevi",
-      "addressLocality": "Dadar West",
-      "addressRegion": "Maharashtra",
-      "addressCountry": "India"
+      streetAddress: "Prabhadevi",
+      addressLocality: "Dadar West",
+      addressRegion: "Maharashtra",
+      addressCountry: "India",
     },
-    "sameAs": [
-      "https://kharwaramog02-swayq.wordpress.com"
-    ]
+    sameAs: ["https://kharwaramog02-swayq.wordpress.com"],
   };
 
   return (
@@ -76,7 +75,11 @@ const Index = () => {
       />
       <LocalBusinessSchema />
       {/* Navigation */}
-      <nav className="bg-white shadow-sm sticky top-0 z-50" role="navigation" aria-label="Main navigation">
+      <nav
+        className="bg-white shadow-sm sticky top-0 z-50"
+        role="navigation"
+        aria-label="Main navigation"
+      >
         <div className="section-container">
           <div className="flex items-center justify-between h-16">
             <div className="flex items-center space-x-3">
@@ -178,7 +181,10 @@ const Index = () => {
       </nav>
 
       {/* Hero Section */}
-      <header className="relative overflow-hidden bg-gradient-to-br from-school-yellow-50 to-school-blue-50 py-20" role="banner">
+      <header
+        className="relative overflow-hidden bg-gradient-to-br from-school-yellow-50 to-school-blue-50 py-20"
+        role="banner"
+      >
         <div className="section-container">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div className="space-y-8">
@@ -195,8 +201,10 @@ const Index = () => {
                 </h1>
                 <p className="text-xl text-gray-600 leading-relaxed font-professional">
                   Amogh Van/Bus Services provides secure, comfortable, and
-                  punctual school bus and van transportation services for students across Mumbai, Prabhadevi, and Dadar West.
-                  Your child's safety is our top priority with GPS tracking and trained drivers.
+                  punctual school bus and van transportation services for
+                  students across Mumbai, Prabhadevi, and Dadar West. Your
+                  child's safety is our top priority with GPS tracking and
+                  trained drivers.
                 </p>
               </div>
 
@@ -263,18 +271,27 @@ const Index = () => {
       </header>
 
       {/* Services Section */}
-      <section id="services" className="py-20 bg-white" role="main" aria-labelledby="services-heading">
+      <section
+        id="services"
+        className="py-20 bg-white"
+        role="main"
+        aria-labelledby="services-heading"
+      >
         <div className="section-container">
           <div className="text-center space-y-4 mb-16">
             <Badge className="bg-school-blue-100 text-school-blue-700">
               Our School Transportation Services
             </Badge>
-            <h2 id="services-heading" className="text-4xl font-bold text-gray-900 font-manrope">
+            <h2
+              id="services-heading"
+              className="text-4xl font-bold text-gray-900 font-manrope"
+            >
               Safe School Transportation Solutions in Mumbai
             </h2>
             <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-              Comprehensive school bus and van transportation services designed to meet all your
-              student transportation needs in Mumbai, Prabhadevi, and Dadar West areas.
+              Comprehensive school bus and van transportation services designed
+              to meet all your student transportation needs in Mumbai,
+              Prabhadevi, and Dadar West areas.
             </p>
           </div>
 
