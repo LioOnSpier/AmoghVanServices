@@ -1,0 +1,26 @@
+/* Local font imports - replace the Google Fonts import with this if you want local hosting */
+
+/* Inter Font - uncomment and use if you download the font files locally */
+/*
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url('/fonts/inter-variable.woff2') format('woff2');
+}
+*/
+
+/* Manrope Font - uncomment and use if you download the font files locally */
+/*
+@font-face {
+  font-family: 'Manrope';
+  font-style: normal;
+  font-weight: 200 800;
+  font-display: swap;
+  src: url('/fonts/manrope-variable.woff2') format('woff2');
+}
+*/
+
+/* If you want to keep external fonts but add fallbacks */
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Manrope:wght@200..800&display=swap");
