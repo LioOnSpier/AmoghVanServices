@@ -3,7 +3,9 @@
 To complete the local font setup, download these font files and place them in this directory:
 
 ## Inter Font Files:
+
 1. **Variable Font (Recommended):**
+
    - Download: https://github.com/rsms/inter/releases/download/v4.0/Inter-4.0.zip
    - Extract `Inter-Variable.woff2` and rename to `inter-variable.woff2`
    - Extract `Inter-Variable.woff` and rename to `inter-variable.woff`
@@ -15,7 +17,9 @@ To complete the local font setup, download these font files and place them in th
    - Inter Bold: https://fonts.gstatic.com/s/inter/v13/UcCO3FwrK3iLTeHuS_fvQtMwCp50KnMw2boKoduKmMEVuLyfAZ9hiA.woff2
 
 ## Manrope Font Files:
+
 1. **Variable Font (Recommended):**
+
    - Download: https://github.com/sharanda/manrope/releases/download/v4.505/manrope-4.505.zip
    - Extract variable font files and rename appropriately
 
@@ -26,6 +30,7 @@ To complete the local font setup, download these font files and place them in th
    - Manrope Bold: https://fonts.gstatic.com/s/manrope/v15/xn7_YHE41ni1AdIRqAuZuw1Bx9mbZk5dFO_F87jxeN7B.woff2
 
 ## Quick Download Commands:
+
 If you have curl available, you can download the files:
 
 ```bash
@@ -45,6 +50,7 @@ curl -o manrope-bold.woff2 "https://fonts.gstatic.com/s/manrope/v15/xn7_YHE41ni1
 ```
 
 ## Alternative: Use Google Fonts Downloader Tools
+
 - Use https://google-webfonts-helper.herokuapp.com/fonts for easy downloads
 - Select Inter and Manrope fonts, choose woff2 format
 - Download and place in this directory
