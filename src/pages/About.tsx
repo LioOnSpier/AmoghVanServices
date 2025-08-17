@@ -69,7 +69,7 @@ const About = () => {
               <div className="bg-school-yellow-500 p-2 rounded-lg">
                 <Bus className="h-6 w-6 text-white" />
               </div>
-              <span className="text-xl font-bold text-gray-900 font-manrope">
+              <span className="text-xl font-company-name text-gray-900">
                 Amogh Van/Bus Services
               </span>
             </Link>
@@ -114,7 +114,7 @@ const About = () => {
               Our Story & Mission
             </h1>
             <p className="text-xl text-gray-600 leading-relaxed">
-              Founded in 2010 by Rajesh Kumar J Kharwar, Amogh Van/Bus Services
+              Founded in 2010 by Rajesh Kumar J Kharwar, <span className="font-company-name">Amogh Van/Bus Services</span>
               was born from a simple yet powerful vision: to provide the safest,
               most reliable transportation for school children across Mumbai.
             </p>

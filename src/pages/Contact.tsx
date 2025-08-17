@@ -177,7 +177,7 @@ Please respond to the contact within 24 hours as promised.
               <div className="bg-school-yellow-500 p-2 rounded-lg">
                 <Bus className="h-6 w-6 text-white" />
               </div>
-              <span className="text-xl font-bold text-gray-900 font-manrope">
+              <span className="text-xl font-company-name text-gray-900">
                 Amogh Van/Bus Services
               </span>
             </Link>

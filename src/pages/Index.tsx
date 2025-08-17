@@ -83,7 +83,7 @@ const Index = () => {
               <div className="bg-school-yellow-500 p-2 rounded-lg">
                 <Bus className="h-6 w-6 text-white" />
               </div>
-              <span className="text-xl font-bold text-gray-900 font-manrope">
+              <span className="text-xl font-company-name text-gray-900">
                 Amogh Van/Bus Services
               </span>
             </div>
@@ -187,13 +187,13 @@ const Index = () => {
                   <Shield className="w-4 h-4 mr-2" />
                   Trusted Since 2010
                 </Badge>
-                <h1 className="text-5xl lg:text-6xl font-bold text-gray-900 leading-tight font-manrope">
+                <h1 className="text-5xl lg:text-6xl font-business-heading text-gray-900 leading-tight">
                   Safe & Reliable
                   <span className="text-school-yellow-500 block">
                     School Transportation in Mumbai
                   </span>
                 </h1>
-                <p className="text-xl text-gray-600 leading-relaxed">
+                <p className="text-xl text-gray-600 leading-relaxed font-professional">
                   Amogh Van/Bus Services provides secure, comfortable, and
                   punctual school bus and van transportation services for students across Mumbai, Prabhadevi, and Dadar West.
                   Your child's safety is our top priority with GPS tracking and trained drivers.
@@ -613,7 +613,7 @@ const Index = () => {
                 <div className="bg-school-yellow-500 p-2 rounded-lg">
                   <Bus className="h-6 w-6 text-white" />
                 </div>
-                <span className="text-xl font-bold font-manrope">
+                <span className="text-xl font-company-name">
                   Amogh Van/Bus Services
                 </span>
               </div>
