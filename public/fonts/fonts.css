@@ -1,105 +1,29 @@
-/* Local Google Fonts - Self-hosted for complete independence */
+/* Local Google Fonts - Self-hosted Variable Fonts */
+/* Using your actual downloaded font files */
 
-/* Inter Font - Variable Weight */
+/* Inter Font - Variable Weight (Supports all weights 100-900) */
 @font-face {
-  font-family: "Inter";
+  font-family: 'Inter';
   font-style: normal;
   font-weight: 100 900;
   font-display: swap;
-  src:
-    url("./inter-variable.woff2") format("woff2-variations"),
-    url("./inter-variable.woff") format("woff-variations");
+  src: url('./Inter-VariableFont_opsz,wght.ttf') format('truetype-variations');
 }
 
-/* Inter Font - Individual Weights (fallback) */
+/* Inter Font - Italic Variable */
 @font-face {
-  font-family: "Inter";
-  font-style: normal;
-  font-weight: 400;
+  font-family: 'Inter';
+  font-style: italic;
+  font-weight: 100 900;
   font-display: swap;
-  src:
-    url("./inter-regular.woff2") format("woff2"),
-    url("./inter-regular.woff") format("woff");
+  src: url('./Inter-Italic-VariableFont_opsz,wght.ttf') format('truetype-variations');
 }
 
+/* Manrope Font - Variable Weight (Supports all weights 200-800) */
 @font-face {
-  font-family: "Inter";
-  font-style: normal;
-  font-weight: 500;
-  font-display: swap;
-  src:
-    url("./inter-medium.woff2") format("woff2"),
-    url("./inter-medium.woff") format("woff");
-}
-
-@font-face {
-  font-family: "Inter";
-  font-style: normal;
-  font-weight: 600;
-  font-display: swap;
-  src:
-    url("./inter-semibold.woff2") format("woff2"),
-    url("./inter-semibold.woff") format("woff");
-}
-
-@font-face {
-  font-family: "Inter";
-  font-style: normal;
-  font-weight: 700;
-  font-display: swap;
-  src:
-    url("./inter-bold.woff2") format("woff2"),
-    url("./inter-bold.woff") format("woff");
-}
-
-/* Manrope Font - Variable Weight */
-@font-face {
-  font-family: "Manrope";
+  font-family: 'Manrope';
   font-style: normal;
   font-weight: 200 800;
   font-display: swap;
-  src:
-    url("./manrope-variable.woff2") format("woff2-variations"),
-    url("./manrope-variable.woff") format("woff-variations");
-}
-
-/* Manrope Font - Individual Weights (fallback) */
-@font-face {
-  font-family: "Manrope";
-  font-style: normal;
-  font-weight: 400;
-  font-display: swap;
-  src:
-    url("./manrope-regular.woff2") format("woff2"),
-    url("./manrope-regular.woff") format("woff");
-}
-
-@font-face {
-  font-family: "Manrope";
-  font-style: normal;
-  font-weight: 500;
-  font-display: swap;
-  src:
-    url("./manrope-medium.woff2") format("woff2"),
-    url("./manrope-medium.woff") format("woff");
-}
-
-@font-face {
-  font-family: "Manrope";
-  font-style: normal;
-  font-weight: 600;
-  font-display: swap;
-  src:
-    url("./manrope-semibold.woff2") format("woff2"),
-    url("./manrope-semibold.woff") format("woff");
-}
-
-@font-face {
-  font-family: "Manrope";
-  font-style: normal;
-  font-weight: 700;
-  font-display: swap;
-  src:
-    url("./manrope-bold.woff2") format("woff2"),
-    url("./manrope-bold.woff") format("woff");
+  src: url('./Manrope-VariableFont_wght.ttf') format('truetype-variations');
 }
