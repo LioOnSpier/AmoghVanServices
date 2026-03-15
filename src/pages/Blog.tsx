@@ -13,78 +13,52 @@ import { Input } from "@/components/ui/input";
 import {
   Bus,
   Calendar,
-  Clock,
   Search,
   User,
   ArrowRight,
   BookOpen,
 } from "lucide-react";
-import { wordpressApi, WordPressPost, wpUtils } from "@/lib/wordpress";
 import { toast } from "sonner";
 import SEO from "@/components/SEO";
+import { getPublishedBlogs, type Blog } from "@/lib/firestore";
+import { Timestamp } from "firebase/firestore";
 
 const Blog = () => {
-  const [posts, setPosts] = useState<WordPressPost[]>([]);
-  const [featuredPosts, setFeaturedPosts] = useState<WordPressPost[]>([]);
+  const [posts, setPosts] = useState<Blog[]>([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const fetchBlogData = async () => {
-      try {
-        // Handle each request individually to prevent Promise.all from failing completely
-        const allPostsPromise = wordpressApi
-          .getPosts({ per_page: 20 })
-          .catch(() => []); // Return empty array as fallback
-
-        const featuredPromise = wordpressApi
-          .getFeaturedPosts(3)
-          .catch(() => []); // Return empty array as fallback
-
-        const [allPosts, featured] = await Promise.all([
-          allPostsPromise,
-          featuredPromise,
-        ]);
-
-        setPosts(allPosts);
-        setFeaturedPosts(featured);
-
-        // Show user-friendly message only if both failed
-        if (allPosts.length === 0 && featured.length === 0) {
-          toast.error(
-            "Blog posts are temporarily unavailable. Please try again later.",
-          );
-        }
-      } catch (error) {
-        // This should rarely happen now, but keep as final safety net
+    getPublishedBlogs()
+      .then(setPosts)
+      .catch(() =>
         toast.error(
-          "Blog posts are temporarily unavailable. Please try again later.",
-        );
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchBlogData();
+          "Blog posts are temporarily unavailable. Please try again later."
+        )
+      )
+      .finally(() => setLoading(false));
   }, []);
 
   const filteredPosts = posts.filter(
     (post) =>
-      post.title.rendered.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      wpUtils
-        .cleanExcerpt(post.excerpt.rendered)
-        .toLowerCase()
-        .includes(searchTerm.toLowerCase()),
+      post.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      post.summary.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
-  const formatDate = (dateString: string) => {
-    return wordpressApi.formatDate(dateString);
+  const formatDate = (ts: Timestamp | null) => {
+    if (!ts) return "";
+    return ts.toDate().toLocaleDateString("en-IN", {
+      day: "2-digit",
+      month: "short",
+      year: "numeric",
+    });
   };
+
+  const featuredPosts = posts.slice(0, 3);
 
   if (loading) {
     return (
       <div className="min-h-screen bg-gradient-to-b from-blue-50 to-white">
-        {/* Navigation */}
         <nav className="bg-white shadow-sm sticky top-0 z-50">
           <div className="section-container">
             <div className="flex items-center justify-between h-16">
@@ -96,30 +70,14 @@ const Blog = () => {
                   Amogh Van/Bus Services
                 </span>
               </Link>
-              <div className="hidden md:flex items-center space-x-8">
-                <Link
-                  to="/"
-                  className="text-gray-600 hover:text-school-blue-600 transition-colors"
-                >
-                  Home
-                </Link>
-                <Link to="/blog" className="text-school-blue-600 font-semibold">
-                  Blog
-                </Link>
-                <Link to="/register" className="btn-primary">
-                  Register Student
-                </Link>
-              </div>
             </div>
           </div>
         </nav>
-
-        {/* Loading State */}
         <div className="py-20">
           <div className="section-container">
             <div className="text-center">
-              <div className="animate-spin h-12 w-12 border-4 border-school-yellow-500 border-t-transparent rounded-full mx-auto mb-4"></div>
-              <p className="text-gray-600">Loading blog posts...</p>
+              <div className="animate-spin h-12 w-12 border-4 border-school-yellow-500 border-t-transparent rounded-full mx-auto mb-4" />
+              <p className="text-gray-600">Loading blog posts…</p>
             </div>
           </div>
         </div>
@@ -138,13 +96,13 @@ const Blog = () => {
       itemListElement: posts.map((post, index) => ({
         "@type": "BlogPosting",
         position: index + 1,
-        headline: post.title.rendered,
-        description: wpUtils.cleanExcerpt(post.excerpt.rendered),
+        headline: post.title,
+        description: post.summary,
         url: `https://amoghvanservices.com/blog/${post.slug}`,
-        datePublished: post.date,
+        datePublished: post.publishedAt?.toDate().toISOString(),
         author: {
           "@type": "Person",
-          name: post.author_info?.name || "Amogh Van Services",
+          name: post.authorName || "Amogh Van Services",
         },
       })),
     },
@@ -154,11 +112,12 @@ const Blog = () => {
     <div className="min-h-screen bg-gradient-to-b from-blue-50 to-white">
       <SEO
         title="Blog - Amogh Van/Bus Services | School Transportation Tips & News Mumbai"
-        description="Read the latest blog posts from Amogh Van/Bus Services about school transportation safety, tips for parents, and news about our services in Mumbai. Stay updated with school transport insights."
-        keywords="school transport blog Mumbai, school bus safety tips, parent transportation guide Mumbai, school transport news, Mumbai school bus updates, student safety tips"
+        description="Read the latest blog posts from Amogh Van/Bus Services about school transportation safety, tips for parents, and news about our services in Mumbai."
+        keywords="school transport blog Mumbai, school bus safety tips, parent transportation guide Mumbai"
         canonicalUrl="https://amoghvanservices.com/blog"
         schema={blogSchema}
       />
+
       {/* Navigation */}
       <nav className="bg-white shadow-sm sticky top-0 z-50">
         <div className="section-container">
@@ -201,7 +160,7 @@ const Blog = () => {
         </div>
       </nav>
 
-      {/* Hero Section */}
+      {/* Hero */}
       <section className="py-20 bg-gradient-to-br from-school-yellow-50 to-school-blue-50">
         <div className="section-container">
           <div className="text-center space-y-6">
@@ -217,13 +176,11 @@ const Blog = () => {
               Amogh Van/Bus Services. Your trusted partner in student
               transportation.
             </p>
-
-            {/* Search Bar */}
             <div className="max-w-md mx-auto relative">
               <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-5 w-5" />
               <Input
                 type="text"
-                placeholder="Search blog posts..."
+                placeholder="Search blog posts…"
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
                 className="pl-10 h-12 border-gray-300 focus:border-school-blue-500"
@@ -234,7 +191,7 @@ const Blog = () => {
       </section>
 
       {/* Featured Posts */}
-      {featuredPosts.length > 0 && (
+      {featuredPosts.length > 0 && !searchTerm && (
         <section className="py-16 bg-white">
           <div className="section-container">
             <h2 className="text-3xl font-bold text-gray-900 font-manrope mb-12 text-center">
@@ -246,11 +203,11 @@ const Blog = () => {
                   key={post.id}
                   className="card-hover border-0 shadow-lg overflow-hidden"
                 >
-                  {post.featured_image_url && (
+                  {post.coverImage && (
                     <div className="aspect-video overflow-hidden">
                       <img
-                        src={post.featured_image_url}
-                        alt={post.title.rendered}
+                        src={post.coverImage}
+                        alt={post.title}
                         className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
                       />
                     </div>
@@ -258,14 +215,14 @@ const Blog = () => {
                   <CardHeader>
                     <div className="flex items-center text-sm text-gray-500 mb-2">
                       <Calendar className="h-4 w-4 mr-1" />
-                      {formatDate(post.date)}
+                      {formatDate(post.publishedAt)}
                     </div>
                     <CardTitle className="text-xl line-clamp-2">
-                      {post.title.rendered}
+                      {post.title}
                     </CardTitle>
-                    {post.excerpt.rendered && (
+                    {post.summary && (
                       <CardDescription className="line-clamp-3">
-                        {wpUtils.cleanExcerpt(post.excerpt.rendered)}
+                        {post.summary}
                       </CardDescription>
                     )}
                   </CardHeader>
@@ -291,7 +248,7 @@ const Blog = () => {
       <section className="py-16 bg-gray-50">
         <div className="section-container">
           <h2 className="text-3xl font-bold text-gray-900 font-manrope mb-12 text-center">
-            All Articles
+            {searchTerm ? `Search Results` : "All Articles"}
           </h2>
 
           {filteredPosts.length === 0 ? (
@@ -323,46 +280,38 @@ const Blog = () => {
                   className="card-hover border-0 shadow-lg overflow-hidden bg-white"
                 >
                   <div className="md:flex">
-                    {post.featured_image_url && (
+                    {post.coverImage && (
                       <div className="md:w-1/3 aspect-video md:aspect-square overflow-hidden">
                         <img
-                          src={post.featured_image_url}
-                          alt={post.title.rendered}
+                          src={post.coverImage}
+                          alt={post.title}
                           className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
                         />
                       </div>
                     )}
-                    <div
-                      className={`${post.featured_image_url ? "md:w-2/3" : "w-full"}`}
-                    >
+                    <div className={post.coverImage ? "md:w-2/3" : "w-full"}>
                       <CardHeader>
                         <div className="flex items-center justify-between mb-2">
                           <div className="flex items-center text-sm text-gray-500">
                             <Calendar className="h-4 w-4 mr-1" />
-                            {formatDate(post.date)}
+                            {formatDate(post.publishedAt)}
                           </div>
-                          {post.category_names &&
-                            post.category_names.length > 0 && (
-                              <Badge className="bg-school-yellow-100 text-school-yellow-700">
-                                {post.category_names[0]}
-                              </Badge>
-                            )}
                         </div>
                         <CardTitle className="text-xl line-clamp-2">
-                          {post.title.rendered}
+                          {post.title}
                         </CardTitle>
-                        {post.excerpt.rendered && (
+                        {post.summary && (
                           <CardDescription className="line-clamp-2">
-                            {wpUtils.cleanExcerpt(post.excerpt.rendered)}
+                            {post.summary}
                           </CardDescription>
                         )}
                       </CardHeader>
                       <CardContent>
                         <div className="flex items-center justify-between">
-                          {post.author_info && (
+                          {post.authorName && (
                             <div className="flex items-center text-sm text-gray-600">
                               <User className="h-4 w-4 mr-1" />
-                              {post.author_info.name}
+                              {post.authorName}
                             </div>
                           )}
                           <Link to={`/blog/${post.slug}`}>
@@ -386,7 +335,7 @@ const Blog = () => {
         </div>
       </section>
 
-      {/* CTA Section */}
+      {/* CTA */}
       <section className="py-20 gradient-bg">
         <div className="section-container text-center">
           <h2 className="text-4xl font-bold text-white font-manrope mb-6">
