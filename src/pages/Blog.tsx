@@ -150,6 +150,12 @@ const Blog = () => {
               >
                 Contact
               </Link>
+              <Link
+                to="/gallery"
+                className="text-gray-600 hover:text-school-blue-600 transition-colors"
+              >
+                Gallery
+              </Link>
               <Link to="/register" className="btn-primary">
                 Register Student
               </Link>

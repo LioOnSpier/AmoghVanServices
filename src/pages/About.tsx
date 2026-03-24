@@ -1,4 +1,5 @@
 import { Button } from "@/components/ui/button";
+import { CONTACT } from "@/data/constants";
 import {
   Card,
   CardContent,
@@ -67,7 +68,7 @@ const About = () => {
         <div className="section-container">
           <div className="flex items-center justify-between h-16">
             <Link to="/" className="flex items-center space-x-3">
-                <img src="/logo.png" alt="Amogh Van/Bus Services Logo" className="h-10 w-10 object-contain rounded-lg" />
+              <img src="/logo.png" alt="Amogh Van/Bus Services Logo" className="h-10 w-10 object-contain rounded-lg" />
               <span className="text-xl font-company-name text-gray-900">
                 Amogh Van/Bus Services
               </span>
@@ -93,6 +94,12 @@ const About = () => {
                 className="text-gray-600 hover:text-school-blue-600 transition-colors"
               >
                 Contact
+              </Link>
+              <Link
+                to="/gallery"
+                className="text-gray-600 hover:text-school-blue-600 transition-colors"
+              >
+                Gallery
               </Link>
               <Link to="/register" className="btn-primary">
                 Register Student
@@ -508,10 +515,10 @@ const About = () => {
                   Email Us
                 </h3>
                 <a
-                  href="mailto:kharwaramog02@gmail.com"
+                  href={`mailto:${CONTACT.EMAIL}`}
                   className="text-school-blue-600 hover:underline font-semibold"
                 >
-                  kharwaramog02@gmail.com
+                  {CONTACT.EMAIL}
                 </a>
               </CardContent>
             </Card>

@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Bus, Home, ArrowLeft } from "lucide-react";
 import { Link } from "react-router-dom";
+import { CONTACT } from "@/data/constants";
 
 const NotFound = () => {
   return (
@@ -63,24 +64,24 @@ const NotFound = () => {
           <p className="text-sm text-gray-500">
             Need help? Contact us at{" "}
             <a
-              href="tel:9870525637"
+              href={`tel:${CONTACT.PHONE_PRIMARY}`}
               className="text-school-blue-600 hover:underline"
             >
-              9870525637
+              {CONTACT.PHONE_PRIMARY}
             </a>{" "}
             /{" "}
             <a
-              href="tel:9321025627"
+              href={`tel:${CONTACT.PHONE_SECONDARY}`}
               className="text-school-blue-600 hover:underline"
             >
-              9321025627
+              {CONTACT.PHONE_SECONDARY}
             </a>{" "}
             or{" "}
             <a
-              href="mailto:info@amoghservices.com"
+              href={`mailto:${CONTACT.EMAIL}`}
               className="text-school-blue-600 hover:underline"
             >
-              info@amoghservices.com
+              {CONTACT.EMAIL}
             </a>
           </p>
         </div>

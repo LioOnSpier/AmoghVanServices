@@ -29,6 +29,7 @@ import { Link } from "react-router-dom";
 import { useState } from "react";
 import SEO from "@/components/SEO";
 import LocalBusinessSchema from "@/components/LocalBusinessSchema";
+import { CONTACT } from "@/data/constants";
 
 const Index = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -48,7 +49,7 @@ const Index = () => {
     foundingDate: "2010",
     contactPoint: {
       "@type": "ContactPoint",
-      telephone: "+91-9870525637",
+      telephone: CONTACT.PHONE_PRIMARY_FULL,
       contactType: "customer service",
       areaServed: "Mumbai",
       availableLanguage: ["English", "Hindi", "Marathi"],
@@ -113,6 +114,12 @@ const Index = () => {
               >
                 Contact
               </Link>
+              <Link
+                to="/gallery"
+                className="text-gray-600 hover:text-school-blue-600 transition-colors"
+              >
+                Gallery
+              </Link>
               <Link to="/register" className="btn-primary">
                 Register Student
               </Link>
@@ -165,6 +172,13 @@ const Index = () => {
                 onClick={() => setIsMobileMenuOpen(false)}
               >
                 Contact
+              </Link>
+              <Link
+                to="/gallery"
+                className="block px-3 py-2 text-gray-600 hover:text-school-blue-600 transition-colors"
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                Gallery
               </Link>
               <Link
                 to="/register"

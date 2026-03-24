@@ -220,6 +220,12 @@ const BlogPostPage = () => {
               <Link to="/blog" className="text-school-blue-600 font-semibold">
                 Blog
               </Link>
+              <Link
+                to="/gallery"
+                className="text-gray-600 hover:text-school-blue-600 transition-colors"
+              >
+                Gallery
+              </Link>
               <Link to="/register" className="btn-primary">
                 Register Student
               </Link>
