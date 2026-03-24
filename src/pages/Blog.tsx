@@ -63,9 +63,7 @@ const Blog = () => {
           <div className="section-container">
             <div className="flex items-center justify-between h-16">
               <Link to="/" className="flex items-center space-x-3">
-                <div className="bg-school-yellow-500 p-2 rounded-lg">
-                  <Bus className="h-6 w-6 text-white" />
-                </div>
+                <img src="/logo.png" alt="Amogh Van/Bus Services Logo" className="h-10 w-10 object-contain rounded-lg" />
                 <span className="text-xl font-bold text-gray-900 font-manrope">
                   Amogh Van/Bus Services
                 </span>

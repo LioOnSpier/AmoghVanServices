@@ -37,8 +37,8 @@ const Index = () => {
     "@context": "https://schema.org",
     "@type": "Organization",
     name: "Amogh Van/Bus Services",
-    url: "https://amoghvanservices.com",
-    logo: "https://amoghvanservices.com/logo.jpg",
+    url: "https://amoghvanservices.in",
+    logo: "https://amoghvanservices.in/logo.jpg",
     description:
       "Mumbai's most trusted school transportation service since 2010, providing safe and reliable van & bus services for students",
     founder: {
@@ -70,7 +70,7 @@ const Index = () => {
         description="Mumbai's most trusted school transportation service since 2010. Safe, reliable van & bus services for students in Prabhadevi, Dadar West. GPS tracking, trained drivers, 500+ satisfied families. Call 9870525637"
         keywords="school bus services Mumbai, school van services Mumbai, student transportation Mumbai, school transport Prabhadevi, school transport Dadar West, safe school bus Mumbai, GPS tracking school transport, reliable school van service, Mumbai school pickup drop, school transport rates Mumbai"
         ogType="website"
-        canonicalUrl="https://amoghvanservices.com/"
+        canonicalUrl="https://amoghvanservices.in/"
         schema={organizationSchema}
       />
       <LocalBusinessSchema />
@@ -83,9 +83,7 @@ const Index = () => {
         <div className="section-container">
           <div className="flex items-center justify-between h-16">
             <div className="flex items-center space-x-3">
-              <div className="bg-school-yellow-500 p-2 rounded-lg">
-                <Bus className="h-6 w-6 text-white" />
-              </div>
+              <img src="/logo.png" alt="Amogh Van/Bus Services Logo" className="h-10 w-10 object-contain rounded-lg" />
               <span className="text-xl font-company-name text-gray-900">
                 Amogh Van/Bus Services
               </span>

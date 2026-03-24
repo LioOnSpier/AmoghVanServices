@@ -106,9 +106,7 @@ const BlogPostPage = () => {
           <div className="section-container">
             <div className="flex items-center h-16">
               <Link to="/" className="flex items-center space-x-3">
-                <div className="bg-school-yellow-500 p-2 rounded-lg">
-                  <Bus className="h-6 w-6 text-white" />
-                </div>
+                <img src="/logo.png" alt="Amogh Van/Bus Services Logo" className="h-10 w-10 object-contain rounded-lg" />
                 <span className="text-xl font-bold text-gray-900 font-manrope">
                   Amogh Van/Bus Services
                 </span>
@@ -131,9 +129,7 @@ const BlogPostPage = () => {
           <div className="section-container">
             <div className="flex items-center h-16">
               <Link to="/" className="flex items-center space-x-3">
-                <div className="bg-school-yellow-500 p-2 rounded-lg">
-                  <Bus className="h-6 w-6 text-white" />
-                </div>
+                <img src="/logo.png" alt="Amogh Van/Bus Services Logo" className="h-10 w-10 object-contain rounded-lg" />
                 <span className="text-xl font-bold text-gray-900 font-manrope">
                   Amogh Van/Bus Services
                 </span>
@@ -166,7 +162,7 @@ const BlogPostPage = () => {
     description: post.summary,
     image:
       post.coverImage ||
-      "https://amoghvanservices.com/default-blog-image.jpg",
+      "https://amoghvanservices.in/default-blog-image.jpg",
     author: {
       "@type": "Person",
       name: post.authorName || "Amogh Van Services",
@@ -176,14 +172,14 @@ const BlogPostPage = () => {
       name: "Amogh Van/Bus Services",
       logo: {
         "@type": "ImageObject",
-        url: "https://amoghvanservices.com/logo.jpg",
+        url: "https://amoghvanservices.in/logo.jpg",
       },
     },
     datePublished: post.publishedAt?.toDate().toISOString(),
     dateModified: post.updatedAt?.toDate().toISOString() ?? post.publishedAt?.toDate().toISOString(),
     mainEntityOfPage: {
       "@type": "WebPage",
-      "@id": `https://amoghvanservices.com/blog/${post.slug}`,
+      "@id": `https://amoghvanservices.in/blog/${post.slug}`,
     },
   };
 
@@ -196,7 +192,7 @@ const BlogPostPage = () => {
           `Read ${post.title} on Amogh Van/Bus Services blog.`
         }
         keywords={`school transport, Mumbai, safety, ${post.title}`}
-        canonicalUrl={`https://amoghvanservices.com/blog/${post.slug}`}
+        canonicalUrl={`https://amoghvanservices.in/blog/${post.slug}`}
         ogImage={post.coverImage || "/default-blog-image.jpg"}
         ogType="article"
         schema={blogPostSchema}

@@ -1,18 +1,23 @@
-User-agent: *
-Allow: /
+# Robots.txt — Amogh Van/Bus Services
+# https://amoghvanservices.in
 
-# Important pages
+User-agent: *
+
+# Allow all public pages
+Allow: /
 Allow: /about
+Allow: /blog
 Allow: /contact
 Allow: /register
-Allow: /blog
 
-# Disallow admin and private areas
+# Block admin panel from indexing
 Disallow: /admin
-Disallow: /private
+Disallow: /admin/
+Disallow: /admin/dashboard
+Disallow: /admin/blog/
+
+# Block build artifacts
+Disallow: /dist/
 
 # Sitemap location
-Sitemap: https://amoghvanservices.com/sitemap.xml
-
-# Crawl-delay for better server performance
-Crawl-delay: 1
+Sitemap: https://amoghvanservices.in/sitemap.xml

@@ -239,9 +239,7 @@ const BlogEditor = () => {
       {/* Navbar */}
       <header className="bg-gray-900 border-b border-gray-800 px-6 py-4 flex items-center justify-between sticky top-0 z-50">
         <div className="flex items-center space-x-3">
-          <div className="bg-school-yellow-500 p-2 rounded-lg">
-            <Bus className="h-6 w-6 text-white" />
-          </div>
+          <img src="/logo.png" alt="Amogh Van/Bus Services Logo" className="h-10 w-10 object-contain rounded-lg" />
           <div>
             <h1 className="font-bold text-lg text-white font-manrope">
               {isEditing ? "Edit Blog Post" : "New Blog Post"}
