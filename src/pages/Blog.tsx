@@ -141,6 +141,12 @@ const Blog = () => {
               >
                 About
               </Link>
+              <Link
+                to="/services"
+                className="text-gray-600 hover:text-school-blue-600 transition-colors"
+              >
+                Services
+              </Link>
               <Link to="/blog" className="text-school-blue-600 font-semibold">
                 Blog
               </Link>
@@ -175,6 +181,9 @@ const Blog = () => {
             <h1 className="text-5xl font-bold text-gray-900 font-manrope">
               Transportation Insights
             </h1>
+            <h2 className="text-2xl text-school-blue-600 font-semibold mt-4 mb-4">
+              Discover how to choose safe school transport and the benefits of school pickup and drop service
+            </h2>
             <p className="text-xl text-gray-600 max-w-2xl mx-auto">
               Stay updated with the latest news, safety tips, and insights from
               Amogh Van/Bus Services. Your trusted partner in student

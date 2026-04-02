@@ -28,7 +28,7 @@ const Gallery = () => {
               </Link>
             </div>
             <div className="hidden md:flex items-center space-x-8">
-              <Link to="/#services" className="text-gray-600 hover:text-school-blue-600 transition-colors">Services</Link>
+              <Link to="/" className="text-gray-600 hover:text-school-blue-600 transition-colors">Home</Link>
               <Link to="/about" className="text-gray-600 hover:text-school-blue-600 transition-colors">About</Link>
               <Link to="/blog" className="text-gray-600 hover:text-school-blue-600 transition-colors">Blog</Link>
               <Link to="/gallery" className="text-school-yellow-600 font-medium transition-colors">Gallery</Link>
@@ -47,7 +47,7 @@ const Gallery = () => {
         {isMobileMenuOpen && (
           <div className="md:hidden bg-white border-t border-gray-200">
             <div className="px-2 pt-2 pb-3 space-y-1">
-              <Link to="/#services" className="block px-3 py-2 text-gray-600 hover:text-school-blue-600 transition-colors" onClick={() => setIsMobileMenuOpen(false)}>Services</Link>
+              <Link to="/" className="block px-3 py-2 text-gray-600 hover:text-school-blue-600 transition-colors" onClick={() => setIsMobileMenuOpen(false)}>Home</Link>
               <Link to="/about" className="block px-3 py-2 text-gray-600 hover:text-school-blue-600 transition-colors" onClick={() => setIsMobileMenuOpen(false)}>About</Link>
               <Link to="/blog" className="block px-3 py-2 text-gray-600 hover:text-school-blue-600 transition-colors" onClick={() => setIsMobileMenuOpen(false)}>Blog</Link>
               <Link to="/gallery" className="block px-3 py-2 text-school-yellow-600 bg-school-yellow-50 font-medium rounded-lg transition-colors" onClick={() => setIsMobileMenuOpen(false)}>Gallery</Link>

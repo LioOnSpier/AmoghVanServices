@@ -194,6 +194,12 @@ Please respond to the contact within 24 hours as promised.
                 About
               </Link>
               <Link
+                to="/services"
+                className="text-gray-600 hover:text-school-blue-600 transition-colors"
+              >
+                Services
+              </Link>
+              <Link
                 to="/blog"
                 className="text-gray-600 hover:text-school-blue-600 transition-colors"
               >
@@ -230,6 +236,9 @@ Please respond to the contact within 24 hours as promised.
             <h1 className="text-5xl font-bold text-gray-900 font-manrope">
               Contact Us
             </h1>
+            <h2 className="text-2xl text-school-blue-600 font-semibold mt-4 mb-4">
+              Ready to book school van service in Mumbai?
+            </h2>
             <p className="text-xl text-gray-600 leading-relaxed">
               Have questions about our transportation services? We're here to
               help you find the perfect solution for your child's daily commute.

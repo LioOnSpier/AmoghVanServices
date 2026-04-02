@@ -8,6 +8,7 @@ import ProtectedRoute from "@/components/ProtectedRoute";
 
 import Index from "./pages/Index";
 import About from "./pages/About";
+import Services from "./pages/Services";
 import Contact from "./pages/Contact";
 import StudentRegistration from "./pages/StudentRegistration";
 import Blog from "./pages/Blog";
@@ -33,6 +34,7 @@ const App = () => (
               {/* Public routes */}
               <Route path="/" element={<Index />} />
               <Route path="/about" element={<About />} />
+              <Route path="/services" element={<Services />} />
               <Route path="/contact" element={<Contact />} />
               <Route path="/register" element={<StudentRegistration />} />
               <Route path="/gallery" element={<Gallery />} />

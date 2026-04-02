@@ -217,6 +217,12 @@ const BlogPostPage = () => {
               >
                 Home
               </Link>
+              <Link
+                to="/services"
+                className="text-gray-600 hover:text-school-blue-600 transition-colors"
+              >
+                Services
+              </Link>
               <Link to="/blog" className="text-school-blue-600 font-semibold">
                 Blog
               </Link>
