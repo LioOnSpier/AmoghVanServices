@@ -34,7 +34,6 @@ import SeoKeywordsList from "@/components/SeoKeywordsList";
 
 const Index = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-
   const organizationSchema = {
     "@context": "https://schema.org",
     "@type": "Organization",
@@ -66,6 +65,10 @@ const Index = () => {
   };
 
   return (
+
+
+    <><meta name="google-site-verification" content="rtZaXDic-e3XFVcxS3Jo0zO_VG-LV3fg7bR9K39PsYA" />
+
     <div className="min-h-screen bg-gradient-to-b from-blue-50 to-white">
       <SEO
         title="Amogh Van/Bus Services - Safe & Reliable School Transportation in Mumbai"
@@ -73,8 +76,7 @@ const Index = () => {
         keywords="school bus services Mumbai, school van services Mumbai, student transportation Mumbai, school transport Prabhadevi, school transport Dadar West, safe school bus Mumbai, GPS tracking school transport, reliable school van service, Mumbai school pickup drop, school transport rates Mumbai"
         ogType="website"
         canonicalUrl="https://amoghvanservices.in/"
-        schema={organizationSchema}
-      />
+        schema={organizationSchema} />
       <LocalBusinessSchema />
       {/* Navigation */}
       <nav
@@ -197,6 +199,7 @@ const Index = () => {
       <header
         className="relative overflow-hidden bg-gradient-to-br from-school-yellow-50 to-school-blue-50 py-20"
         role="banner"
+        
       >
         <div className="section-container">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
@@ -269,11 +272,10 @@ const Index = () => {
               <div className="relative animate-float">
                 <div className="bg-gradient-to-br from-school-yellow-400 to-school-yellow-600 rounded-2xl shadow-2xl p-4 lg:p-8 transform rotate-3">
                   <div className="aspect-video rounded-xl overflow-hidden shadow-inner flex items-center justify-center bg-white">
-                    <img 
-                      src="/hero-bus.jpg" 
-                      alt="Students enjoying their ride in Amogh Van Services school bus" 
-                      className="w-full h-full object-cover"
-                    />
+                    <img
+                      src="/hero-bus.jpg"
+                      alt="Students enjoying their ride in Amogh Van Services school bus"
+                      className="w-full h-full object-cover" />
                   </div>
                 </div>
               </div>
@@ -644,7 +646,7 @@ const Index = () => {
           </div>
         </div>
       </footer>
-    </div>
+    </div></>
   );
 };
 
