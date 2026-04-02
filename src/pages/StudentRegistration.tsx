@@ -40,6 +40,8 @@ import * as z from "zod";
 import { toast } from "sonner";
 import emailjs from "@emailjs/browser";
 import SEO from "@/components/SEO";
+import { TimePicker } from "@/components/ui/time-picker";
+import { CONTACT } from "@/data/constants";
 
 const studentSchema = z.object({
   // Student Information
@@ -435,10 +437,10 @@ Submitted on: ${new Date().toLocaleString()}
                     </a>{" "}
                     or{" "}
                     <a
-                      href="mailto:kharwaramog02@gmail.com"
+                      href={`mailto:${CONTACT.EMAIL}`}
                       className="text-school-blue-600 hover:underline"
                     >
-                      kharwaramog02@gmail.com
+                      {CONTACT.EMAIL}
                     </a>
                   </p>
                 </div>
@@ -829,23 +831,10 @@ Submitted on: ${new Date().toLocaleString()}
                           <Label htmlFor="preferredPickupTime">
                             Preferred Pickup Time *
                           </Label>
-                          <Select
-                            onValueChange={(value) =>
-                              setValue("preferredPickupTime", value)
-                            }
-                          >
-                            <SelectTrigger className="mt-1">
-                              <SelectValue placeholder="Select preferred pickup time" />
-                            </SelectTrigger>
-                            <SelectContent>
-                              <SelectItem value="6:30">6:30 AM</SelectItem>
-                              <SelectItem value="7:00">7:00 AM</SelectItem>
-                              <SelectItem value="7:30">7:30 AM</SelectItem>
-                              <SelectItem value="8:00">8:00 AM</SelectItem>
-                              <SelectItem value="8:30">8:30 AM</SelectItem>
-                              <SelectItem value="flexible">Flexible</SelectItem>
-                            </SelectContent>
-                          </Select>
+                          <TimePicker
+                            value={watch("preferredPickupTime")}
+                            onChange={(val) => setValue("preferredPickupTime", val, { shouldValidate: true })}
+                          />
                           {errors.preferredPickupTime && (
                             <p className="text-red-500 text-sm mt-1 flex items-center">
                               <AlertCircle className="h-4 w-4 mr-1" />
@@ -908,24 +897,6 @@ Submitted on: ${new Date().toLocaleString()}
                         </div>
 
                         <div className="space-y-4">
-                          <div className="flex items-start space-x-3">
-                            <Checkbox
-                              id="photoPermission"
-                              checked={watch("photoPermission")}
-                              onCheckedChange={(checked) =>
-                                setValue("photoPermission", checked as boolean)
-                              }
-                            />
-                            <Label
-                              htmlFor="photoPermission"
-                              className="text-sm leading-relaxed"
-                            >
-                              I give permission for my child to be photographed
-                              for Amogh Van/Bus Services promotional materials
-                              and safety documentation.
-                            </Label>
-                          </div>
-
                           <div className="flex items-start space-x-3">
                             <Checkbox
                               id="termsAccepted"

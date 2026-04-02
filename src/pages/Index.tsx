@@ -29,16 +29,17 @@ import { Link } from "react-router-dom";
 import { useState } from "react";
 import SEO from "@/components/SEO";
 import LocalBusinessSchema from "@/components/LocalBusinessSchema";
+import { CONTACT } from "@/data/constants";
+import SeoKeywordsList from "@/components/SeoKeywordsList";
 
 const Index = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-
   const organizationSchema = {
     "@context": "https://schema.org",
     "@type": "Organization",
     name: "Amogh Van/Bus Services",
-    url: "https://amoghvanservices.com",
-    logo: "https://amoghvanservices.com/logo.jpg",
+    url: "https://amoghvanservices.in",
+    logo: "https://amoghvanservices.in/logo.jpg",
     description:
       "Mumbai's most trusted school transportation service since 2010, providing safe and reliable van & bus services for students",
     founder: {
@@ -48,7 +49,7 @@ const Index = () => {
     foundingDate: "2010",
     contactPoint: {
       "@type": "ContactPoint",
-      telephone: "+91-9870525637",
+      telephone: CONTACT.PHONE_PRIMARY_FULL,
       contactType: "customer service",
       areaServed: "Mumbai",
       availableLanguage: ["English", "Hindi", "Marathi"],
@@ -64,15 +65,18 @@ const Index = () => {
   };
 
   return (
+
+
+    <><meta name="google-site-verification" content="rtZaXDic-e3XFVcxS3Jo0zO_VG-LV3fg7bR9K39PsYA" />
+
     <div className="min-h-screen bg-gradient-to-b from-blue-50 to-white">
       <SEO
         title="Amogh Van/Bus Services - Safe & Reliable School Transportation in Mumbai"
         description="Mumbai's most trusted school transportation service since 2010. Safe, reliable van & bus services for students in Prabhadevi, Dadar West. GPS tracking, trained drivers, 500+ satisfied families. Call 9870525637"
         keywords="school bus services Mumbai, school van services Mumbai, student transportation Mumbai, school transport Prabhadevi, school transport Dadar West, safe school bus Mumbai, GPS tracking school transport, reliable school van service, Mumbai school pickup drop, school transport rates Mumbai"
         ogType="website"
-        canonicalUrl="https://amoghvanservices.com/"
-        schema={organizationSchema}
-      />
+        canonicalUrl="https://amoghvanservices.in/"
+        schema={organizationSchema} />
       <LocalBusinessSchema />
       {/* Navigation */}
       <nav
@@ -83,20 +87,18 @@ const Index = () => {
         <div className="section-container">
           <div className="flex items-center justify-between h-16">
             <div className="flex items-center space-x-3">
-              <div className="bg-school-yellow-500 p-2 rounded-lg">
-                <Bus className="h-6 w-6 text-white" />
-              </div>
+              <img src="/logo.png" alt="Amogh Van/Bus Services Logo" className="h-10 w-10 object-contain rounded-lg" />
               <span className="text-xl font-company-name text-gray-900">
                 Amogh Van/Bus Services
               </span>
             </div>
             <div className="hidden md:flex items-center space-x-8">
-              <a
-                href="#services"
+              <Link
+                to="/services"
                 className="text-gray-600 hover:text-school-blue-600 transition-colors"
               >
                 Services
-              </a>
+              </Link>
               <Link
                 to="/about"
                 className="text-gray-600 hover:text-school-blue-600 transition-colors"
@@ -114,6 +116,12 @@ const Index = () => {
                 className="text-gray-600 hover:text-school-blue-600 transition-colors"
               >
                 Contact
+              </Link>
+              <Link
+                to="/gallery"
+                className="text-gray-600 hover:text-school-blue-600 transition-colors"
+              >
+                Gallery
               </Link>
               <Link to="/register" className="btn-primary">
                 Register Student
@@ -140,13 +148,13 @@ const Index = () => {
         {isMobileMenuOpen && (
           <div className="md:hidden bg-white border-t border-gray-200">
             <div className="px-2 pt-2 pb-3 space-y-1">
-              <a
-                href="#services"
+              <Link
+                to="/services"
                 className="block px-3 py-2 text-gray-600 hover:text-school-blue-600 transition-colors"
                 onClick={() => setIsMobileMenuOpen(false)}
               >
                 Services
-              </a>
+              </Link>
               <Link
                 to="/about"
                 className="block px-3 py-2 text-gray-600 hover:text-school-blue-600 transition-colors"
@@ -169,6 +177,13 @@ const Index = () => {
                 Contact
               </Link>
               <Link
+                to="/gallery"
+                className="block px-3 py-2 text-gray-600 hover:text-school-blue-600 transition-colors"
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                Gallery
+              </Link>
+              <Link
                 to="/register"
                 className="block px-3 py-2 bg-school-yellow-500 text-white rounded-lg font-semibold mt-2"
                 onClick={() => setIsMobileMenuOpen(false)}
@@ -184,6 +199,7 @@ const Index = () => {
       <header
         className="relative overflow-hidden bg-gradient-to-br from-school-yellow-50 to-school-blue-50 py-20"
         role="banner"
+        
       >
         <div className="section-container">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
@@ -196,9 +212,12 @@ const Index = () => {
                 <h1 className="text-5xl lg:text-6xl font-business-heading text-gray-900 leading-tight">
                   Safe & Reliable
                   <span className="text-school-yellow-500 block">
-                    School Transportation in Mumbai
+                    school van service in Mumbai
                   </span>
                 </h1>
+                <h2 className="text-xl text-school-blue-600 font-semibold mt-2">
+                  Providing safe school transport in Mumbai since 2010
+                </h2>
                 <p className="text-xl text-gray-600 leading-relaxed font-professional">
                   Amogh Van/Bus Services provides secure, comfortable, and
                   punctual school bus and van transportation services for
@@ -249,20 +268,19 @@ const Index = () => {
                 </div>
               </div>
             </div>
-
             <div className="relative">
               <div className="relative animate-float">
-                <div className="bg-white rounded-2xl shadow-2xl p-8 transform rotate-3">
-                  <div className="aspect-video bg-gradient-to-br from-school-yellow-400 to-school-yellow-600 rounded-xl flex items-center justify-center">
-                    <Bus className="h-16 w-16 text-white" />
-                  </div>
-                  <div className="mt-4 space-y-2">
-                    <div className="h-4 bg-gray-200 rounded w-3/4"></div>
-                    <div className="h-4 bg-gray-200 rounded w-1/2"></div>
+                <div className="bg-gradient-to-br from-school-yellow-400 to-school-yellow-600 rounded-2xl shadow-2xl p-4 lg:p-8 transform rotate-3">
+                  <div className="aspect-video rounded-xl overflow-hidden shadow-inner flex items-center justify-center bg-white">
+                    <img
+                      src="/hero-bus.jpg"
+                      alt="Students enjoying their ride in Amogh Van Services school bus"
+                      className="w-full h-full object-cover" />
                   </div>
                 </div>
               </div>
-              <div className="absolute top-8 right-8 bg-school-green-500 text-white p-3 rounded-full animate-pulse">
+
+              <div className="absolute top-8 right-8 bg-school-green-500 text-white p-3 rounded-full animate-pulse z-20 shadow-lg">
                 <CheckCircle className="h-6 w-6" />
               </div>
             </div>
@@ -284,9 +302,10 @@ const Index = () => {
             </Badge>
             <h2
               id="services-heading"
-              className="text-4xl font-bold text-gray-900 font-manrope"
+              className="text-4xl font-bold text-gray-900 font-manrope whitespace-pre-line"
             >
-              Safe School Transportation Solutions in Mumbai
+              Trusted school pickup and drop service{"\n"}
+              <span className="text-school-blue-600 text-2xl mt-2 block">Premium student transport service</span>
             </h2>
             <p className="text-xl text-gray-600 max-w-2xl mx-auto">
               Comprehensive school bus and van transportation services designed
@@ -510,83 +529,6 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Testimonials */}
-      <section className="py-20 bg-white">
-        <div className="section-container">
-          <div className="text-center space-y-4 mb-16">
-            <Badge className="bg-school-yellow-100 text-school-yellow-700">
-              Testimonials
-            </Badge>
-            <h2 className="text-4xl font-bold text-gray-900 font-manrope">
-              What Parents Say
-            </h2>
-          </div>
-
-          <div className="grid md:grid-cols-3 gap-8">
-            <Card className="card-hover border-0 shadow-lg">
-              <CardContent className="p-6">
-                <div className="flex items-center mb-4">
-                  {[...Array(5)].map((_, i) => (
-                    <Star
-                      key={i}
-                      className="h-5 w-5 text-yellow-400 fill-current"
-                    />
-                  ))}
-                </div>
-                <p className="text-gray-600 mb-4">
-                  "Mr. Rajesh and his team at Amogh Van/Bus Services have been
-                  incredible. My daughter feels safe and I have peace of mind
-                  knowing she's in good hands."
-                </p>
-                <div className="font-semibold text-gray-900">Priya Sharma</div>
-                <div className="text-sm text-gray-500">
-                  Parent, Elementary School
-                </div>
-              </CardContent>
-            </Card>
-
-            <Card className="card-hover border-0 shadow-lg">
-              <CardContent className="p-6">
-                <div className="flex items-center mb-4">
-                  {[...Array(5)].map((_, i) => (
-                    <Star
-                      key={i}
-                      className="h-5 w-5 text-yellow-400 fill-current"
-                    />
-                  ))}
-                </div>
-                <p className="text-gray-600 mb-4">
-                  "Always on time, professional drivers, and excellent
-                  communication. Amogh Van/Bus Services is highly recommended!"
-                </p>
-                <div className="font-semibold text-gray-900">Suresh Patel</div>
-                <div className="text-sm text-gray-500">Parent, High School</div>
-              </CardContent>
-            </Card>
-
-            <Card className="card-hover border-0 shadow-lg">
-              <CardContent className="p-6">
-                <div className="flex items-center mb-4">
-                  {[...Array(5)].map((_, i) => (
-                    <Star
-                      key={i}
-                      className="h-5 w-5 text-yellow-400 fill-current"
-                    />
-                  ))}
-                </div>
-                <p className="text-gray-600 mb-4">
-                  "The GPS tracking feature is amazing. I can see exactly where
-                  the bus is and when it will arrive."
-                </p>
-                <div className="font-semibold text-gray-900">Kavita Desai</div>
-                <div className="text-sm text-gray-500">
-                  Parent, Middle School
-                </div>
-              </CardContent>
-            </Card>
-          </div>
-        </div>
-      </section>
 
       {/* CTA Section */}
       <section className="py-20 gradient-bg">
@@ -620,6 +562,9 @@ const Index = () => {
           </div>
         </div>
       </section>
+
+      {/* SEO Keywords List */}
+      <SeoKeywordsList />
 
       {/* Footer */}
       <footer id="contact" className="bg-gray-900 text-white py-16">
@@ -701,7 +646,7 @@ const Index = () => {
           </div>
         </div>
       </footer>
-    </div>
+    </div></>
   );
 };
 

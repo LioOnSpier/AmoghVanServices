@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -19,47 +19,44 @@ import {
   AlertCircle,
   Shield,
   ArrowLeft,
+  Mail,
 } from "lucide-react";
-import { Link } from "react-router-dom";
 import { toast } from "sonner";
-
-// Simple admin credentials (In production, use proper authentication)
-const ADMIN_CREDENTIALS = {
-  username: "admin", // Change this to your desired username
-  password: "amogh@2025", // Change this to a secure password
-};
+import { useAuth } from "@/contexts/AuthContext";
 
 const AdminLogin = () => {
-  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
+  const { signIn } = useAuth();
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
 
-    // Simulate API call delay
-    await new Promise((resolve) => setTimeout(resolve, 1000));
-
-    if (
-      username === ADMIN_CREDENTIALS.username &&
-      password === ADMIN_CREDENTIALS.password
-    ) {
-      // Store admin session (in production, use proper JWT tokens)
-      localStorage.setItem("amogh_admin_logged_in", "true");
-      localStorage.setItem("amogh_admin_login_time", Date.now().toString());
-
-      toast.success("Welcome back! Redirecting to admin panel...");
-
-      // Redirect to WordPress Admin
-      window.location.href = "https://kharwaramog02-swayq.wordpress.com/wp-admin";
-    } else {
-      toast.error("Invalid credentials. Please try again.");
+    try {
+      await signIn(email, password);
+      toast.success("Welcome back! Redirecting to admin panel…");
+      navigate("/admin/dashboard");
+    } catch (err: unknown) {
+      const message =
+        err instanceof Error ? err.message : "Invalid credentials.";
+      if (
+        message.includes("user-not-found") ||
+        message.includes("wrong-password") ||
+        message.includes("invalid-credential")
+      ) {
+        toast.error("Invalid email or password. Please try again.");
+      } else if (message.includes("too-many-requests")) {
+        toast.error("Too many failed attempts. Please try again later.");
+      } else {
+        toast.error("Login failed. Please check your credentials.");
+      }
+    } finally {
+      setIsLoading(false);
     }
-
-    setIsLoading(false);
   };
 
   return (
@@ -99,17 +96,20 @@ const AdminLogin = () => {
             <form onSubmit={handleLogin} className="space-y-6">
               <div className="space-y-4">
                 <div>
-                  <Label htmlFor="username">Username</Label>
-                  <Input
-                    id="username"
-                    type="text"
-                    value={username}
-                    onChange={(e) => setUsername(e.target.value)}
-                    placeholder="Enter admin username"
-                    required
-                    className="mt-1"
-                    disabled={isLoading}
-                  />
+                  <Label htmlFor="email">Email</Label>
+                  <div className="relative mt-1">
+                    <Mail className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-400" />
+                    <Input
+                      id="email"
+                      type="email"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      placeholder="admin@example.com"
+                      required
+                      className="pl-10"
+                      disabled={isLoading}
+                    />
+                  </div>
                 </div>
 
                 <div>
@@ -149,8 +149,8 @@ const AdminLogin = () => {
               >
                 {isLoading ? (
                   <>
-                    <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white mr-2"></div>
-                    Signing In...
+                    <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white mr-2" />
+                    Signing In…
                   </>
                 ) : (
                   <>
@@ -188,7 +188,6 @@ const AdminLogin = () => {
           </CardContent>
         </Card>
 
-        {/* Footer */}
         <div className="text-center mt-8 text-gray-400 text-sm">
           <p>&copy; 2025 Amogh Van/Bus Services. All rights reserved.</p>
         </div>

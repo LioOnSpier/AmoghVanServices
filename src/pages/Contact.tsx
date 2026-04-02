@@ -40,6 +40,7 @@ import * as z from "zod";
 import { toast } from "sonner";
 import emailjs from "@emailjs/browser";
 import SEO from "@/components/SEO";
+import { CONTACT } from "@/data/constants";
 
 // Define schema inside component to avoid initialization issues
 const Contact = () => {
@@ -76,7 +77,7 @@ const Contact = () => {
 
       // Format the email template parameters similar to parent details
       const templateParams = {
-        to_email: "kharwaramog02@gmail.com",
+        to_email: CONTACT.EMAIL,
         from_name: "Amogh Van/Bus Services Contact Form",
         subject: `Contact Form Inquiry: ${data.subject}`,
 
@@ -134,7 +135,7 @@ Please respond to the contact within 24 hours as promised.
     } catch (error) {
       console.error("Failed to send contact email:", error);
       toast.error(
-        "Failed to send message. Please try calling us directly at 9870525637.",
+        `Failed to send message. Please try calling us directly at ${CONTACT.PHONE_PRIMARY}.`,
       );
     } finally {
       setIsSubmitting(false);
@@ -147,13 +148,13 @@ Please respond to the contact within 24 hours as promised.
     mainEntity: {
       "@type": "Organization",
       name: "Amogh Van/Bus Services",
-      telephone: ["+91-9870525637", "+91-9321025627"],
-      email: "kharwaramog02@gmail.com",
+      telephone: [CONTACT.PHONE_PRIMARY_FULL, CONTACT.PHONE_SECONDARY_FULL],
+      email: CONTACT.EMAIL,
       address: {
         "@type": "PostalAddress",
-        streetAddress: "Prabhadevi",
-        addressLocality: "Dadar West",
-        addressRegion: "Maharashtra",
+        streetAddress: CONTACT.ADDRESS.STREET,
+        addressLocality: CONTACT.ADDRESS.LOCALITY,
+        addressRegion: CONTACT.ADDRESS.REGION,
         addressCountry: "India",
       },
       openingHours: "Mo-Sa 07:00-19:00",
@@ -164,7 +165,7 @@ Please respond to the contact within 24 hours as promised.
     <div className="min-h-screen bg-gradient-to-b from-blue-50 to-white">
       <SEO
         title="Contact Amogh Van/Bus Services - Get School Transportation Quote in Mumbai"
-        description="Contact Amogh Van/Bus Services for reliable school transportation in Mumbai. Call 9870525637 or 9321025627. Email: kharwaramog02@gmail.com. Located in Prabhadevi, Dadar West. Get instant quote!"
+        description="Contact Amogh Van/Bus Services for reliable school transportation in Mumbai. Call 9870525637 or 9321025627. Email: amoghvanservices@gmail.com. Located in Prabhadevi, Dadar West. Get instant quote!"
         keywords="contact school bus service Mumbai, school transport contact number Mumbai, Amogh Van Services phone number, school transport inquiry Mumbai, get school bus quote Mumbai"
         canonicalUrl="https://amoghvanservices.com/contact"
         schema={contactPageSchema}
@@ -174,9 +175,7 @@ Please respond to the contact within 24 hours as promised.
         <div className="section-container">
           <div className="flex items-center justify-between h-16">
             <Link to="/" className="flex items-center space-x-3">
-              <div className="bg-school-yellow-500 p-2 rounded-lg">
-                <Bus className="h-6 w-6 text-white" />
-              </div>
+              <img src="/logo.png" alt="Amogh Van/Bus Services Logo" className="h-10 w-10 object-contain rounded-lg" />
               <span className="text-xl font-company-name text-gray-900">
                 Amogh Van/Bus Services
               </span>
@@ -195,6 +194,12 @@ Please respond to the contact within 24 hours as promised.
                 About
               </Link>
               <Link
+                to="/services"
+                className="text-gray-600 hover:text-school-blue-600 transition-colors"
+              >
+                Services
+              </Link>
+              <Link
                 to="/blog"
                 className="text-gray-600 hover:text-school-blue-600 transition-colors"
               >
@@ -205,6 +210,12 @@ Please respond to the contact within 24 hours as promised.
                 className="text-school-blue-600 font-semibold"
               >
                 Contact
+              </Link>
+              <Link
+                to="/gallery"
+                className="text-gray-600 hover:text-school-blue-600 transition-colors"
+              >
+                Gallery
               </Link>
               <Link to="/register" className="btn-primary">
                 Register Student
@@ -225,6 +236,9 @@ Please respond to the contact within 24 hours as promised.
             <h1 className="text-5xl font-bold text-gray-900 font-manrope">
               Contact Us
             </h1>
+            <h2 className="text-2xl text-school-blue-600 font-semibold mt-4 mb-4">
+              Ready to book school van service in Mumbai?
+            </h2>
             <p className="text-xl text-gray-600 leading-relaxed">
               Have questions about our transportation services? We're here to
               help you find the perfect solution for your child's daily commute.
@@ -276,10 +290,10 @@ Please respond to the contact within 24 hours as promised.
                   Send us a detailed message and we'll respond quickly
                 </CardDescription>
                 <a
-                  href="mailto:kharwaramog02@gmail.com"
+                  href="mailto:amoghvanservices@gmail.com"
                   className="text-school-blue-600 hover:text-school-blue-700 font-semibold text-lg transition-colors"
                 >
-                  kharwaramog02@gmail.com
+                  amoghvanservices@gmail.com
                 </a>
                 <p className="text-sm text-gray-500 mt-4">
                   We respond within 24 hours

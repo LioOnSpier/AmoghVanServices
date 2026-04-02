@@ -2,21 +2,21 @@ const LocalBusinessSchema = () => {
   const localBusinessData = {
     "@context": "https://schema.org",
     "@type": "LocalBusiness",
-    "@id": "https://amoghvanservices.com/#localbusiness",
+    "@id": "https://amoghvanservices.in/#localbusiness",
     "name": "Amogh Van/Bus Services",
     "alternateName": "Amogh School Transportation",
     "description": "Professional school transportation services in Mumbai since 2010. Safe, reliable van and bus services for students with GPS tracking and trained drivers.",
-    "url": "https://amoghvanservices.com",
+    "url": "https://amoghvanservices.in",
     "logo": {
       "@type": "ImageObject",
-      "url": "https://amoghvanservices.com/logo.jpg",
+      "url": "https://amoghvanservices.in/logo.jpg",
       "width": 400,
       "height": 400
     },
     "image": [
-      "https://amoghvanservices.com/bus-service-1.jpg",
-      "https://amoghvanservices.com/van-service-1.jpg",
-      "https://amoghvanservices.com/safety-features.jpg"
+      "https://amoghvanservices.in/bus-service-1.jpg",
+      "https://amoghvanservices.in/van-service-1.jpg",
+      "https://amoghvanservices.in/safety-features.jpg"
     ],
     "telephone": "+91-9870525637",
     "email": "kharwaramog02@gmail.com",
@@ -213,7 +213,7 @@ const LocalBusinessSchema = () => {
       "@type": "ReserveAction",
       "target": {
         "@type": "EntryPoint",
-        "urlTemplate": "https://amoghvanservices.com/register",
+        "urlTemplate": "https://amoghvanservices.in/register",
         "actionPlatform": [
           "http://schema.org/DesktopWebPlatform",
           "http://schema.org/MobileWebPlatform"

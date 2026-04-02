@@ -1,4 +1,5 @@
 import { Button } from "@/components/ui/button";
+import { CONTACT } from "@/data/constants";
 import {
   Card,
   CardContent,
@@ -67,9 +68,7 @@ const About = () => {
         <div className="section-container">
           <div className="flex items-center justify-between h-16">
             <Link to="/" className="flex items-center space-x-3">
-              <div className="bg-school-yellow-500 p-2 rounded-lg">
-                <Bus className="h-6 w-6 text-white" />
-              </div>
+              <img src="/logo.png" alt="Amogh Van/Bus Services Logo" className="h-10 w-10 object-contain rounded-lg" />
               <span className="text-xl font-company-name text-gray-900">
                 Amogh Van/Bus Services
               </span>
@@ -85,6 +84,12 @@ const About = () => {
                 About
               </Link>
               <Link
+                to="/services"
+                className="text-gray-600 hover:text-school-blue-600 transition-colors"
+              >
+                Services
+              </Link>
+              <Link
                 to="/blog"
                 className="text-gray-600 hover:text-school-blue-600 transition-colors"
               >
@@ -95,6 +100,12 @@ const About = () => {
                 className="text-gray-600 hover:text-school-blue-600 transition-colors"
               >
                 Contact
+              </Link>
+              <Link
+                to="/gallery"
+                className="text-gray-600 hover:text-school-blue-600 transition-colors"
+              >
+                Gallery
               </Link>
               <Link to="/register" className="btn-primary">
                 Register Student
@@ -233,6 +244,9 @@ const About = () => {
             <h2 className="text-4xl font-bold text-gray-900 font-manrope">
               What Makes Us Different
             </h2>
+            <h3 className="text-2xl text-school-blue-600 font-semibold mt-2 mb-2">
+              The most trusted school van service near me
+            </h3>
             <p className="text-xl text-gray-600 max-w-2xl mx-auto">
               We're more than just transportation providers. We're an extension
               of your child's educational journey.
@@ -510,10 +524,10 @@ const About = () => {
                   Email Us
                 </h3>
                 <a
-                  href="mailto:kharwaramog02@gmail.com"
+                  href={`mailto:${CONTACT.EMAIL}`}
                   className="text-school-blue-600 hover:underline font-semibold"
                 >
-                  kharwaramog02@gmail.com
+                  {CONTACT.EMAIL}
                 </a>
               </CardContent>
             </Card>
