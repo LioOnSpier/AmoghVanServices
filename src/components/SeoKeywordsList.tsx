@@ -8,7 +8,7 @@ const SeoKeywordsList = () => {
           Areas & Services We Cover
         </h3>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 text-sm text-gray-500">
-          
+
           {/* Column 1: Primary & Service-Based */}
           <div className="space-y-3">
             <h4 className="text-gray-700 font-medium mb-4">Core Transport Services</h4>
@@ -50,15 +50,6 @@ const SeoKeywordsList = () => {
           {/* Column 3: Area-Based (Local SEO) */}
           <div className="space-y-3">
             <h4 className="text-gray-700 font-medium mb-4">Local Areas Served</h4>
-            <h5 className="font-normal text-gray-500 hover:text-school-blue-600 transition-colors cursor-default">school van service in Andheri</h5>
-            <h5 className="font-normal text-gray-500 hover:text-school-blue-600 transition-colors cursor-default">school van service in Borivali</h5>
-            <h5 className="font-normal text-gray-500 hover:text-school-blue-600 transition-colors cursor-default">school van service in Kandivali</h5>
-            <h6 className="font-normal text-gray-500 hover:text-school-blue-600 transition-colors cursor-default">school van service in Malad</h6>
-            <h6 className="font-normal text-gray-500 hover:text-school-blue-600 transition-colors cursor-default">school van service in Goregaon</h6>
-            <h6 className="font-normal text-gray-500 hover:text-school-blue-600 transition-colors cursor-default">school van service in Powai</h6>
-            <h6 className="font-normal text-gray-500 hover:text-school-blue-600 transition-colors cursor-default">school van service in Navi Mumbai</h6>
-            <h6 className="font-normal text-gray-500 hover:text-school-blue-600 transition-colors cursor-default">school pickup and drop in Thane</h6>
-            <h6 className="font-normal text-gray-500 hover:text-school-blue-600 transition-colors cursor-default">school transport service in Mira Road</h6>
             <h6 className="font-normal text-gray-500 hover:text-school-blue-600 transition-colors cursor-default">school van service in Dadar</h6>
             <h6 className="font-normal text-gray-500 hover:text-school-blue-600 transition-colors cursor-default">school van service in Prabhadevi</h6>
             <h6 className="font-normal text-gray-500 hover:text-school-blue-600 transition-colors cursor-default">school van service in Mahim</h6>
