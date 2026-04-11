@@ -451,7 +451,7 @@ const About = () => {
             <h2 className="text-4xl font-bold font-manrope">
               Trusted by Mumbai Families
             </h2>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+            <div className="grid grid-cols-2 md:grid-cols-3 gap-8 justify-items-center max-w-3xl mx-auto w-full">
               <div className="text-center">
                 <div className="text-4xl font-bold mb-2">200+</div>
                 <div className="text-lg opacity-90">Happy Students</div>
@@ -460,8 +460,7 @@ const About = () => {
                 <div className="text-4xl font-bold mb-2">15+</div>
                 <div className="text-lg opacity-90">Years Experience</div>
               </div>
-             
-              <div className="text-center">
+              <div className="text-center col-span-2 md:col-span-1">
                 <div className="text-4xl font-bold mb-2">100%</div>
                 <div className="text-lg opacity-90">Safety Record</div>
               </div>
