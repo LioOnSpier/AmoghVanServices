@@ -26,6 +26,18 @@ async function uploadToCloudinary(
   folder: string,
   onProgress?: (pct: number) => void
 ): Promise<string> {
+  if (!CLOUD_NAME) {
+    throw new Error(
+      "Cloudinary cloud name is not configured. " +
+      "Add VITE_CLOUDINARY_CLOUD_NAME to your Vercel environment variables."
+    );
+  }
+  if (!UPLOAD_PRESET) {
+    throw new Error(
+      "Cloudinary upload preset is not configured. " +
+      "Add VITE_CLOUDINARY_UPLOAD_PRESET to your Vercel environment variables."
+    );
+  }
   const url = `https://api.cloudinary.com/v1_1/${CLOUD_NAME}/image/upload`;
 
   const formData = new FormData();
