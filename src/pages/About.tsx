@@ -453,17 +453,14 @@ const About = () => {
             </h2>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
               <div className="text-center">
-                <div className="text-4xl font-bold mb-2">500+</div>
+                <div className="text-4xl font-bold mb-2">200+</div>
                 <div className="text-lg opacity-90">Happy Students</div>
               </div>
               <div className="text-center">
                 <div className="text-4xl font-bold mb-2">15+</div>
                 <div className="text-lg opacity-90">Years Experience</div>
               </div>
-              <div className="text-center">
-                <div className="text-4xl font-bold mb-2">50+</div>
-                <div className="text-lg opacity-90">School Partnerships</div>
-              </div>
+             
               <div className="text-center">
                 <div className="text-4xl font-bold mb-2">100%</div>
                 <div className="text-lg opacity-90">Safety Record</div>
