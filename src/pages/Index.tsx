@@ -68,7 +68,7 @@ const Index = () => {
 
 
     <><meta name="google-site-verification" content="rtZaXDic-e3XFVcxS3Jo0zO_VG-LV3fg7bR9K39PsYA" />
-
+      <meta name="google-adsense-account" content="ca-pub-9093280985813545"></meta>
       <div className="min-h-screen bg-gradient-to-b from-blue-50 to-white">
         <SEO
           title="Amogh Van/Bus Services - Safe & Reliable School Transportation in Mumbai"
