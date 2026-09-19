@@ -21,13 +21,12 @@ import {
 } from "lucide-react";
 import { toast } from "sonner";
 import SEO from "@/components/SEO";
-import { getBlogBySlug, getPublishedBlogs, Blog } from "@/lib/firestore";
-import { Timestamp } from "firebase/firestore";
+import { getPostBySlug, getRelatedPosts, type Post } from "@/lib/posts";
 
 const BlogPostPage = () => {
   const { slug } = useParams<{ slug: string }>();
-  const [post, setPost] = useState<Blog | null>(null);
-  const [recentPosts, setRecentPosts] = useState<Blog[]>([]);
+  const [post, setPost] = useState<Post | null>(null);
+  const [recentPosts, setRecentPosts] = useState<Post[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -35,8 +34,8 @@ const BlogPostPage = () => {
       if (!slug) return;
       try {
         const [postData, recent] = await Promise.all([
-          getBlogBySlug(slug).catch(() => null),
-          getPublishedBlogs().catch(() => []),
+          getPostBySlug(slug).catch(() => null),
+          getRelatedPosts(slug).catch(() => []),
         ]);
 
         if (!postData) {
@@ -46,7 +45,7 @@ const BlogPostPage = () => {
         }
 
         setPost(postData);
-        setRecentPosts(recent.filter((p) => p.id !== postData.id).slice(0, 3));
+        setRecentPosts(recent);
       } catch {
         toast.error("Failed to load blog post. Please try again later.");
       } finally {
@@ -57,9 +56,9 @@ const BlogPostPage = () => {
     fetchPost();
   }, [slug]);
 
-  const formatDate = (ts: Timestamp | null) => {
-    if (!ts) return "";
-    return ts.toDate().toLocaleDateString("en-US", {
+  const formatDate = (date: Date | null) => {
+    if (!date) return "";
+    return date.toLocaleDateString("en-US", {
       year: "numeric",
       month: "long",
       day: "numeric",
@@ -175,8 +174,8 @@ const BlogPostPage = () => {
         url: "https://amoghvanservices.in/logo.jpg",
       },
     },
-    datePublished: post.publishedAt?.toDate().toISOString(),
-    dateModified: post.updatedAt?.toDate().toISOString() ?? post.publishedAt?.toDate().toISOString(),
+    datePublished: post.publishedAt?.toISOString(),
+    dateModified: post.publishedAt?.toISOString(),
     mainEntityOfPage: {
       "@type": "WebPage",
       "@id": `https://amoghvanservices.in/blog/${post.slug}`,

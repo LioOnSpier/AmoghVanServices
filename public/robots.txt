@@ -2,22 +2,20 @@
 # https://amoghvanservices.in
 
 User-agent: *
-
-# Allow all public pages
 Allow: /
-Allow: /about
-Allow: /blog
-Allow: /contact
-Allow: /register
 
-# Block admin panel from indexing
+# Admin panel — not for indexing
 Disallow: /admin
 Disallow: /admin/
-Disallow: /admin/dashboard
-Disallow: /admin/blog/
 
-# Block build artifacts
+# Build artifacts
 Disallow: /dist/
 
-# Sitemap location
+# Google AdSense crawler needs access to every page it may serve ads on.
+User-agent: Mediapartners-Google
+Allow: /
+
+User-agent: AdsBot-Google
+Allow: /
+
 Sitemap: https://amoghvanservices.in/sitemap.xml

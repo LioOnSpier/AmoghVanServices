@@ -910,14 +910,23 @@ Submitted on: ${new Date().toLocaleString()}
                               className="text-sm leading-relaxed"
                             >
                               I accept the{" "}
-                              <span className="text-school-blue-600 underline cursor-pointer">
+                              <Link
+                                to="/terms"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="text-school-blue-600 underline"
+                              >
                                 Terms of Service
-                              </span>{" "}
-                              and
-                              <span className="text-school-blue-600 underline cursor-pointer">
-                                {" "}
+                              </Link>{" "}
+                              and{" "}
+                              <Link
+                                to="/privacy-policy"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="text-school-blue-600 underline"
+                              >
                                 Privacy Policy
-                              </span>
+                              </Link>
                               . I understand the transportation policies and
                               safety procedures. *
                             </Label>

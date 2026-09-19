@@ -9,7 +9,7 @@ const LocalBusinessSchema = () => {
     "url": "https://amoghvanservices.in",
     "logo": {
       "@type": "ImageObject",
-      "url": "https://amoghvanservices.in/logo.jpg",
+      "url": "https://amoghvanservices.in/logo.png",
       "width": 400,
       "height": 400
     },

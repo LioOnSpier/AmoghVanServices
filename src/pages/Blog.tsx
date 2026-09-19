@@ -20,16 +20,15 @@ import {
 } from "lucide-react";
 import { toast } from "sonner";
 import SEO from "@/components/SEO";
-import { getPublishedBlogs, type Blog } from "@/lib/firestore";
-import { Timestamp } from "firebase/firestore";
+import { getAllPosts, type Post } from "@/lib/posts";
 
 const Blog = () => {
-  const [posts, setPosts] = useState<Blog[]>([]);
+  const [posts, setPosts] = useState<Post[]>([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    getPublishedBlogs()
+    getAllPosts()
       .then(setPosts)
       .catch(() =>
         toast.error(
@@ -45,9 +44,9 @@ const Blog = () => {
       post.summary.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
-  const formatDate = (ts: Timestamp | null) => {
-    if (!ts) return "";
-    return ts.toDate().toLocaleDateString("en-IN", {
+  const formatDate = (date: Date | null) => {
+    if (!date) return "";
+    return date.toLocaleDateString("en-IN", {
       day: "2-digit",
       month: "short",
       year: "numeric",
@@ -96,8 +95,8 @@ const Blog = () => {
         position: index + 1,
         headline: post.title,
         description: post.summary,
-        url: `https://amoghvanservices.com/blog/${post.slug}`,
-        datePublished: post.publishedAt?.toDate().toISOString(),
+        url: `https://amoghvanservices.in/blog/${post.slug}`,
+        datePublished: post.publishedAt?.toISOString(),
         author: {
           "@type": "Person",
           name: post.authorName || "Amogh Van Services",

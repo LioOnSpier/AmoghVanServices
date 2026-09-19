@@ -39,7 +39,7 @@ const Index = () => {
     "@type": "Organization",
     name: "Amogh Van/Bus Services",
     url: "https://amoghvanservices.in",
-    logo: "https://amoghvanservices.in/logo.jpg",
+    logo: "https://amoghvanservices.in/logo.png",
     description:
       "Mumbai's most trusted school transportation service since 2010, providing safe and reliable van & bus services for students",
     founder: {
@@ -67,9 +67,9 @@ const Index = () => {
   return (
 
 
-    <><meta name="google-site-verification" content="rtZaXDic-e3XFVcxS3Jo0zO_VG-LV3fg7bR9K39PsYA" />
-      <meta name="google-adsense-account" content="ca-pub-9093280985813545"></meta>
-      <div className="min-h-screen bg-gradient-to-b from-blue-50 to-white">
+    // Search Console and AdSense verification tags live in index.html, so
+    // they sit in the static head of every prerendered page.
+    <div className="min-h-screen bg-gradient-to-b from-blue-50 to-white">
         <SEO
           title="Amogh Van/Bus Services - Safe & Reliable School Transportation in Mumbai"
           description="Mumbai's most trusted school transportation service since 2010. Safe, reliable van & bus services for students in Prabhadevi, Dadar West. GPS tracking, trained drivers, 500+ satisfied families. Call 9870525637"
@@ -629,7 +629,7 @@ const Index = () => {
                   </div>
                   <div className="flex items-center">
                     <Mail className="h-4 w-4 mr-3" />
-                    info@amoghservices.com
+                    amoghvanservices@gmail.com
                   </div>
                   <div className="flex items-start">
                     <MapPin className="h-4 w-4 mr-3 mt-1" />
@@ -646,7 +646,7 @@ const Index = () => {
             </div>
           </div>
         </footer>
-      </div></>
+      </div>
   );
 };
 

@@ -17,6 +17,9 @@ import Gallery from "./pages/Gallery";
 import AdminLogin from "./pages/AdminLogin";
 import AdminDashboard from "./pages/admin/AdminDashboard";
 import BlogEditor from "./pages/admin/BlogEditor";
+import PrivacyPolicy from "./pages/legal/PrivacyPolicy";
+import Terms from "./pages/legal/Terms";
+import Disclaimer from "./pages/legal/Disclaimer";
 import NotFound from "./pages/NotFound";
 import ErrorBoundary from "@/components/ErrorBoundary";
 
@@ -38,6 +41,11 @@ const App = () => (
               <Route path="/contact" element={<Contact />} />
               <Route path="/register" element={<StudentRegistration />} />
               <Route path="/gallery" element={<Gallery />} />
+
+              {/* Policy pages */}
+              <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+              <Route path="/terms" element={<Terms />} />
+              <Route path="/disclaimer" element={<Disclaimer />} />
               <Route
                 path="/blog"
                 element={
