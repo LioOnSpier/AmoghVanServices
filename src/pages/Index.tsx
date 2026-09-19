@@ -1,3 +1,4 @@
+import SiteFooter from "@/components/SiteFooter";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -567,85 +568,7 @@ const Index = () => {
         <SeoKeywordsList />
 
         {/* Footer */}
-        <footer id="contact" className="bg-gray-900 text-white py-16">
-          <div className="section-container">
-            <div className="grid lg:grid-cols-4 gap-8">
-              <div className="space-y-4">
-                <div className="flex items-center space-x-3">
-                  <div className="bg-school-yellow-500 p-2 rounded-lg">
-                    <Bus className="h-6 w-6 text-white" />
-                  </div>
-                  <span className="text-xl font-company-name">
-                    Amogh Van/Bus Services
-                  </span>
-                </div>
-                <p className="text-gray-400">
-                  Founded by Rajesh Kumar J Kharwar. Providing safe, reliable
-                  school transportation services in Mumbai and surrounding areas
-                  since 2010.
-                </p>
-                <div className="flex space-x-4">
-                  <a
-                    href="tel:9870525637"
-                    className="bg-gray-800 p-2 rounded-lg hover:bg-school-yellow-500 transition-colors cursor-pointer"
-                  >
-                    <Phone className="h-5 w-5" />
-                  </a>
-                  <a
-                    href="mailto:info@amoghservices.com"
-                    className="bg-gray-800 p-2 rounded-lg hover:bg-school-yellow-500 transition-colors cursor-pointer"
-                  >
-                    <Mail className="h-5 w-5" />
-                  </a>
-                </div>
-              </div>
-
-              <div>
-                <h4 className="font-semibold mb-4">Services</h4>
-                <ul className="space-y-2 text-gray-400">
-                  <li>Daily School Routes</li>
-                  <li>Field Trips</li>
-                  <li>Private Transportation</li>
-                  <li>Special Needs Support</li>
-                </ul>
-              </div>
-
-              <div>
-                <h4 className="font-semibold mb-4">Company</h4>
-                <ul className="space-y-2 text-gray-400">
-                  <li>About Us</li>
-                  <li>Safety Standards</li>
-                  <li>Careers</li>
-                  <li>Contact</li>
-                </ul>
-              </div>
-
-              <div>
-                <h4 className="font-semibold mb-4">Contact Info</h4>
-                <div className="space-y-3 text-gray-400">
-                  <div className="flex items-center">
-                    <Phone className="h-4 w-4 mr-3" />
-                    9870525637 / 9321025627
-                  </div>
-                  <div className="flex items-center">
-                    <Mail className="h-4 w-4 mr-3" />
-                    amoghvanservices@gmail.com
-                  </div>
-                  <div className="flex items-start">
-                    <MapPin className="h-4 w-4 mr-3 mt-1" />
-                    Prabhadevi, Dadar West
-                    <br />
-                    Mumbai, Maharashtra
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div className="border-t border-gray-800 mt-12 pt-8 text-center text-gray-400">
-              <p>&copy; 2025 Amogh Van/Bus Services. All rights reserved.</p>
-            </div>
-          </div>
-        </footer>
+        <SiteFooter />
       </div>
   );
 };

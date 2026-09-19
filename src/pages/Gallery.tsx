@@ -1,3 +1,4 @@
+import SiteFooter from "@/components/SiteFooter";
 import React, { useState } from "react";
 import SEO from "@/components/SEO";
 import { Badge } from "@/components/ui/badge";
@@ -77,11 +78,7 @@ const Gallery = () => {
       </main>
 
       {/* Reused Footer Section Simplified */}
-      <footer className="bg-gray-900 text-white py-8 mt-auto">
-        <div className="section-container text-center text-gray-400">
-          <p>&copy; 2025 Amogh Van/Bus Services. All rights reserved.</p>
-        </div>
-      </footer>
+      <SiteFooter />
     </div>
   );
 };

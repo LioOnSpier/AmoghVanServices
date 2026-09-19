@@ -1,3 +1,4 @@
+import SiteFooter from "@/components/SiteFooter";
 import { Button } from "@/components/ui/button";
 import { CONTACT } from "@/data/constants";
 import {
@@ -60,7 +61,7 @@ const About = () => {
         title="About Amogh Van/Bus Services - 15+ Years of Safe School Transportation in Mumbai"
         description="Learn about Amogh Van/Bus Services, founded by Rajesh Kumar J Kharwar in 2010. 15+ years of experience providing safe, reliable school transportation in Mumbai. Serving 500+ families with 100% safety record."
         keywords="about Amogh Van Services, Rajesh Kumar J Kharwar, school transport Mumbai history, experienced school bus service Mumbai, trusted school transportation Mumbai, school transport company profile"
-        canonicalUrl="https://amoghvanservices.com/about"
+        canonicalUrl="https://amoghvanservices.in/about"
         schema={aboutSchema}
       />
       {/* Navigation */}
@@ -577,6 +578,7 @@ const About = () => {
           </div>
         </div>
       </section>
+      <SiteFooter />
     </div>
   );
 };

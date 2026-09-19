@@ -1,3 +1,4 @@
+import SiteFooter from "@/components/SiteFooter";
 import { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
@@ -459,6 +460,7 @@ const BlogPostPage = () => {
           </div>
         </div>
       </div>
+      <SiteFooter />
     </div>
   );
 };

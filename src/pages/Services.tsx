@@ -1,3 +1,4 @@
+import SiteFooter from "@/components/SiteFooter";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Menu, X, Bus, Calendar, Users, CheckCircle } from "lucide-react";
@@ -219,11 +220,7 @@ const Services = () => {
       <SeoKeywordsList />
 
       {/* Simple Footer */}
-      <footer className="bg-gray-900 text-white py-8 mt-auto">
-        <div className="section-container text-center text-gray-400">
-          <p>&copy; 2025 Amogh Van/Bus Services. All rights reserved.</p>
-        </div>
-      </footer>
+      <SiteFooter />
     </div>
   );
 };

@@ -4,8 +4,19 @@ RewriteEngine On
 # Handle Angular and React Router
 RewriteBase /
 
-# Handle client-side routing
 RewriteRule ^index\.html$ - [L]
+
+# --- Prerendered pages ---------------------------------------------------
+# The build writes each route to <route>/index.html. Serve that file directly
+# so crawlers receive the HTML at the canonical URL with a 200, instead of
+# being bounced through mod_dir's trailing-slash 301 on every page.
+RewriteCond %{REQUEST_URI} !^/$
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{DOCUMENT_ROOT}%{REQUEST_URI}/index.html -f
+RewriteRule ^(.*?)/?$ /$1/index.html [L]
+
+# --- SPA fallback --------------------------------------------------------
+# Anything with no prerendered file falls through to the client-side router.
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule . /index.html [L]
@@ -48,6 +59,16 @@ RewriteRule . /index.html [L]
     ExpiresByType image/svg+xml "access plus 1 year"
     ExpiresByType font/woff "access plus 1 year"
     ExpiresByType font/woff2 "access plus 1 year"
+
+    # Prerendered HTML must never be cached long: it references hashed asset
+    # filenames that change on every deploy.
+    ExpiresByType text/html "access plus 0 seconds"
+</IfModule>
+
+<IfModule mod_headers.c>
+    <FilesMatch "\.html$">
+        Header set Cache-Control "no-cache, must-revalidate"
+    </FilesMatch>
 </IfModule>
 
 # Security headers

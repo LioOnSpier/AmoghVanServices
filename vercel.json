@@ -1,8 +1,106 @@
 {
+  "cleanUrls": false,
+  "trailingSlash": false,
   "rewrites": [
+    {
+      "source": "/about",
+      "destination": "/about/index.html"
+    },
+    {
+      "source": "/services",
+      "destination": "/services/index.html"
+    },
+    {
+      "source": "/gallery",
+      "destination": "/gallery/index.html"
+    },
+    {
+      "source": "/blog",
+      "destination": "/blog/index.html"
+    },
+    {
+      "source": "/contact",
+      "destination": "/contact/index.html"
+    },
+    {
+      "source": "/register",
+      "destination": "/register/index.html"
+    },
+    {
+      "source": "/privacy-policy",
+      "destination": "/privacy-policy/index.html"
+    },
+    {
+      "source": "/terms",
+      "destination": "/terms/index.html"
+    },
+    {
+      "source": "/disclaimer",
+      "destination": "/disclaimer/index.html"
+    },
+    {
+      "source": "/blog/how-to-choose-school-van-service-mumbai",
+      "destination": "/blog/how-to-choose-school-van-service-mumbai/index.html"
+    },
+    {
+      "source": "/blog/helping-anxious-child-first-school-bus-journey",
+      "destination": "/blog/helping-anxious-child-first-school-bus-journey/index.html"
+    },
+    {
+      "source": "/blog/gps-tracking-school-transport-what-it-does",
+      "destination": "/blog/gps-tracking-school-transport-what-it-does/index.html"
+    },
+    {
+      "source": "/blog/monsoon-school-commute-safety-mumbai",
+      "destination": "/blog/monsoon-school-commute-safety-mumbai/index.html"
+    },
+    {
+      "source": "/blog/child-motion-sickness-school-bus-what-helps",
+      "destination": "/blog/child-motion-sickness-school-bus-what-helps/index.html"
+    },
+    {
+      "source": "/blog/school-bus-safety-rules-india-parent-checklist",
+      "destination": "/blog/school-bus-safety-rules-india-parent-checklist/index.html"
+    },
+    {
+      "source": "/blog/summer-heat-school-commute-safety-mumbai",
+      "destination": "/blog/summer-heat-school-commute-safety-mumbai/index.html"
+    },
+    {
+      "source": "/blog/teaching-children-school-bus-safety-by-age",
+      "destination": "/blog/teaching-children-school-bus-safety-by-age/index.html"
+    },
+    {
+      "source": "/blog/school-bus-services-safe-and-reliable-transportation-for-students",
+      "destination": "/blog/school-bus-services-safe-and-reliable-transportation-for-students/index.html"
+    },
+    {
+      "source": "/blog/benefits-of-group-transport-for-school-activities",
+      "destination": "/blog/benefits-of-group-transport-for-school-activities/index.html"
+    },
     {
       "source": "/(.*)",
       "destination": "/index.html"
+    }
+  ],
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=0, must-revalidate"
+        }
+      ]
+    },
+    {
+      "source": "/assets/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
+      ]
     }
   ]
 }

@@ -1,3 +1,4 @@
+import SiteFooter from "@/components/SiteFooter";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import {
@@ -358,7 +359,7 @@ Submitted on: ${new Date().toLocaleString()}
         title="Student Registration - Amogh Van/Bus Services | Register for School Transport Mumbai"
         description="Register your child for safe and reliable school transportation in Mumbai. Quick online registration for Amogh Van/Bus Services. Serving Prabhadevi, Dadar West. GPS tracking, trained drivers. Start now!"
         keywords="student registration Mumbai, school transport registration, school bus registration Mumbai, school van registration, Mumbai school transport enrollment"
-        canonicalUrl="https://amoghvanservices.com/register"
+        canonicalUrl="https://amoghvanservices.in/register"
         noIndex={false}
       />
 
@@ -995,6 +996,7 @@ Submitted on: ${new Date().toLocaleString()}
           )}
         </div>
       </div>
+      <SiteFooter />
     </div>
   );
 };

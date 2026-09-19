@@ -21,7 +21,38 @@ import http from "node:http";
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
-import puppeteer from "puppeteer";
+
+/**
+ * Launch a browser that works both locally and on a build server.
+ *
+ * Vercel's build image has no system Chromium and lacks the shared libraries
+ * (libnspr4, libnss3) that Puppeteer's bundled Chrome links against, so a
+ * plain `puppeteer.launch()` dies there with "error while loading shared
+ * libraries". @sparticuz/chromium ships a self-contained build for exactly
+ * that environment; locally we keep using the full Puppeteer download.
+ */
+async function launchBrowser() {
+  const serverless = Boolean(
+    process.env.VERCEL || process.env.AWS_LAMBDA_FUNCTION_NAME || process.env.NETLIFY
+  );
+
+  if (serverless) {
+    const chromium = (await import("@sparticuz/chromium")).default;
+    const puppeteerCore = (await import("puppeteer-core")).default;
+    console.log("  using @sparticuz/chromium (serverless build environment)");
+    return puppeteerCore.launch({
+      args: [...chromium.args, "--no-sandbox", "--disable-setuid-sandbox"],
+      executablePath: await chromium.executablePath(),
+      headless: true,
+    });
+  }
+
+  const puppeteer = (await import("puppeteer")).default;
+  return puppeteer.launch({
+    headless: true,
+    args: ["--no-sandbox", "--disable-setuid-sandbox"],
+  });
+}
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(__dirname, "..");
@@ -165,10 +196,7 @@ async function main() {
   const server = createServer();
   await new Promise((resolve) => server.listen(PORT, resolve));
 
-  const browser = await puppeteer.launch({
-    headless: true,
-    args: ["--no-sandbox", "--disable-setuid-sandbox"],
-  });
+  const browser = await launchBrowser();
 
   console.log(`\nPrerendering ${routes.length} routes…\n`);
   let ok = 0;
@@ -239,6 +267,57 @@ async function main() {
   }
 
   writeSitemap(routes);
+  writeVercelConfig(routes);
+}
+
+/**
+ * Regenerate vercel.json.
+ *
+ * Vercel is configured with a catch-all rewrite to /index.html for the SPA.
+ * Left alone, that catch-all can swallow requests for the prerendered pages
+ * and serve the empty shell instead — a silent regression that looks fine in
+ * the build log. Emitting one explicit rewrite per prerendered route ahead of
+ * the catch-all removes the ambiguity: rewrites match in order, first wins.
+ *
+ * Vercel reads this file at the START of a deployment, before the build runs,
+ * so the regenerated file must be committed for it to take effect.
+ */
+function writeVercelConfig(routes) {
+  const rewrites = routes
+    .filter((r) => r !== "/")
+    .map((r) => ({ source: r, destination: `${r}/index.html` }));
+
+  // SPA fallback for anything not prerendered.
+  rewrites.push({ source: "/(.*)", destination: "/index.html" });
+
+  const config = {
+    cleanUrls: false,
+    trailingSlash: false,
+    rewrites,
+    headers: [
+      {
+        // Prerendered HTML references hashed asset filenames that change on
+        // every deploy, so it must always be revalidated.
+        source: "/(.*)",
+        headers: [
+          { key: "Cache-Control", value: "public, max-age=0, must-revalidate" },
+        ],
+      },
+      {
+        source: "/assets/(.*)",
+        headers: [
+          { key: "Cache-Control", value: "public, max-age=31536000, immutable" },
+        ],
+      },
+    ],
+  };
+
+  fs.writeFileSync(
+    path.join(ROOT, "vercel.json"),
+    JSON.stringify(config, null, 2) + "\n",
+    "utf8"
+  );
+  console.log(`vercel.json written with ${rewrites.length} rewrites.`);
 }
 
 /** Regenerate sitemap.xml so it always matches what was actually prerendered. */

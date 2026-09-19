@@ -1,3 +1,4 @@
+import SiteFooter from "@/components/SiteFooter";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
@@ -111,7 +112,7 @@ const Blog = () => {
         title="Blog - Amogh Van/Bus Services | School Transportation Tips & News Mumbai"
         description="Read the latest blog posts from Amogh Van/Bus Services about school transportation safety, tips for parents, and news about our services in Mumbai."
         keywords="school transport blog Mumbai, school bus safety tips, parent transportation guide Mumbai"
-        canonicalUrl="https://amoghvanservices.com/blog"
+        canonicalUrl="https://amoghvanservices.in/blog"
         schema={blogSchema}
       />
 
@@ -365,6 +366,7 @@ const Blog = () => {
           </Link>
         </div>
       </section>
+      <SiteFooter />
     </div>
   );
 };
