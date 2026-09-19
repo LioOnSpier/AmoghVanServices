@@ -29,10 +29,8 @@ import {
   Send,
   CheckCircle,
   AlertCircle,
-  Calendar,
-  Users,
-  FileText,
   ArrowRight,
+  Zap,
 } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
@@ -227,7 +225,10 @@ Please respond to the contact within 24 hours as promised.
       </nav>
 
       {/* Hero Section */}
-      <section className="py-20 bg-gradient-to-br from-school-yellow-50 to-school-blue-50">
+      {/* pb-10 instead of py-20: the hero's bottom padding stacked on the
+          next section's top padding, leaving a large dead band above the
+          contact cards. */}
+      <section className="pt-20 pb-10 bg-gradient-to-br from-school-yellow-50 to-school-blue-50">
         <div className="section-container">
           <div className="text-center space-y-6 max-w-4xl mx-auto">
             <Badge className="bg-school-blue-100 text-school-blue-700">
@@ -237,7 +238,7 @@ Please respond to the contact within 24 hours as promised.
             <h1 className="text-5xl font-bold text-gray-900 font-manrope">
               Contact Us
             </h1>
-            <h2 className="text-2xl text-school-blue-600 font-semibold mt-4 mb-4">
+            <h2 className="text-2xl text-gray-600 font-semibold mt-4 mb-4">
               Ready to book school van service in Mumbai?
             </h2>
             <p className="text-xl text-gray-600 leading-relaxed">
@@ -249,7 +250,7 @@ Please respond to the contact within 24 hours as promised.
       </section>
 
       {/* Contact Methods */}
-      <section className="py-20 bg-white">
+      <section className="pt-10 pb-20 bg-white">
         <div className="section-container">
           <div className="grid md:grid-cols-3 gap-8 mb-20">
             <Card className="text-center shadow-lg border-0 card-hover">
@@ -276,7 +277,7 @@ Please respond to the contact within 24 hours as promised.
                   </a>
                 </div>
                 <p className="text-sm text-gray-500 mt-4">
-                  Available Mon-Sat, 7:00 AM - 7:00 PM
+                  Available Mon–Sat, 7:00 am – 7:00 pm
                 </p>
               </CardContent>
             </Card>
@@ -352,7 +353,7 @@ Please respond to the contact within 24 hours as promised.
                           placeholder="Enter your full name"
                         />
                         {errors.name && (
-                          <p className="text-red-500 text-sm mt-1 flex items-center">
+                          <p className="text-school-red-600 text-sm mt-1 flex items-center">
                             <AlertCircle className="h-4 w-4 mr-1" />
                             {errors.name.message}
                           </p>
@@ -368,7 +369,7 @@ Please respond to the contact within 24 hours as promised.
                           placeholder="Enter your phone number"
                         />
                         {errors.phone && (
-                          <p className="text-red-500 text-sm mt-1 flex items-center">
+                          <p className="text-school-red-600 text-sm mt-1 flex items-center">
                             <AlertCircle className="h-4 w-4 mr-1" />
                             {errors.phone.message}
                           </p>
@@ -386,7 +387,7 @@ Please respond to the contact within 24 hours as promised.
                         placeholder="Enter your email address"
                       />
                       {errors.email && (
-                        <p className="text-red-500 text-sm mt-1 flex items-center">
+                        <p className="text-school-red-600 text-sm mt-1 flex items-center">
                           <AlertCircle className="h-4 w-4 mr-1" />
                           {errors.email.message}
                         </p>
@@ -422,7 +423,7 @@ Please respond to the contact within 24 hours as promised.
                         </SelectContent>
                       </Select>
                       {errors.inquiryType && (
-                        <p className="text-red-500 text-sm mt-1 flex items-center">
+                        <p className="text-school-red-600 text-sm mt-1 flex items-center">
                           <AlertCircle className="h-4 w-4 mr-1" />
                           {errors.inquiryType.message}
                         </p>
@@ -438,7 +439,7 @@ Please respond to the contact within 24 hours as promised.
                         placeholder="Brief subject of your message"
                       />
                       {errors.subject && (
-                        <p className="text-red-500 text-sm mt-1 flex items-center">
+                        <p className="text-school-red-600 text-sm mt-1 flex items-center">
                           <AlertCircle className="h-4 w-4 mr-1" />
                           {errors.subject.message}
                         </p>
@@ -455,7 +456,7 @@ Please respond to the contact within 24 hours as promised.
                         rows={5}
                       />
                       {errors.message && (
-                        <p className="text-red-500 text-sm mt-1 flex items-center">
+                        <p className="text-school-red-600 text-sm mt-1 flex items-center">
                           <AlertCircle className="h-4 w-4 mr-1" />
                           {errors.message.message}
                         </p>
@@ -465,7 +466,7 @@ Please respond to the contact within 24 hours as promised.
                     <Button
                       type="submit"
                       disabled={isSubmitting}
-                      className="btn-primary w-full flex items-center justify-center"
+                      className="btn-primary h-12 w-full sm:w-auto sm:min-w-[220px] flex items-center justify-center"
                     >
                       {isSubmitting ? (
                         <>
@@ -498,11 +499,11 @@ Please respond to the contact within 24 hours as promised.
                   <div className="space-y-3">
                     <div className="flex justify-between">
                       <span className="text-gray-600">Monday - Friday</span>
-                      <span className="font-semibold">7:00 AM - 7:00 PM</span>
+                      <span className="font-semibold">7:00 am – 7:00 pm</span>
                     </div>
                     <div className="flex justify-between">
                       <span className="text-gray-600">Saturday</span>
-                      <span className="font-semibold">8:00 AM - 5:00 PM</span>
+                      <span className="font-semibold">8:00 am – 5:00 pm</span>
                     </div>
                     <div className="flex justify-between">
                       <span className="text-gray-600">Sunday</span>
@@ -520,14 +521,18 @@ Please respond to the contact within 24 hours as promised.
               {/* Quick Actions */}
               <Card className="shadow-lg border-0">
                 <CardHeader>
-                  <CardTitle>Quick Actions</CardTitle>
+                  <CardTitle className="flex items-center">
+                    <Zap className="mr-2 h-5 w-5" aria-hidden="true" />
+                    Quick Actions
+                  </CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-4">
-                  <Link to="/register">
-                    <Button variant="outline" className="w-full justify-start">
-                      <Users className="mr-2 h-4 w-4" />
-                      Register Your Student
-                    </Button>
+                  {/* Same signature as every other Register CTA: brand
+                      orange fill, ArrowRight, same label. It was a ghost
+                      button with a Users icon. */}
+                  <Link to="/register" className="btn-primary flex w-full items-center justify-center">
+                    Register Your Student
+                    <ArrowRight className="ml-2 h-4 w-4" aria-hidden="true" />
                   </Link>
                 </CardContent>
               </Card>
@@ -535,7 +540,8 @@ Please respond to the contact within 24 hours as promised.
               {/* Important Information */}
               <Card className="shadow-lg border-0 bg-school-yellow-50">
                 <CardHeader>
-                  <CardTitle className="text-school-yellow-700">
+                  <CardTitle className="flex items-center text-school-yellow-700">
+                    <AlertCircle className="mr-2 h-5 w-5" aria-hidden="true" />
                     Important Information
                   </CardTitle>
                 </CardHeader>
@@ -653,9 +659,11 @@ Please respond to the contact within 24 hours as promised.
             reliable student transportation.
           </p>
           <Link to="/register">
-            <Button className="bg-white text-school-blue-600 hover:bg-gray-50 font-semibold px-8 py-4 text-lg">
-              Register Your Student Today
-              <ArrowRight className="ml-2 h-5 w-5" />
+            {/* Inverse of the same signature: solid orange is unreadable on
+                the orange end of gradient-bg, so the fill and text swap. */}
+            <Button className="bg-white text-school-yellow-600 hover:bg-gray-50 font-semibold px-8 py-4 text-lg">
+              Register Your Student
+              <ArrowRight className="ml-2 h-5 w-5" aria-hidden="true" />
             </Button>
           </Link>
         </div>

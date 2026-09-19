@@ -6,19 +6,19 @@
 @layer base {
   :root {
     --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    --foreground: 221 39% 11%; /* gray-900, matches the page ramp */
     --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card-foreground: 221 39% 11%;
     --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --popover-foreground: 221 39% 11%;
     --primary: 43 96% 56%; /* School bus yellow */
     --primary-foreground: 25 95% 53%;
     --secondary: 210 40% 98%;
-    --secondary-foreground: 222.2 84% 4.9%;
+    --secondary-foreground: 221 39% 11%;
     --muted: 210 40% 98%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    --muted-foreground: 220 9% 46%; /* gray-500, matches the page ramp */
     --accent: 217 91% 60%; /* Trust blue */
-    --accent-foreground: 222.2 84% 4.9%;
+    --accent-foreground: 221 39% 11%;
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
     --border: 214.3 31.8% 91.4%;
@@ -131,6 +131,26 @@
 }
 
 @layer components {
+  /*
+   * Text colour ramp — keep additions to this list.
+   * The home page had drifted to 16 distinct text colours; these are the
+   * ten it needs. Reach for an existing step before inventing a new one.
+   *
+   *   Light surfaces   text-gray-900  headings, emphasis
+   *                    text-gray-600  body copy
+   *                    text-gray-500  muted / secondary detail
+   *   Dark surfaces    text-white     headings, emphasis
+   *                    text-gray-400  body copy (gray-500 fails AA here)
+   *   Brand accents    text-school-yellow-500 / -600   primary action + accent
+   *                    text-school-blue-600            links / interactive text
+   *                    text-school-blue-700            badge text
+   *                    text-school-green-700           trust / safety badges
+   *
+   * school-blue-600 is the link colour: do not use it for headings, or the
+   * heading reads as clickable.
+   *
+   * Icon fills are not text and may use their own brand steps.
+   */
   .btn-primary {
     @apply bg-school-yellow-500 hover:bg-school-yellow-600 text-white font-semibold px-6 py-3 rounded-lg transition-all duration-200 shadow-lg hover:shadow-xl;
   }

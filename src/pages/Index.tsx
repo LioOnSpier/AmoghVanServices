@@ -240,7 +240,7 @@ const Index = () => {
                     <Button
                       variant="outline"
                       size="lg"
-                      className="border-school-blue-500 text-school-blue-600 hover:bg-school-blue-50"
+                      className="border-school-yellow-500 text-school-yellow-600 hover:bg-school-yellow-50 hover:text-school-yellow-600"
                     >
                       <Phone className="mr-2 h-5 w-5" />
                       Call Us Now
@@ -281,8 +281,17 @@ const Index = () => {
                   </div>
                 </div>
 
-                <div className="absolute top-8 right-8 bg-school-green-500 text-white p-3 rounded-full animate-pulse z-20 shadow-lg">
-                  <CheckCircle className="h-6 w-6" />
+                {/* Static trust marker, not a control. Sits fully below the
+                    card: overlapping a rotate-3 card with a level badge read
+                    as a layout error. mt-8 clears the tilted corner. */}
+                <div className="mt-8 flex justify-end">
+                  <p className="inline-flex items-center gap-2 rounded-full bg-white px-4 py-2 text-sm font-semibold text-gray-900 shadow-lg">
+                    <CheckCircle
+                      className="h-5 w-5 text-school-green-600"
+                      aria-hidden="true"
+                    />
+                    Verified drivers &amp; GPS tracked
+                  </p>
                 </div>
               </div>
             </div>
@@ -412,10 +421,12 @@ const Index = () => {
         {/* Safety Section */}
         <section id="safety" className="py-20 bg-gray-50">
           <div className="section-container">
-            <div className="grid lg:grid-cols-2 gap-12 items-center">
+            {/* items-start, not items-center: the columns are different
+                heights, so centring them left their tops misaligned. */}
+            <div className="grid lg:grid-cols-2 gap-12 items-start">
               <div className="space-y-8">
                 <div className="space-y-4">
-                  <Badge className="bg-school-red-100 text-school-red-700">
+                  <Badge className="bg-school-green-100 text-school-green-700">
                     Safety First
                   </Badge>
                   <h2 className="text-4xl font-bold text-gray-900 font-manrope">
@@ -430,7 +441,9 @@ const Index = () => {
 
                 <div className="grid grid-cols-2 gap-6">
                   <div className="bg-white p-6 rounded-xl shadow-sm">
-                    <Shield className="h-8 w-8 text-school-green-500 mb-3" />
+                    <div className="bg-school-green-100 w-12 h-12 rounded-full flex items-center justify-center mb-3">
+                      <Shield className="h-6 w-6 text-school-green-600" aria-hidden="true" />
+                    </div>
                     <h3 className="font-semibold text-gray-900 mb-2">
                       Licensed Drivers
                     </h3>
@@ -439,7 +452,9 @@ const Index = () => {
                     </p>
                   </div>
                   <div className="bg-white p-6 rounded-xl shadow-sm">
-                    <Navigation className="h-8 w-8 text-school-blue-500 mb-3" />
+                    <div className="bg-school-blue-100 w-12 h-12 rounded-full flex items-center justify-center mb-3">
+                      <Navigation className="h-6 w-6 text-school-blue-600" aria-hidden="true" />
+                    </div>
                     <h3 className="font-semibold text-gray-900 mb-2">
                       GPS Tracking
                     </h3>
@@ -448,7 +463,9 @@ const Index = () => {
                     </p>
                   </div>
                   <div className="bg-white p-6 rounded-xl shadow-sm">
-                    <Clock className="h-8 w-8 text-school-yellow-500 mb-3" />
+                    <div className="bg-school-yellow-100 w-12 h-12 rounded-full flex items-center justify-center mb-3">
+                      <Clock className="h-6 w-6 text-school-yellow-600" aria-hidden="true" />
+                    </div>
                     <h3 className="font-semibold text-gray-900 mb-2">
                       On-Time Service
                     </h3>
@@ -457,7 +474,9 @@ const Index = () => {
                     </p>
                   </div>
                   <div className="bg-white p-6 rounded-xl shadow-sm">
-                    <Award className="h-8 w-8 text-school-red-500 mb-3" />
+                    <div className="bg-school-red-100 w-12 h-12 rounded-full flex items-center justify-center mb-3">
+                      <Award className="h-6 w-6 text-school-red-600" aria-hidden="true" />
+                    </div>
                     <h3 className="font-semibold text-gray-900 mb-2">
                       Certified Vehicles
                     </h3>
@@ -553,7 +572,7 @@ const Index = () => {
                   <Button
                     variant="outline"
                     size="lg"
-                    className="border-white text-white hover:bg-white hover:text-school-blue-600"
+                    className="bg-gray-900 text-white hover:bg-gray-800 font-semibold"
                   >
                     <Phone className="mr-2 h-5 w-5" />
                     Get Quote

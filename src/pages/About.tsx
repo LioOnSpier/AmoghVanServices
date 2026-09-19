@@ -212,7 +212,7 @@ const About = () => {
               </div>
             </div>
 
-            <div className="relative">
+            <div>
               <div className="bg-gradient-to-br from-school-yellow-100 to-school-blue-100 rounded-2xl shadow-2xl p-12 flex items-center justify-center">
                 <div className="text-center space-y-4">
                   <div className="bg-school-yellow-500 w-24 h-24 rounded-full flex items-center justify-center mx-auto">
@@ -226,10 +226,12 @@ const About = () => {
                   </p>
                 </div>
               </div>
-              <div className="absolute -bottom-6 -left-6 bg-school-yellow-500 text-white p-6 rounded-xl shadow-lg">
-                <div className="text-3xl font-bold">15+</div>
-                <div className="text-sm">Years of Service</div>
-              </div>
+              {/* Sits below the card instead of straddling its corner, which
+                  clipped the card background and crowded the focal point. */}
+              <p className="mt-6 inline-flex items-baseline gap-2 bg-school-yellow-500 text-white px-6 py-4 rounded-xl shadow-lg">
+                <span className="text-3xl font-bold">15+</span>
+                <span className="text-sm">Years of Service</span>
+              </p>
             </div>
           </div>
         </div>
@@ -245,7 +247,9 @@ const About = () => {
             <h2 className="text-4xl font-bold text-gray-900 font-manrope">
               What Makes Us Different
             </h2>
-            <h3 className="text-2xl text-school-blue-600 font-semibold mt-2 mb-2">
+            {/* Muted grey, not blue: school-blue-600 is this page's link
+                colour (phone, email), so a blue heading read as clickable. */}
+            <h3 className="text-2xl text-gray-600 font-semibold mt-2 mb-2">
               The most trusted school van service near me
             </h3>
             <p className="text-xl text-gray-600 max-w-2xl mx-auto">
@@ -322,8 +326,12 @@ const About = () => {
       {/* Our Commitment Section */}
       <section className="py-20 bg-white">
         <div className="section-container">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
-            <div className="space-y-8">
+          {/* The intro copy and the three cards share one row; "Our Promise"
+              spans the full width beneath them. Previously the three stacked
+              cards towered over the left column, and items-center left a
+              large void under the promise box. */}
+          <div className="space-y-12">
+            <div className="grid lg:grid-cols-2 gap-12 items-start">
               <div className="space-y-4">
                 <Badge className="bg-school-yellow-100 text-school-yellow-700">
                   Our Commitment
@@ -344,102 +352,102 @@ const About = () => {
                 </p>
               </div>
 
-              <div className="bg-school-blue-50 p-6 rounded-xl">
-                <h3 className="text-xl font-semibold text-gray-900 mb-4 flex items-center">
-                  <Target className="h-5 w-5 mr-2 text-school-blue-600" />
-                  Our Promise to You
-                </h3>
-                <ul className="space-y-3">
-                  <li className="flex items-start space-x-3">
-                    <CheckCircle className="h-5 w-5 text-school-green-500 mt-0.5 flex-shrink-0" />
-                    <span className="text-gray-700">
-                      Punctual, reliable service every single day
-                    </span>
-                  </li>
-                  <li className="flex items-start space-x-3">
-                    <CheckCircle className="h-5 w-5 text-school-green-500 mt-0.5 flex-shrink-0" />
-                    <span className="text-gray-700">
-                      The highest safety standards with regular vehicle
-                      inspections
-                    </span>
-                  </li>
-                  <li className="flex items-start space-x-3">
-                    <CheckCircle className="h-5 w-5 text-school-green-500 mt-0.5 flex-shrink-0" />
-                    <span className="text-gray-700">
-                      Professional, caring staff who treat your child with
-                      respect
-                    </span>
-                  </li>
-                  <li className="flex items-start space-x-3">
-                    <CheckCircle className="h-5 w-5 text-school-green-500 mt-0.5 flex-shrink-0" />
-                    <span className="text-gray-700">
-                      Open communication and transparency with parents
-                    </span>
-                  </li>
-                </ul>
+              <div className="space-y-6">
+                <Card className="border-l-4 border-school-yellow-500 shadow-lg">
+                  <CardContent className="p-6">
+                    <div className="flex items-start space-x-4">
+                      <div className="bg-school-yellow-100 p-3 rounded-full">
+                        <Eye className="h-6 w-6 text-school-yellow-600" />
+                      </div>
+                      <div>
+                        <h3 className="font-semibold text-gray-900 text-lg mb-2">
+                          Our Vision
+                        </h3>
+                        <p className="text-gray-600">
+                          To be Mumbai's most trusted and preferred school
+                          transportation service, setting the standard for safety
+                          and reliability in student transport.
+                        </p>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+
+                <Card className="border-l-4 border-school-blue-500 shadow-lg">
+                  <CardContent className="p-6">
+                    <div className="flex items-start space-x-4">
+                      <div className="bg-school-blue-100 p-3 rounded-full">
+                        <Handshake className="h-6 w-6 text-school-blue-600" />
+                      </div>
+                      <div>
+                        <h3 className="font-semibold text-gray-900 text-lg mb-2">
+                          Community Partnership
+                        </h3>
+                        <p className="text-gray-600">
+                          Working closely with schools, parents, and local
+                          communities to create the safest possible environment
+                          for children's daily commute.
+                        </p>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+
+                <Card className="border-l-4 border-school-green-500 shadow-lg">
+                  <CardContent className="p-6">
+                    <div className="flex items-start space-x-4">
+                      <div className="bg-school-green-100 p-3 rounded-full">
+                        <Award className="h-6 w-6 text-school-green-600" />
+                      </div>
+                      <div>
+                        <h3 className="font-semibold text-gray-900 text-lg mb-2">
+                          Continuous Improvement
+                        </h3>
+                        <p className="text-gray-600">
+                          Constantly investing in better vehicles, training, and
+                          technology to enhance the safety and comfort of every
+                          journey.
+                        </p>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
               </div>
             </div>
 
-            <div className="space-y-6">
-              <Card className="border-l-4 border-school-yellow-500 shadow-lg">
-                <CardContent className="p-6">
-                  <div className="flex items-start space-x-4">
-                    <div className="bg-school-yellow-100 p-3 rounded-full">
-                      <Eye className="h-6 w-6 text-school-yellow-600" />
-                    </div>
-                    <div>
-                      <h4 className="font-semibold text-gray-900 text-lg mb-2">
-                        Our Vision
-                      </h4>
-                      <p className="text-gray-600">
-                        To be Mumbai's most trusted and preferred school
-                        transportation service, setting the standard for safety
-                        and reliability in student transport.
-                      </p>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-
-              <Card className="border-l-4 border-school-blue-500 shadow-lg">
-                <CardContent className="p-6">
-                  <div className="flex items-start space-x-4">
-                    <div className="bg-school-blue-100 p-3 rounded-full">
-                      <Handshake className="h-6 w-6 text-school-blue-600" />
-                    </div>
-                    <div>
-                      <h4 className="font-semibold text-gray-900 text-lg mb-2">
-                        Community Partnership
-                      </h4>
-                      <p className="text-gray-600">
-                        Working closely with schools, parents, and local
-                        communities to create the safest possible environment
-                        for children's daily commute.
-                      </p>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-
-              <Card className="border-l-4 border-school-green-500 shadow-lg">
-                <CardContent className="p-6">
-                  <div className="flex items-start space-x-4">
-                    <div className="bg-school-green-100 p-3 rounded-full">
-                      <Award className="h-6 w-6 text-school-green-600" />
-                    </div>
-                    <div>
-                      <h4 className="font-semibold text-gray-900 text-lg mb-2">
-                        Continuous Improvement
-                      </h4>
-                      <p className="text-gray-600">
-                        Constantly investing in better vehicles, training, and
-                        technology to enhance the safety and comfort of every
-                        journey.
-                      </p>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
+            <div className="bg-school-blue-50 p-6 rounded-xl">
+              <h3 className="text-xl font-semibold text-gray-900 mb-4 flex items-center">
+                <Target className="h-5 w-5 mr-2 text-school-blue-600" />
+                Our Promise to You
+              </h3>
+              <ul className="grid gap-3 sm:grid-cols-2">
+                <li className="flex items-start space-x-3">
+                  <CheckCircle className="h-5 w-5 text-school-green-500 mt-0.5 flex-shrink-0" />
+                  <span className="text-gray-600">
+                    Punctual, reliable service every single day
+                  </span>
+                </li>
+                <li className="flex items-start space-x-3">
+                  <CheckCircle className="h-5 w-5 text-school-green-500 mt-0.5 flex-shrink-0" />
+                  <span className="text-gray-600">
+                    The highest safety standards with regular vehicle
+                    inspections
+                  </span>
+                </li>
+                <li className="flex items-start space-x-3">
+                  <CheckCircle className="h-5 w-5 text-school-green-500 mt-0.5 flex-shrink-0" />
+                  <span className="text-gray-600">
+                    Professional, caring staff who treat your child with
+                    respect
+                  </span>
+                </li>
+                <li className="flex items-start space-x-3">
+                  <CheckCircle className="h-5 w-5 text-school-green-500 mt-0.5 flex-shrink-0" />
+                  <span className="text-gray-600">
+                    Open communication and transparency with parents
+                  </span>
+                </li>
+              </ul>
             </div>
           </div>
         </div>
@@ -559,17 +567,20 @@ const About = () => {
             school transportation service.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            {/* Primary carries the brand orange on a solid white fill, the
+                same inverse treatment the home page CTA uses. The secondary
+                is a solid dark fill: a white ghost button scored ~2.1:1
+                against the orange end of this gradient. */}
             <Link to="/register">
-              <Button className="bg-white text-school-blue-600 hover:bg-gray-50 font-semibold px-8 py-4 text-lg">
+              <Button className="bg-white text-school-yellow-600 hover:bg-gray-50 font-semibold px-8 py-4 text-lg">
                 Register Your Student
                 <ArrowRight className="ml-2 h-5 w-5" />
               </Button>
             </Link>
             <a href="tel:9870525637">
               <Button
-                variant="outline"
                 size="lg"
-                className="border-white text-white hover:bg-white hover:text-school-blue-600 px-8 py-4 text-lg"
+                className="bg-gray-900 text-white hover:bg-gray-800 font-semibold px-8 py-4 text-lg"
               >
                 <Phone className="mr-2 h-5 w-5" />
                 Call Now
