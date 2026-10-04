@@ -91,8 +91,11 @@ const KEYWORD_GROUPS: { title: string; items: string[] }[] = [
 const SeoKeywordsList = () => {
   const total = KEYWORD_GROUPS.reduce((n, g) => n + g.items.length, 0);
 
+  // No top margin on the wrapper: the preceding section is a full-bleed dark
+  // band, and a margin on this tinted block let the page's white background
+  // show through between the two as a stray sliver.
   return (
-    <div className="bg-gray-50 py-12 mt-10 border-t border-gray-200">
+    <div className="bg-gray-50 py-12 border-t border-gray-200">
       <div className="section-container">
         <details className="group">
           <summary className="flex cursor-pointer items-center justify-between gap-4 border-b pb-4 text-xl font-semibold text-gray-900 marker:content-none [&::-webkit-details-marker]:hidden focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-school-blue-600 focus-visible:ring-offset-2 rounded-sm">

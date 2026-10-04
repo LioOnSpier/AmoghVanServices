@@ -71,12 +71,36 @@
       "destination": "/blog/teaching-children-school-bus-safety-by-age/index.html"
     },
     {
+      "source": "/blog/school-van-vs-school-bus-vs-carpool-mumbai-comparison",
+      "destination": "/blog/school-van-vs-school-bus-vs-carpool-mumbai-comparison/index.html"
+    },
+    {
+      "source": "/blog/safe-school-field-trip-transport-checklist",
+      "destination": "/blog/safe-school-field-trip-transport-checklist/index.html"
+    },
+    {
       "source": "/blog/school-bus-services-safe-and-reliable-transportation-for-students",
       "destination": "/blog/school-bus-services-safe-and-reliable-transportation-for-students/index.html"
     },
     {
+      "source": "/blog/school-van-late-or-missed-pickup-what-to-do",
+      "destination": "/blog/school-van-late-or-missed-pickup-what-to-do/index.html"
+    },
+    {
       "source": "/blog/benefits-of-group-transport-for-school-activities",
       "destination": "/blog/benefits-of-group-transport-for-school-activities/index.html"
+    },
+    {
+      "source": "/blog/school-gate-drop-off-pickup-safety-for-parents",
+      "destination": "/blog/school-gate-drop-off-pickup-safety-for-parents/index.html"
+    },
+    {
+      "source": "/blog/school-transport-for-children-with-special-needs",
+      "destination": "/blog/school-transport-for-children-with-special-needs/index.html"
+    },
+    {
+      "source": "/blog/calm-school-morning-routine-never-miss-the-van",
+      "destination": "/blog/calm-school-morning-routine-never-miss-the-van/index.html"
     },
     {
       "source": "/(.*)",

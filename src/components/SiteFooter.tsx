@@ -15,12 +15,29 @@ import { Bus, Phone, Mail, MapPin } from "lucide-react";
  * with the link columns beside it.
  */
 const SiteFooter = () => (
-  <footer id="contact" className="bg-gray-900 text-white py-16">
-    <div className="section-container">
+  <footer
+    id="contact"
+    className="relative isolate overflow-hidden bg-gray-900 py-16 text-white"
+  >
+    {/* Same two brand glows as the CTA band, at a quarter of the strength —
+        enough to stop the footer reading as a flat black slab, not enough to
+        compete with the links. */}
+    <div
+      aria-hidden="true"
+      className="absolute inset-0 bg-[radial-gradient(50%_60%_at_10%_0%,rgba(245,158,11,0.16),transparent_60%),radial-gradient(50%_60%_at_90%_10%,rgba(59,130,246,0.18),transparent_60%)]"
+    />
+    {/* Hairline top edge: a lit seam separates the footer from whatever
+        section ends above it, dark or light. */}
+    <div
+      aria-hidden="true"
+      className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-school-yellow-500/50 to-transparent"
+    />
+
+    <div className="section-container relative">
       <div className="grid lg:grid-cols-4 gap-8">
         <div className="space-y-4">
           <div className="flex items-center space-x-3">
-            <div className="bg-school-yellow-500 p-2 rounded-lg">
+            <div className="rounded-xl bg-gradient-to-br from-school-yellow-400 to-school-yellow-600 p-2 shadow-glow-yellow">
               <Bus className="h-6 w-6 text-white" aria-hidden="true" />
             </div>
             <span className="text-xl font-company-name">

@@ -1,4 +1,5 @@
 import SiteFooter from "@/components/SiteFooter";
+import SiteNav from "@/components/SiteNav";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import {
@@ -170,65 +171,13 @@ Please respond to the contact within 24 hours as promised.
         schema={contactPageSchema}
       />
       {/* Navigation */}
-      <nav className="bg-white shadow-sm sticky top-0 z-50">
-        <div className="section-container">
-          <div className="flex items-center justify-between h-16">
-            <Link to="/" className="flex items-center space-x-3">
-              <img src="/logo.png" alt="Amogh Van/Bus Services Logo" className="h-10 w-10 object-contain rounded-lg" />
-              <span className="text-xl font-company-name text-gray-900">
-                Amogh Van/Bus Services
-              </span>
-            </Link>
-            <div className="hidden md:flex items-center space-x-8">
-              <Link
-                to="/"
-                className="text-gray-600 hover:text-school-blue-600 transition-colors"
-              >
-                Home
-              </Link>
-              <Link
-                to="/about"
-                className="text-gray-600 hover:text-school-blue-600 transition-colors"
-              >
-                About
-              </Link>
-              <Link
-                to="/services"
-                className="text-gray-600 hover:text-school-blue-600 transition-colors"
-              >
-                Services
-              </Link>
-              <Link
-                to="/blog"
-                className="text-gray-600 hover:text-school-blue-600 transition-colors"
-              >
-                Blog
-              </Link>
-              <Link
-                to="/contact"
-                className="text-school-blue-600 font-semibold"
-              >
-                Contact
-              </Link>
-              <Link
-                to="/gallery"
-                className="text-gray-600 hover:text-school-blue-600 transition-colors"
-              >
-                Gallery
-              </Link>
-              <Link to="/register" className="btn-primary">
-                Register Student
-              </Link>
-            </div>
-          </div>
-        </div>
-      </nav>
+      <SiteNav />
 
       {/* Hero Section */}
       {/* pb-10 instead of py-20: the hero's bottom padding stacked on the
           next section's top padding, leaving a large dead band above the
           contact cards. */}
-      <section className="pt-20 pb-10 bg-gradient-to-br from-school-yellow-50 to-school-blue-50">
+      <section className="page-hero pt-20 pb-10">
         <div className="section-container">
           <div className="text-center space-y-6 max-w-4xl mx-auto">
             <Badge className="bg-school-blue-100 text-school-blue-700">
@@ -253,7 +202,7 @@ Please respond to the contact within 24 hours as promised.
       <section className="pt-10 pb-20 bg-white">
         <div className="section-container">
           <div className="grid md:grid-cols-3 gap-8 mb-20">
-            <Card className="text-center shadow-lg border-0 card-hover">
+            <Card className="card-glass text-center">
               <CardContent className="p-8">
                 <div className="bg-school-blue-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6">
                   <Phone className="h-8 w-8 text-school-blue-600" />
@@ -282,7 +231,7 @@ Please respond to the contact within 24 hours as promised.
               </CardContent>
             </Card>
 
-            <Card className="text-center shadow-lg border-0 card-hover">
+            <Card className="card-glass text-center">
               <CardContent className="p-8">
                 <div className="bg-school-green-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6">
                   <Mail className="h-8 w-8 text-school-green-600" />
@@ -303,7 +252,7 @@ Please respond to the contact within 24 hours as promised.
               </CardContent>
             </Card>
 
-            <Card className="text-center shadow-lg border-0 card-hover">
+            <Card className="card-glass text-center">
               <CardContent className="p-8">
                 <div className="bg-school-yellow-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6">
                   <MapPin className="h-8 w-8 text-school-yellow-600" />

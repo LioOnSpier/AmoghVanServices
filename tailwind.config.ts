@@ -158,12 +158,70 @@ export default {
             opacity: "1",
           },
         },
+        /* Hero image card: a gentler drift than `float`, paired with a
+           sub-degree rotation so the tilt never reads as a layout bug. */
+        "float-tilt": {
+          "0%, 100%": { transform: "translateY(0) rotate(2deg)" },
+          "50%": { transform: "translateY(-14px) rotate(1.2deg)" },
+        },
+        /* Ambient colour wash behind the hero and CTA. Moves two blurred
+           blobs on different periods so the loop never looks like a loop. */
+        "aurora-a": {
+          "0%, 100%": { transform: "translate3d(0, 0, 0) scale(1)" },
+          "33%": { transform: "translate3d(6%, -8%, 0) scale(1.12)" },
+          "66%": { transform: "translate3d(-5%, 5%, 0) scale(0.94)" },
+        },
+        "aurora-b": {
+          "0%, 100%": { transform: "translate3d(0, 0, 0) scale(1.05)" },
+          "50%": { transform: "translate3d(-8%, 6%, 0) scale(0.92)" },
+        },
+        /* Slow left-to-right pan across an oversized gradient, for gradient
+           text and the CTA band. */
+        "gradient-pan": {
+          "0%, 100%": { backgroundPosition: "0% 50%" },
+          "50%": { backgroundPosition: "100% 50%" },
+        },
+        /* Light sweep across a button or card on hover. */
+        shimmer: {
+          "100%": { transform: "translateX(200%)" },
+        },
+        /* Expanding halo behind the "live GPS" style status dots. */
+        "pulse-ring": {
+          "0%": { transform: "scale(0.9)", opacity: "0.6" },
+          "70%, 100%": { transform: "scale(2.2)", opacity: "0" },
+        },
+        /* Scroll-reveal entrance. The visible end state is what matters:
+           `Reveal` only ever adds this, never a persistent opacity-0. */
+        "reveal-up": {
+          from: { opacity: "0", transform: "translateY(26px)" },
+          to: { opacity: "1", transform: "translateY(0)" },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
         float: "float 6s ease-in-out infinite",
         "slide-in": "slide-in 0.5s ease-out",
+        "float-tilt": "float-tilt 7s ease-in-out infinite",
+        "aurora-a": "aurora-a 22s ease-in-out infinite",
+        "aurora-b": "aurora-b 18s ease-in-out infinite",
+        "gradient-pan": "gradient-pan 8s ease-in-out infinite",
+        shimmer: "shimmer 1.1s ease-out",
+        "pulse-ring": "pulse-ring 2.4s cubic-bezier(0.24, 0.6, 0.35, 1) infinite",
+        "reveal-up": "reveal-up 0.72s cubic-bezier(0.16, 1, 0.3, 1) both",
+      },
+      boxShadow: {
+        /* Layered soft shadows — one tight contact shadow plus one wide
+           ambient — read as depth where a single large blur reads as haze. */
+        soft: "0 1px 2px rgba(16, 24, 40, 0.04), 0 8px 24px -8px rgba(16, 24, 40, 0.10)",
+        lift: "0 2px 4px rgba(16, 24, 40, 0.05), 0 18px 40px -12px rgba(16, 24, 40, 0.18)",
+        glass:
+          "inset 0 1px 0 rgba(255, 255, 255, 0.6), 0 2px 6px rgba(16, 24, 40, 0.04), 0 20px 48px -16px rgba(16, 24, 40, 0.20)",
+        "glow-yellow": "0 12px 36px -10px rgba(245, 158, 11, 0.55)",
+        "glow-blue": "0 12px 36px -10px rgba(37, 99, 235, 0.45)",
+      },
+      backgroundSize: {
+        "200": "200% 200%",
       },
     },
   },

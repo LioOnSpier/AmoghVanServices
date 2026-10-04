@@ -1,4 +1,5 @@
 import SiteFooter from "@/components/SiteFooter";
+import SiteNav from "@/components/SiteNav";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import {
@@ -333,27 +334,7 @@ Submitted on: ${new Date().toLocaleString()}
   return (
     <div className="min-h-screen bg-gradient-to-b from-blue-50 to-white">
       {/* Navigation */}
-      <nav className="bg-white shadow-sm">
-        <div className="section-container">
-          <div className="flex items-center justify-between h-16">
-            <Link to="/" className="flex items-center space-x-3">
-              <div className="bg-school-yellow-500 p-2 rounded-lg">
-                <Bus className="h-6 w-6 text-white" />
-              </div>
-              <span className="text-xl font-company-name text-gray-900">
-                Amogh Van/Bus Services
-              </span>
-            </Link>
-            <Link
-              to="/"
-              className="flex items-center text-gray-600 hover:text-school-blue-600 transition-colors"
-            >
-              <ArrowLeft className="h-4 w-4 mr-2" />
-              Back to Home
-            </Link>
-          </div>
-        </div>
-      </nav>
+      <SiteNav />
 
       <SEO
         title="Student Registration - Amogh Van/Bus Services | Register for School Transport Mumbai"

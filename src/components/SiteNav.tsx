@@ -1,6 +1,8 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { Menu, X } from "lucide-react";
+import { Menu, X, Phone } from "lucide-react";
+import { CONTACT } from "@/data/constants";
+import { cn } from "@/lib/utils";
 
 const links = [
   { to: "/", label: "Home" },
@@ -14,54 +16,113 @@ const links = [
 /**
  * Shared site navigation. Highlights the active route so visitors always
  * know where they are — previously each page hand-rolled its own copy.
+ *
+ * The bar is frosted rather than solid white. At the very top of the page it
+ * sits nearly transparent so the hero's gradient runs behind it; once the
+ * page scrolls it gains tint, blur and a shadow, which is what separates it
+ * from the content passing underneath. A plain translucent bar that never
+ * changes leaves text colliding with whatever scrolls behind it.
  */
 const SiteNav = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
   const { pathname } = useLocation();
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 12);
+    onScroll(); // a route entered mid-page starts scrolled
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  // Close the drawer on navigation — React Router keeps the component mounted
+  // across route changes, so it would otherwise stay open over the new page.
+  useEffect(() => setIsMobileMenuOpen(false), [pathname]);
 
   const isActive = (to: string) =>
     to === "/" ? pathname === "/" : pathname.startsWith(to);
 
   return (
-    <nav className="bg-white shadow-sm sticky top-0 z-50">
+    <nav
+      className={cn(
+        "sticky top-0 z-50 transition-all duration-500 ease-out",
+        "border-b backdrop-blur-xl",
+        scrolled
+          ? "border-white/60 bg-white/80 shadow-soft"
+          : "border-transparent bg-white/55",
+      )}
+      role="navigation"
+      aria-label="Main navigation"
+    >
       <div className="section-container">
-        <div className="flex items-center justify-between h-16">
-          <div className="flex items-center space-x-3">
-            <img
-              src="/logo.png"
-              alt="Amogh Van/Bus Services Logo"
-              className="h-10 w-10 object-contain rounded-lg"
-            />
-            <Link to="/" className="text-xl font-company-name text-gray-900">
+        <div
+          className={cn(
+            "flex items-center justify-between transition-all duration-500",
+            scrolled ? "h-16" : "h-20",
+          )}
+        >
+          <Link to="/" className="group flex items-center gap-3">
+            <span className="relative">
+              {/* Soft brand halo behind the mark — grows on hover so the
+                  logo feels like a control without moving the layout. */}
+              <span
+                aria-hidden="true"
+                className="absolute -inset-1 rounded-xl bg-school-yellow-400/25 blur-md transition-all duration-300 group-hover:-inset-2 group-hover:bg-school-yellow-400/40"
+              />
+              <img
+                src="/logo.png"
+                alt="Amogh Van/Bus Services Logo"
+                className="relative h-10 w-10 rounded-lg object-contain"
+              />
+            </span>
+            <span className="font-company-name text-lg text-gray-900 sm:text-xl">
               Amogh Van/Bus Services
-            </Link>
-          </div>
+            </span>
+          </Link>
 
-          <div className="hidden md:flex items-center space-x-8">
+          <div className="hidden items-center gap-1 lg:flex">
             {links.map((l) => (
               <Link
                 key={l.to}
                 to={l.to}
-                className={
+                aria-current={isActive(l.to) ? "page" : undefined}
+                className={cn(
+                  "relative rounded-lg px-3 py-2 text-sm transition-colors duration-200",
                   isActive(l.to)
-                    ? "text-school-blue-600 font-semibold transition-colors"
-                    : "text-gray-600 hover:text-school-blue-600 transition-colors"
-                }
+                    ? "font-semibold text-school-blue-600"
+                    : "text-gray-600 hover:bg-white/70 hover:text-school-blue-600",
+                )}
               >
                 {l.label}
+                {/* Underline marks the active route. Scaled from the centre
+                    so it draws outward rather than wiping in from the left. */}
+                <span
+                  aria-hidden="true"
+                  className={cn(
+                    "absolute inset-x-3 -bottom-0.5 h-0.5 rounded-full bg-gradient-to-r from-school-yellow-400 to-school-yellow-600 transition-transform duration-300",
+                    isActive(l.to) ? "scale-x-100" : "scale-x-0",
+                  )}
+                />
               </Link>
             ))}
-            <Link to="/register" className="btn-primary">
+            <a
+              href={`tel:${CONTACT.PHONE_PRIMARY}`}
+              className="ml-2 inline-flex items-center gap-2 rounded-lg px-3 py-2 text-sm font-medium text-gray-600 transition-colors hover:text-school-blue-600"
+            >
+              <Phone className="h-4 w-4" aria-hidden="true" />
+              {CONTACT.PHONE_PRIMARY}
+            </a>
+            <Link to="/register" className="btn-primary ml-2 px-5 py-2.5 text-sm">
               Register Student
             </Link>
           </div>
 
-          <div className="md:hidden">
+          <div className="lg:hidden">
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
               aria-label="Toggle navigation menu"
               aria-expanded={isMobileMenuOpen}
-              className="text-gray-600 hover:text-gray-900 focus:outline-none focus:text-gray-900"
+              className="rounded-lg border border-white/70 bg-white/70 p-2 text-gray-700 shadow-soft backdrop-blur-lg transition-colors hover:text-school-blue-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-school-blue-600"
             >
               {isMobileMenuOpen ? (
                 <X className="h-6 w-6" />
@@ -73,33 +134,52 @@ const SiteNav = () => {
         </div>
       </div>
 
-      {isMobileMenuOpen && (
-        <div className="md:hidden bg-white border-t border-gray-200">
-          <div className="px-2 pt-2 pb-3 space-y-1">
+      {/*
+        Animated with a grid-rows trick rather than max-height: the row
+        collapses to the content's real height, so the drawer never eases
+        against a guessed max-height that is either clipped or laggy.
+      */}
+      <div
+        className={cn(
+          "grid overflow-hidden transition-[grid-template-rows,opacity] duration-300 ease-out lg:hidden",
+          isMobileMenuOpen ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0",
+        )}
+      >
+        <div className="min-h-0">
+          <div className="space-y-1 border-t border-white/60 bg-white/85 px-4 pb-4 pt-3 backdrop-blur-xl">
             {links.map((l) => (
               <Link
                 key={l.to}
                 to={l.to}
                 onClick={() => setIsMobileMenuOpen(false)}
-                className={
+                aria-current={isActive(l.to) ? "page" : undefined}
+                className={cn(
+                  "block rounded-lg px-3 py-2.5 transition-colors",
                   isActive(l.to)
-                    ? "block px-3 py-2 text-school-blue-600 bg-school-blue-50 font-medium rounded-lg transition-colors"
-                    : "block px-3 py-2 text-gray-600 hover:text-school-blue-600 transition-colors"
-                }
+                    ? "bg-school-blue-50 font-medium text-school-blue-600"
+                    : "text-gray-600 hover:bg-gray-50 hover:text-school-blue-600",
+                )}
               >
                 {l.label}
               </Link>
             ))}
+            <a
+              href={`tel:${CONTACT.PHONE_PRIMARY}`}
+              className="flex items-center gap-2 rounded-lg px-3 py-2.5 text-gray-600 transition-colors hover:text-school-blue-600"
+            >
+              <Phone className="h-4 w-4" aria-hidden="true" />
+              {CONTACT.PHONE_PRIMARY}
+            </a>
             <Link
               to="/register"
               onClick={() => setIsMobileMenuOpen(false)}
-              className="block px-3 py-2 bg-school-yellow-500 text-white rounded-lg font-semibold mt-2"
+              className="btn-primary mt-2 w-full"
             >
               Register Student
             </Link>
           </div>
         </div>
-      )}
+      </div>
     </nav>
   );
 };

@@ -1,4 +1,5 @@
 import SiteFooter from "@/components/SiteFooter";
+import SiteNav from "@/components/SiteNav";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
@@ -59,18 +60,7 @@ const Blog = () => {
   if (loading) {
     return (
       <div className="min-h-screen bg-gradient-to-b from-blue-50 to-white">
-        <nav className="bg-white shadow-sm sticky top-0 z-50">
-          <div className="section-container">
-            <div className="flex items-center justify-between h-16">
-              <Link to="/" className="flex items-center space-x-3">
-                <img src="/logo.png" alt="Amogh Van/Bus Services Logo" className="h-10 w-10 object-contain rounded-lg" />
-                <span className="text-xl font-bold text-gray-900 font-manrope">
-                  Amogh Van/Bus Services
-                </span>
-              </Link>
-            </div>
-          </div>
-        </nav>
+        <SiteNav />
         <div className="py-20">
           <div className="section-container">
             <div className="text-center">
@@ -117,61 +107,10 @@ const Blog = () => {
       />
 
       {/* Navigation */}
-      <nav className="bg-white shadow-sm sticky top-0 z-50">
-        <div className="section-container">
-          <div className="flex items-center justify-between h-16">
-            <Link to="/" className="flex items-center space-x-3">
-              <div className="bg-school-yellow-500 p-2 rounded-lg">
-                <Bus className="h-6 w-6 text-white" />
-              </div>
-              <span className="text-xl font-bold text-gray-900 font-manrope">
-                Amogh Van/Bus Services
-              </span>
-            </Link>
-            <div className="hidden md:flex items-center space-x-8">
-              <Link
-                to="/"
-                className="text-gray-600 hover:text-school-blue-600 transition-colors"
-              >
-                Home
-              </Link>
-              <Link
-                to="/about"
-                className="text-gray-600 hover:text-school-blue-600 transition-colors"
-              >
-                About
-              </Link>
-              <Link
-                to="/services"
-                className="text-gray-600 hover:text-school-blue-600 transition-colors"
-              >
-                Services
-              </Link>
-              <Link to="/blog" className="text-school-blue-600 font-semibold">
-                Blog
-              </Link>
-              <Link
-                to="/contact"
-                className="text-gray-600 hover:text-school-blue-600 transition-colors"
-              >
-                Contact
-              </Link>
-              <Link
-                to="/gallery"
-                className="text-gray-600 hover:text-school-blue-600 transition-colors"
-              >
-                Gallery
-              </Link>
-              <Link to="/register" className="btn-primary">
-                Register Student
-              </Link>
-            </div>
-          </div>
-        </div>
-      </nav>
+      <SiteNav />
 
       {/* Hero */}
-      <section className="py-20 bg-gradient-to-br from-school-yellow-50 to-school-blue-50">
+      <section className="page-hero py-20">
         <div className="section-container">
           <div className="text-center space-y-6">
             <Badge className="bg-school-blue-100 text-school-blue-700">
@@ -214,7 +153,7 @@ const Blog = () => {
               {featuredPosts.map((post) => (
                 <Card
                   key={post.id}
-                  className="card-hover border-0 shadow-lg overflow-hidden"
+                  className="card-glass overflow-hidden"
                 >
                   {post.coverImage && (
                     <div className="aspect-video overflow-hidden">
@@ -290,7 +229,7 @@ const Blog = () => {
               {filteredPosts.map((post) => (
                 <Card
                   key={post.id}
-                  className="card-hover border-0 shadow-lg overflow-hidden bg-white"
+                  className="card-glass overflow-hidden"
                 >
                   <div className="md:flex">
                     {post.coverImage && (

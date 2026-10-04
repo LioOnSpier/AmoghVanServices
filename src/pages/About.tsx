@@ -1,4 +1,5 @@
 import SiteFooter from "@/components/SiteFooter";
+import SiteNav from "@/components/SiteNav";
 import { Button } from "@/components/ui/button";
 import { CONTACT } from "@/data/constants";
 import {
@@ -65,59 +66,10 @@ const About = () => {
         schema={aboutSchema}
       />
       {/* Navigation */}
-      <nav className="bg-white shadow-sm sticky top-0 z-50">
-        <div className="section-container">
-          <div className="flex items-center justify-between h-16">
-            <Link to="/" className="flex items-center space-x-3">
-              <img src="/logo.png" alt="Amogh Van/Bus Services Logo" className="h-10 w-10 object-contain rounded-lg" />
-              <span className="text-xl font-company-name text-gray-900">
-                Amogh Van/Bus Services
-              </span>
-            </Link>
-            <div className="hidden md:flex items-center space-x-8">
-              <Link
-                to="/"
-                className="text-gray-600 hover:text-school-blue-600 transition-colors"
-              >
-                Home
-              </Link>
-              <Link to="/about" className="text-school-blue-600 font-semibold">
-                About
-              </Link>
-              <Link
-                to="/services"
-                className="text-gray-600 hover:text-school-blue-600 transition-colors"
-              >
-                Services
-              </Link>
-              <Link
-                to="/blog"
-                className="text-gray-600 hover:text-school-blue-600 transition-colors"
-              >
-                Blog
-              </Link>
-              <Link
-                to="/contact"
-                className="text-gray-600 hover:text-school-blue-600 transition-colors"
-              >
-                Contact
-              </Link>
-              <Link
-                to="/gallery"
-                className="text-gray-600 hover:text-school-blue-600 transition-colors"
-              >
-                Gallery
-              </Link>
-              <Link to="/register" className="btn-primary">
-                Register Student
-              </Link>
-            </div>
-          </div>
-        </div>
-      </nav>
+      <SiteNav />
 
       {/* Hero Section */}
-      <section className="py-20 bg-gradient-to-br from-school-yellow-50 to-school-blue-50">
+      <section className="page-hero py-20">
         <div className="section-container">
           <div className="text-center space-y-6 max-w-4xl mx-auto">
             <Badge className="bg-school-blue-100 text-school-blue-700">
@@ -259,7 +211,7 @@ const About = () => {
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <Card className="card-hover border-0 shadow-lg">
+            <Card className="card-glass">
               <CardHeader className="text-center pb-4">
                 <div className="bg-school-yellow-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
                   <TrendingUp className="h-8 w-8 text-school-yellow-600" />
@@ -279,7 +231,7 @@ const About = () => {
               </CardContent>
             </Card>
 
-            <Card className="card-hover border-0 shadow-lg">
+            <Card className="card-glass">
               <CardHeader className="text-center pb-4">
                 <div className="bg-school-blue-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
                   <Users className="h-8 w-8 text-school-blue-600" />
@@ -300,7 +252,7 @@ const About = () => {
               </CardContent>
             </Card>
 
-            <Card className="card-hover border-0 shadow-lg">
+            <Card className="card-glass">
               <CardHeader className="text-center pb-4">
                 <div className="bg-school-green-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
                   <Heart className="h-8 w-8 text-school-green-600" />
